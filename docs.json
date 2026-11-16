@@ -930,7 +930,8 @@
               "cookbook/ivr-phone-menu",
               "cookbook/call-then-text-follow-up",
               "cookbook/red-team-before-launch",
-              "cookbook/find-regression-step"
+              "cookbook/find-regression-step",
+              "cookbook/evaluate-human-agents"
             ]
           },
           {
