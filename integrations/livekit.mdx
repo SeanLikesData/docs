@@ -224,21 +224,20 @@ Keep the order in `on_shutdown`: `span.end()`, then `force_flush()`, then the PO
 </Tab>
 <Tab title="Monitor">
 
-Send your live calls to Bluejay to score them. Use the traces path, because it gives Bluejay the system prompt, tool calls, and model settings of each call, not only the transcript.
+Score your live calls. Send them with traces, so Bluejay sees each call's system prompt and tool calls.
 
 ### Send calls with traces
 
-Export your agent's OpenTelemetry traces to Bluejay, then send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace ID. Bluejay reads tool calls from the traces, so you do not send them.
+Export traces to Bluejay, then send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace ID. Bluejay reads tool calls from the trace.
 
 <Steps>
 <Step title="Create the agent">
 Create an agent in Bluejay and copy its agent ID.
 </Step>
 <Step title="Export traces and send the call">
-Set up tracing before `session.start()`, and send the call in a shutdown callback.
+Send the call in a shutdown callback.
 
 ```python
-import asyncio
 import os
 from datetime import datetime, timezone
 
@@ -285,9 +284,8 @@ async def entrypoint(ctx: JobContext):
             })
         if not transcript:
             return
-        await asyncio.to_thread(tracer_provider.force_flush)
-        await asyncio.sleep(15)  # Bluejay batches trace ingest for up to 10s
-        async with httpx.AsyncClient(timeout=10) as client:
+        tracer_provider.force_flush()
+        async with httpx.AsyncClient(timeout=30) as client:
             res = await client.post(
                 "https://api.getbluejay.ai/v1/evaluate",
                 json={
@@ -296,7 +294,6 @@ async def entrypoint(ctx: JobContext):
                     "participants": [{"role": "AGENT"}, {"role": "USER"}],
                     "transcript": transcript,
                     "trace_ids": [trace_id],
-                    # "recording_url": recording_url,  # enables audio metrics
                 },
                 headers={"X-API-Key": BLUEJAY_API_KEY},
             )
@@ -308,9 +305,7 @@ async def entrypoint(ctx: JobContext):
 </Step>
 </Steps>
 
-Keep the order in the callback: `force_flush()`, then the wait, then the POST. If you send the POST too early, Bluejay can miss the tool calls in the trace. See [Traces](/monitor/traces).
-
-If the project also sends calls through the webhook, set `bluejay.bypass_webhook` when the agent joins, so Bluejay does not get each call twice:
+Call `force_flush()` before the POST, or the trace can be missing. If the project also uses the webhook, set `bluejay.bypass_webhook` so Bluejay does not get each call twice:
 
 ```python
 await req.accept(identity="support-bot", attributes={"bluejay.bypass_webhook": "true"})
@@ -318,7 +313,7 @@ await req.accept(identity="support-bot", attributes={"bluejay.bypass_webhook": "
 
 ### Send calls with the webhook
 
-LiveKit sends every call in the project to Bluejay with no code. This path does not capture traces or tool calls.
+No code. LiveKit sends every call in the project to Bluejay, without traces or tool calls.
 
 <Warning>
 Cost risk. The LiveKit webhook streams call data to Bluejay. LiveKit can bill you for the egress.
