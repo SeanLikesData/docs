@@ -9,9 +9,6 @@ import { Code } from "/snippets/code.jsx";
 
 Connect an agent that runs as a LiveKit Agents worker.
 
-<img className="block dark:hidden" src="/images/connect-livekit.png" alt="The LiveKit connection fields with saved LiveKit credentials, an agent name, a customer tool topic, and metadata JSON" />
-<img className="hidden dark:block" src="/images/connect-livekit-dark.png" alt="The LiveKit connection fields with saved LiveKit credentials, an agent name, a customer tool topic, and metadata JSON" />
-
 <Tabs>
 <Tab title="Test">
 
@@ -23,6 +20,9 @@ In LiveKit Cloud, copy the API key, API secret, and server URL from **Settings >
 </Step>
 <Step title="Create the agent">
 Create a Voice agent with the **LiveKit** connection type.
+
+<img className="block dark:hidden" src="/images/connect-livekit.png" alt="The LiveKit connection fields with saved LiveKit credentials, an agent name, a customer tool topic, and metadata JSON" />
+<img className="hidden dark:block" src="/images/connect-livekit-dark.png" alt="The LiveKit connection fields with saved LiveKit credentials, an agent name, a customer tool topic, and metadata JSON" />
 </Step>
 <Step title="Set the agent name">
 Set **LiveKit Agent Name** to your worker's registered name. Leave it empty only with automatic dispatch.
@@ -226,7 +226,7 @@ Call `force_flush()` before the POST, or the trace can be missing.
 
 ## Code
 
-Export traces to Bluejay, and send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace ID. Bluejay reads the system prompt and tool calls from the trace. Set `BLUEJAY_API_KEY` and `BLUEJAY_AGENT_ID` to your Bluejay API key and the ID of the agent to score.
+Send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace, so Bluejay sees the system prompt and tool calls.
 
 ```python
 import os
