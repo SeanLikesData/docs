@@ -12,6 +12,9 @@ Connect an agent that runs as a LiveKit Agents worker.
 <img className="block dark:hidden" src="/images/connect-livekit.png" alt="The LiveKit connection fields with saved LiveKit credentials, an agent name, a customer tool topic, and metadata JSON" />
 <img className="hidden dark:block" src="/images/connect-livekit-dark.png" alt="The LiveKit connection fields with saved LiveKit credentials, an agent name, a customer tool topic, and metadata JSON" />
 
+<Tabs>
+<Tab title="Test">
+
 ## Connect
 
 <Steps>
@@ -19,22 +22,23 @@ Connect an agent that runs as a LiveKit Agents worker.
 In LiveKit Cloud, copy the API key, API secret, and server URL from **Settings > API keys**. Paste them in Bluejay under **Settings → Integrations → LiveKit**. Skip this step if you use a [token webhook](#token-webhook).
 </Step>
 <Step title="Create the agent">
-Create a Voice agent with the **LiveKit** connection type:
-
-- **LiveKit Agent Name**: your worker's registered name. Leave it empty only with automatic dispatch.
-- **LiveKit Customer Tool Topic (Optional)**: see [Tool calls](#tool-calls).
-- **LiveKit Metadata (Optional JSON)**: sent as job metadata, with each Digital Human's `livekit_metadata` and the simulation IDs, such as `X-Simulation-Result-Id`, merged in.
+Create a Voice agent with the **LiveKit** connection type.
 </Step>
-<Step title="Choose how Bluejay joins the room">
+<Step title="Set the agent name">
+Set **LiveKit Agent Name** to your worker's registered name. Leave it empty only with automatic dispatch.
+</Step>
+<Step title="Choose the authentication">
 Set **Authentication** in the agent's **Connection Settings**:
 
 - **API Key**: Bluejay creates the room token with your saved keys.
 - **Token Webhook**: your server creates the room token. Put the full header value, such as `Bearer <token>`, in **Authorization Header (Optional)**.
 </Step>
+<Step title="Add metadata (optional)">
+Bluejay sends **LiveKit Metadata** as the job metadata, with each Digital Human's `livekit_metadata` and the simulation IDs, such as `X-Simulation-Result-Id`, merged in.
+</Step>
 </Steps>
 
-<Tabs>
-<Tab title="Test">
+## Run a test
 
 <Tabs>
 <Tab title="Direct">
@@ -222,7 +226,7 @@ Call `force_flush()` before the POST, or the trace can be missing.
 
 ## Code
 
-Export traces to Bluejay, and send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace ID. Bluejay reads the system prompt and tool calls from the trace.
+Export traces to Bluejay, and send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace ID. Bluejay reads the system prompt and tool calls from the trace. Set `BLUEJAY_API_KEY` and `BLUEJAY_AGENT_ID` to your Bluejay API key and the ID of the agent to score.
 
 ```python
 import os
