@@ -12,9 +12,6 @@ Connect a chat agent that answers `POST /chat/completions` in the OpenAI format,
 <img className="block dark:hidden" src="/images/connect-openai-compatible.png" alt="The OpenAI-compatible connection fields with an API base URL, an API key, and a model" />
 <img className="hidden dark:block" src="/images/connect-openai-compatible-dark.png" alt="The OpenAI-compatible connection fields with an API base URL, an API key, and a model" />
 
-<Tabs>
-<Tab title="Test">
-
 ## Connect
 
 <Steps>
@@ -31,6 +28,9 @@ To create the agent from the API, call [Add Agent](/api-reference/endpoint/add-a
 Add the agent to a [simulation](/test/simulations/create) and run it. Your agent needs no webhook or callback to Bluejay. To queue runs from the API, use [`/v1/queue-http-text-simulation-run`](/api-reference/endpoint/queue-http-text-simulation-run).
 </Step>
 </Steps>
+
+<Tabs>
+<Tab title="Test">
 
 ## How a conversation runs
 

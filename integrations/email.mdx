@@ -13,9 +13,6 @@ Connect an email agent, let Bluejay's test mail into its inbox, and grade whethe
 <img className="block dark:hidden" src="/images/connect-email.png" alt="An agent email address filled in and the allowlist box checked" />
 <img className="hidden dark:block" src="/images/connect-email-dark.png" alt="An agent email address filled in and the allowlist box checked" />
 
-<Tabs>
-<Tab title="Test">
-
 ## Connect
 
 <Tabs>
@@ -49,6 +46,9 @@ curl -X POST https://api.getbluejay.ai/v1/add-agent \
 Bluejay sets the agent's `mode` to `EMAIL` itself. `email_reply_addresses` is optional. Queue runs with `/v1/queue-email-simulation-run` and the `simulation_id`.
 </Tab>
 </Tabs>
+
+<Tabs>
+<Tab title="Test">
 
 ## Allow Bluejay's mail
 
