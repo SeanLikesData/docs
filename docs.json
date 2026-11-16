@@ -894,7 +894,14 @@
           {
             "group": "Monitor",
             "pages": [
-              "monitor/logs",
+              {
+                "group": "Logs",
+                "icon": "list",
+                "root": "monitor/logs",
+                "pages": [
+                  "monitor/pii-redaction"
+                ]
+              },
               {
                 "group": "Metrics",
                 "icon": "gauge-high",
