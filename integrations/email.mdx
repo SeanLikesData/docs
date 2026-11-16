@@ -13,6 +13,9 @@ Connect an email agent, let Bluejay's test mail into its inbox, and grade whethe
 <img className="block dark:hidden" src="/images/connect-email.png" alt="An agent email address filled in and the allowlist box checked" />
 <img className="hidden dark:block" src="/images/connect-email-dark.png" alt="An agent email address filled in and the allowlist box checked" />
 
+<Tabs>
+<Tab title="Test">
+
 ## Connect
 
 <Tabs>
@@ -105,11 +108,15 @@ For an **Inbound** agent, Bluejay also records the time from the Digital Human's
 
 In a simulation, Bluejay's own mail server receives your agent's replies, so it records SPF, DKIM, and DMARC verdicts for every reply. To run the same checks on your production threads, see [Logs](/monitor/logs#email).
 
-## Monitor
+</Tab>
+<Tab title="Monitor">
 
 To check an email agent on a schedule, use [Uptime Monitoring](/monitor/uptime/overview). In the app, an uptime monitor or a scheduled run for an email agent runs at most every 30 minutes. If the Digital Human's email hard bounces or gets a spam complaint, Bluejay pauses the monitor so that it stops sending to an inbox that rejects its mail.
 
 <video controls muted playsInline preload="metadata" className="w-full rounded-xl" src="/videos/email-uptime.mp4"></video>
+
+</Tab>
+</Tabs>
 
 ## Limits
 

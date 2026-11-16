@@ -12,6 +12,9 @@ Connect a voice agent that runs on OpenAI Realtime, on Azure OpenAI, or on your 
 <img className="block dark:hidden" src="/images/connect-openai-realtime.png" alt="The OpenAI Realtime connection fields with an API key, a model, and a prompt ID, and the Realtime URL left empty" />
 <img className="hidden dark:block" src="/images/connect-openai-realtime-dark.png" alt="The OpenAI Realtime connection fields with an API key, a model, and a prompt ID, and the Realtime URL left empty" />
 
+<Tabs>
+<Tab title="Test">
+
 ## Connect
 
 OpenAI has no agent list that Bluejay can sync, so you connect each agent by hand.
@@ -48,9 +51,13 @@ Through the API, set `connection_type` to `OPENAI_REALTIME` on [add agent](/api-
 
 The transcript comes from Bluejay's own speech-to-text, not from OpenAI's transcript. Bluejay saves the OpenAI session ID with the result. If OpenAI sends an error during the call, Bluejay records it in the result metadata under <Code>customer_session_errors</Code>.
 
-## Monitor
+</Tab>
+<Tab title="Monitor">
 
 Bluejay does not receive your production Realtime sessions. To score them, send each conversation to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate) after it ends. See [Logs](/monitor/logs).
+
+</Tab>
+</Tabs>
 
 ## Limits
 

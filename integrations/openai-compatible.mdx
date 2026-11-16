@@ -12,6 +12,9 @@ Connect a chat agent that answers `POST /chat/completions` in the OpenAI format,
 <img className="block dark:hidden" src="/images/connect-openai-compatible.png" alt="The OpenAI-compatible connection fields with an API base URL, an API key, and a model" />
 <img className="hidden dark:block" src="/images/connect-openai-compatible-dark.png" alt="The OpenAI-compatible connection fields with an API base URL, an API key, and a model" />
 
+<Tabs>
+<Tab title="Test">
+
 ## Connect
 
 <Steps>
@@ -80,9 +83,13 @@ Return the final reply text in the same response as the tool calls. A response w
 
 Each request carries a W3C `traceparent` header with a new trace ID, and Bluejay saves that ID on the conversation. If your agent uses OpenTelemetry and [sends its traces to Bluejay](/test/traces), its spans continue that trace and appear next to the conversation, so you do not need to link them yourself.
 
-## Monitor
+</Tab>
+<Tab title="Monitor">
 
 This connection runs tests only. To score your agent's production conversations, send them to Bluejay as described in [Logs](/monitor/logs).
+
+</Tab>
+</Tabs>
 
 ## Limits
 
