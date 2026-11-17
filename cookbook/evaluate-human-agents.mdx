@@ -22,6 +22,8 @@ Use the metrics, alerts, and dashboards you built for AI agents to score calls t
     Use the prompt to describe the team's job and the policies its reps follow. Bluejay reads an agent's context when it [generates metrics](/monitor/metrics) for it.
 
     Keep human calls on their own agent. Calls on that agent stay separate from your AI agent's calls, and you can compare the two side by side later.
+
+    To tell individual reps apart inside a team, see [Track individual reps](#track-individual-reps).
   </Step>
   <Step title="Send the calls">
     Send each call to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate) after it ends, with a `recording_url`, a `transcript`, or both. The rep is the `AGENT` and the customer is the `USER`, the same as for an AI agent. To send calls from the Logs page instead, use **Upload**.
@@ -205,6 +207,62 @@ Use the metrics, alerts, and dashboards you built for AI agents to score calls t
     - Chart the metrics by agent on a [dashboard](/monitor/dashboards), so human and AI results sit side by side.
   </Step>
 </Steps>
+
+## Track individual reps
+
+Bluejay has no separate object for a rep. You separate reps in one of two ways.
+
+| | One agent per rep | One agent per team, with a rep id in `metadata` |
+|---|---|---|
+| Use it when | You have a few reps. | You have many reps, or reps change often. |
+| Setup | Create and keep one agent for each rep. | Send one extra field with each call. |
+| Metrics | Select every rep's agent when you create a metric. | Select the team's agent once. |
+| Logs | Filter by agent. | Filter by the rep id. |
+| Dashboards | Group a widget by **Agent**. | Group a widget by the rep id. |
+| Alerts | Scope an alert to one rep's agent. | An alert cannot be limited to one rep id. |
+
+With one agent for each rep, you can keep a team's agents together in a folder in the agent list.
+
+### Send the rep id
+
+Put the rep id in `metadata` on every call, as a flat key with a string value. Use an id, not a name.
+
+```json
+"metadata": {
+  "rep_id": "rep-2217",
+  "team": "member-services",
+  "external_conversation_id": "call-8841"
+}
+```
+
+A key becomes available in the filters below after the first call that carries it arrives.
+
+### See one rep
+
+<Steps>
+  <Step title="Filter Logs">
+    On the Logs page, add a filter on the metadata key, then pick the rep id. To keep the filter, save it as a **View**. A View saves the filters and the time range, for example "Rep 2217, last 7 days".
+  </Step>
+  <Step title="Chart reps on a dashboard">
+    In a [dashboard](/monitor/dashboards) widget, set **Group By** to the `rep_id` key under **Metadata** to draw one series for each rep. To chart a single rep, add a filter on the key in the widget. Group By on a metadata key is not offered for tool call, metadata, trace attribute, or JSON custom metrics.
+  </Step>
+  <Step title="Pull the numbers with the API">
+    [`GET /v1/observability/conversations`](/api-reference/endpoint/list-conversations) filters by a metadata key and can count conversations for each value of it.
+
+    ```bash
+    curl --get https://api.getbluejay.ai/v1/observability/conversations \
+      --header "X-API-Key: $BLUEJAY_API_KEY" \
+      --data-urlencode "metadata_path=rep_id" \
+      --data-urlencode "metadata_value=rep-2217" \
+      --data-urlencode "last=30days"
+    ```
+  </Step>
+</Steps>
+
+### What a rep id cannot do
+
+- An [alert](/monitor/alerts) has one condition. It can use a metric or a metadata field, not both, so it cannot fire on a metric for one rep id. To alert on one rep, give that rep an agent.
+- A [metric condition](/monitor/metrics#add-metric-conditions) cannot read metadata, so a metric cannot run for only some reps.
 
 ## Check the result
 
