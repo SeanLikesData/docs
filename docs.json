@@ -955,6 +955,7 @@
               "integrations/bland",
               "integrations/google-dfcx",
               "integrations/eleven-labs",
+              "integrations/genesys",
               "integrations/google-ces",
               "integrations/kore",
               "integrations/livekit",

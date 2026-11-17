@@ -18,7 +18,7 @@ Logs shows your production conversations. They can arrive from three sources:
 | Source | How conversations arrive |
 |--------|--------------------------|
 | Voice platform | Each ended call arrives after you [connect the platform](/integrations/vapi#monitor). |
-| [`POST /v1/evaluate`](/api-reference/endpoint/evaluate) | Your backend sends each conversation after it ends. |
+| [`POST /v1/evaluate`](/api-reference/endpoint/evaluate) | Your backend sends each conversation after it ends. For [Genesys Cloud](/integrations/genesys), a small job you run does this. |
 | **Upload** | Upload **Audio Call** files or a **Chat/Transcript** from the Logs page. |
 
 ### Send conversations with the API
