@@ -23,7 +23,7 @@ Use the metrics, alerts, and dashboards you built for AI agents to score calls t
 
     Keep human calls on their own agent. Calls on that agent stay separate from your AI agent's calls, and you can compare the two side by side later.
 
-    To tell individual reps apart inside a team, see [Track individual reps](#track-individual-reps).
+    Each rep on the team gets a label, so you can see every rep on their own. See [Track individual reps](#track-individual-reps).
   </Step>
   <Step title="Send the calls">
     Send each call to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate) after it ends, with a `recording_url`, a `transcript`, or both. The rep is the `AGENT` and the customer is the `USER`, the same as for an AI agent. To send calls from the Logs page instead, use **Upload**.
@@ -44,10 +44,10 @@ Use the metrics, alerts, and dashboards you built for AI agents to score calls t
         "call_direction": "INBOUND",
         "interface": "PHONE",
         "multichannel": true,
+        "label": "rep-2217",
         "tags": ["human-agent"],
         "metadata": {
           "agent_type": "human",
-          "rep_id": "rep-2217",
           "team": "member-services",
           "queue": "claims",
           "external_conversation_id": "call-8841"
@@ -210,59 +210,51 @@ Use the metrics, alerts, and dashboards you built for AI agents to score calls t
 
 ## Track individual reps
 
-Bluejay has no separate object for a rep. You separate reps in one of two ways.
+Every call can carry a **label**, and a label is how Bluejay tracks a rep. Send the rep's id as the `label` on each call. Bluejay then shows that rep on the Logs page, on dashboards, and in the API, next to the rest of the team.
 
-| | One agent per rep | One agent per team, with a rep id in `metadata` |
-|---|---|---|
-| Use it when | You have a few reps. | You have many reps, or reps change often. |
-| Setup | Create and keep one agent for each rep. | Send one extra field with each call. |
-| Metrics | Select every rep's agent when you create a metric. | Select the team's agent once. |
-| Logs | Filter by agent. | Filter by the rep id. |
-| Dashboards | Group a widget by **Agent**. | Group a widget by the rep id. |
-| Alerts | Scope an alert to one rep's agent. | An alert cannot be limited to one rep id. |
+One agent holds the whole team, and each rep is a label on it. This works for a team of ten reps and for a contact center with thousands.
 
-With one agent for each rep, you can keep a team's agents together in a folder in the agent list.
+### Send the rep as the label
 
-### Send the rep id
-
-Put the rep id in `metadata` on every call, as a flat key with a string value. Use an id, not a name.
+Add `label` to each call you send to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate). Use the rep's id from your phone system, not a name.
 
 ```json
-"metadata": {
-  "rep_id": "rep-2217",
-  "team": "member-services",
-  "external_conversation_id": "call-8841"
+{
+  "agent_id": "123",
+  "label": "rep-2217",
+  "recording_url": "https://storage.example.com/calls/8841.mp3"
 }
 ```
 
-A key becomes available in the filters below after the first call that carries it arrives.
+You do not create reps first. The first call with a new label creates it, so a new hire appears in Bluejay with their first call. The team's metrics run on every rep's calls with no extra setup.
 
-### See one rep
+### See each rep
 
 <Steps>
-  <Step title="Filter Logs">
-    On the Logs page, add a filter on the metadata key, then pick the rep id. To keep the filter, save it as a **View**. A View saves the filters and the time range, for example "Rep 2217, last 7 days".
+  <Step title="Filter Logs by rep">
+    The Logs page has a **Label** column that shows the rep on every call. Add a filter on **Label** and pick a rep to see only their calls. To keep the filter, save it as a **View**, for example "Rep 2217, last 7 days".
   </Step>
-  <Step title="Chart reps on a dashboard">
-    In a [dashboard](/monitor/dashboards) widget, set **Group By** to the `rep_id` key under **Metadata** to draw one series for each rep. To chart a single rep, add a filter on the key in the widget. Group By on a metadata key is not offered for tool call, metadata, trace attribute, or JSON custom metrics.
+  <Step title="Compare reps on a dashboard">
+    In a [dashboard](/monitor/dashboards) widget, set **Group By** to **Labels** to draw one bar or series for each rep. Use it to rank reps on a QA metric or to compare handle time. To show one rep, set the label filter at the top of the dashboard.
   </Step>
-  <Step title="Pull the numbers with the API">
-    [`GET /v1/observability/conversations`](/api-reference/endpoint/list-conversations) filters by a metadata key and can count conversations for each value of it.
+  <Step title="Pull a rep's calls with the API">
+    [`GET /v1/observability/conversations`](/api-reference/endpoint/list-conversations) filters by label and can count conversations for each label with `group_by=label`.
 
     ```bash
     curl --get https://api.getbluejay.ai/v1/observability/conversations \
       --header "X-API-Key: $BLUEJAY_API_KEY" \
-      --data-urlencode "metadata_path=rep_id" \
-      --data-urlencode "metadata_value=rep-2217" \
+      --data-urlencode "agent_ids=123" \
+      --data-urlencode "label=rep-2217" \
       --data-urlencode "last=30days"
     ```
   </Step>
 </Steps>
 
-### What a rep id cannot do
+### Good to know
 
-- An [alert](/monitor/alerts) has one condition. It can use a metric or a metadata field, not both, so it cannot fire on a metric for one rep id. To alert on one rep, give that rep an agent.
-- A [metric condition](/monitor/metrics#add-metric-conditions) cannot read metadata, so a metric cannot run for only some reps.
+- A call has one label. Put anything else you want to slice by, such as the queue or the site, in `metadata`.
+- A label belongs to one agent. A rep who works on two teams has a label on each team's agent.
+- An [alert](/monitor/alerts) watches the whole team's agent. To find the rep behind an alert, filter the Logs page by label.
 
 ## Check the result
 
