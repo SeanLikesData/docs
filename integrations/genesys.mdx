@@ -134,7 +134,8 @@ The call then appears in [Logs](/monitor/logs) with its transcript and metric re
     | `start_time_utc` | The conversation's `conversationStart`. |
     | `participants` | Exactly two: one `AGENT` and one `USER`. Set `spoke_first` on whoever speaks first. |
     | `metadata.external_conversation_id` | The Genesys Cloud `conversationId`. Sending the same id again replaces that conversation. |
-    | `metadata`, other keys | Queue, rep id, language, and other values you want to filter by. They also work as [dynamic variables](/monitor/metrics/llm-as-a-judge#dynamic-variables) in custom metrics. |
+    | `label` | The id of the rep who took the call, for a human-handled call. Bluejay tracks each rep by label. See [Track individual reps](/cookbook/evaluate-human-agents#track-individual-reps). |
+    | `metadata`, other keys | Queue, language, and other values you want to filter by. They also work as [dynamic variables](/monitor/metrics/llm-as-a-judge#dynamic-variables) in custom metrics. |
     | `multichannel` | `true` if the trunk records the caller and the agent on separate channels. |
 
     A successful response includes a `call_id`. The API allows 100 requests per minute for each organization, or 500 for enterprise accounts.
