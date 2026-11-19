@@ -10,6 +10,14 @@ import { ChangelogFilters } from "/snippets/changelog-filters.jsx";
 
 <ChangelogFilters />
 
+<Update label="November 19th, 2026" tags={["Improvement", "API", "Simulations"]}>
+  ## Hang up on transfer is on by default
+
+  New simulations now hang up when the agent transfers the call, so a Digital Human never reaches your live team by accident. This applies to simulations created in the app, through Create Simulation and through Bluejay as Code. Pass `hangup_on_transfer: false` to let transfers through. Existing simulations keep their setting.
+
+  [Create Simulation](/api-reference/endpoint/create-simulation)
+</Update>
+
 <Update label="November 4th, 2026" tags={["Improvement", "API", "Digital Humans"]}>
   ## Digital Human tags
 
