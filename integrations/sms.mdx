@@ -40,6 +40,7 @@ curl -X POST https://api.getbluejay.ai/v1/add-agent \
   -d '{
     "name": "Support Texts",
     "system_prompt": "You help customers by text.",
+    "goals": ["Answer order status questions by text"],
     "type": "INBOUND",
     "mode": "TEXT",
     "connection_type": "SMS",
