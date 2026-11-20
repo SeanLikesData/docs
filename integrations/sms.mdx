@@ -15,7 +15,7 @@ Connect an agent that customers reach by texting a phone number. Each Digital Hu
 <Tab title="Website">
 <Steps>
 <Step title="Turn on SMS testing">
-SMS testing is on the Growth, Scale, and Enterprise plans, and Bluejay reviews each organization before it can send texts. Click **Request SMS testing** in the run dialog, or **Request** in the **SMS Testing** section of your settings, and describe what your agent texts people. You can run SMS simulations once the request is approved.
+SMS testing is on Growth, Scale, and Enterprise plans. Click **Request SMS testing** in the run dialog and describe what your agent texts. You can run SMS simulations once Bluejay approves it.
 </Step>
 <Step title="Create the agent">
 Create a Text agent with the **SMS** connection type. Enter your agent's number in E.164 format, for example `+15551234567`. The number must be able to send and receive texts.
@@ -54,22 +54,17 @@ Queue runs with [Queue Simulation Run](/api-reference/endpoint/queue-simulation-
 
 ## How a conversation runs
 
-The agent type sets who texts first:
+The two sides take turns. The Digital Human waits for its **Patience** before each reply. See [Behavior](/test/simulations/digital-humans#behavior).
 
-- **Inbound**: the Digital Human sends the first text to your agent's number.
-- **Outbound**: each Digital Human waits for a text from your agent, then replies. See [Outbound agents](#outbound-agents).
-
-After that, the two sides take turns. The Digital Human waits for its **Patience** before each reply. See [Behavior](/test/simulations/digital-humans#behavior).
-
-Bluejay matches each text to its conversation by your agent's number and the Digital Human's number. A text from any other number is not part of the test, so your agent must reply from the number saved on the agent.
+Your agent must reply from the number saved on the agent.
 
 ### How a conversation ends
 
-Bluejay does not read an end signal from your agent's texts. A conversation ends when one of these happens:
+A conversation ends when:
 
 - The Digital Human ends it.
 - The conversation reaches the simulation's maximum number of turns, 100 messages from both sides by default. The Digital Human then sends a goodbye text.
-- No text arrives for the inactivity timeout, 5 minutes by default. If the simulation sets its own inactivity timeout, Bluejay uses that value, between 5 and 30 minutes.
+- No text arrives for 5 minutes. A simulation can set this from 5 to 30 minutes.
 
 ## Outbound agents
 
@@ -85,17 +80,13 @@ If your voice agent texts the customer after a call, for example a booking confi
 
 To check an SMS agent on a schedule, use [Uptime Monitoring](/monitor/uptime/overview). To grade your production text conversations, send them to [Logs](/monitor/logs#text-and-sms).
 
-## Limits
-
-- A pair of numbers, your agent's and a Digital Human's, can be in only one running SMS conversation at a time, because Bluejay matches texts by that pair.
-
 ## Troubleshooting
 
 | What you see | What to do |
 |---|---|
-| `403`: <Code>sms_testing_not_enabled</Code> | Your organization does not have SMS testing turned on. Request it, as in [Connect](#connect). |
+| `403`: <Code>sms_testing_not_enabled</Code> | Your organization does not have SMS testing turned on. Request it from the run dialog, or from **Request** in the **SMS Testing** section of your settings. |
 | `400` that names Digital Humans without a phone number | Give each Digital Human in the run a number. |
-| `409`: a TEXT simulation is already running with the same phone number pair | Wait for the other run to finish or cancel it. From the API, set <Code>terminate_overlapping_simulations</Code> to `true` to end the other conversations. |
+| `409`: a TEXT simulation is already running with the same phone number pair | A pair of numbers can be in only one running SMS conversation at a time. Wait for the other run to finish or cancel it. From the API, set <Code>terminate_overlapping_simulations</Code> to `true` to end the other conversations. |
 | An Outbound conversation never starts | Check that the agent has an **Outbound Trigger Webhook URL** and that your system texts from the agent's number. |
 | The transcript has only the Digital Human's first text | No reply reached Bluejay from the agent's number. Check that your agent replies from the number saved on the agent. |
 
