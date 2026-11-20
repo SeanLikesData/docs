@@ -19,9 +19,19 @@ Deletes the version that has the `label` you send.
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 
+<RequestExample>
+
+```bash cURL
+curl --request DELETE \
+  --url https://api.getbluejay.ai/v1/agents/{agent_id}/versions \
+  --header 'X-API-Key: <api-key>'
+```
+
+</RequestExample>
+
 ## Path parameters
 
-<FieldTable rows={[{"name": "agent_id", "type": "integer", "required": true, "description": ""}]} />
+<FieldTable rows={[{"name": "agent_id", "type": "integer", "required": true, "description": "ID of the agent."}]} />
 
 ## Query parameters
 
@@ -41,13 +51,5 @@ A `200` response has no body.
 |---|---|
 | `200` | Successful Response |
 | `422` | Validation Error |
-
-## Example request
-
-```bash
-curl --request DELETE \
-  --url https://api.getbluejay.ai/v1/agents/{agent_id}/versions \
-  --header 'X-API-Key: <api-key>'
-```
 
 {/* END GENERATED */}

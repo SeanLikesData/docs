@@ -147,6 +147,20 @@ def clean(text):
     return text.replace("—", ",")
 
 
+def plain(name):
+    """A short readable description for a field the spec leaves blank."""
+    words = name.replace("-", "_").split("_")
+    if name == "id":
+        return "Unique ID."
+    if len(words) > 1 and words[-1] == "id":
+        return "ID of the " + " ".join(words[:-1]) + "."
+    if len(words) > 1 and words[-1] == "at":
+        return "When it was " + " ".join(words[:-1]) + "."
+    if len(words) > 1 and words[-1] == "by":
+        return "Who " + " ".join(words[:-1]) + " it."
+    return ""
+
+
 def field_rows(spec, props, required, depth=0, seen=()):
     rows = []
     for name, raw in props.items():
@@ -157,7 +171,7 @@ def field_rows(spec, props, required, depth=0, seen=()):
             "name": name,
             "type": type_label(spec, schema, seen),
             "required": name in required,
-            "description": clean(schema.get("description") or first.get("description")),
+            "description": clean(schema.get("description") or first.get("description")) or plain(name),
         }
         default = schema.get("default", first.get("default"))
         if default is not None and not isinstance(default, (dict, list)):
@@ -184,7 +198,7 @@ def param_rows(spec, params, where):
             "name": p["name"],
             "type": type_label(spec, schema),
             "required": bool(p.get("required")),
-            "description": clean(p.get("description") or schema.get("description") or first.get("description")),
+            "description": clean(p.get("description") or schema.get("description") or first.get("description")) or plain(p["name"]),
         }
         default = schema.get("default", first.get("default"))
         if default is not None and not isinstance(default, (dict, list)):
@@ -287,6 +301,7 @@ def table(rows):
 
 def generate(spec, method, path, op):
     parts = [START, ""]
+    rail = ["<RequestExample>", "", "```bash cURL", curl(spec, method, path, op), "```", "", "</RequestExample>", ""]
     params = op.get("parameters", [])
     for where, heading in (("path", "Path parameters"), ("query", "Query parameters"), ("header", "Headers")):
         rows = param_rows(spec, params, where)
@@ -331,9 +346,9 @@ def generate(spec, method, path, op):
         parts += ["## Status codes", "", "| Status | Meaning |", "|---|---|"]
         parts += [f"| `{c}` | {d} |" for c, d in statuses]
         parts += [""]
-    parts += ["## Example request", "", "```bash", curl(spec, method, path, op), "```", ""]
     if resp_schema:
-        parts += ["## Example response", "", "```json " + code, json.dumps(example(spec, resp_schema), indent=2), "```", ""]
+        rail += ["<ResponseExample>", "", "```json " + code, json.dumps(example(spec, resp_schema), indent=2), "```", "", "</ResponseExample>", ""]
+    parts[2:2] = rail
     parts.append(END)
     return "\n".join(parts)
 
