@@ -19,7 +19,7 @@ Rate limit: 30 requests per minute.
 ```bash cURL
 curl --request PATCH \
   --url https://api.getbluejay.ai/v1/custom-background-noises/{noise_id} \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "name": "<string>"
@@ -43,6 +43,8 @@ curl --request PATCH \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Path parameters
 

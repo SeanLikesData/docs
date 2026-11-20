@@ -21,7 +21,7 @@ This request does not accept `allow_silence_tool` or `silence_tool_instructions`
 ```bash cURL
 curl --request POST \
   --url https://api.getbluejay.ai/v1/generate-digital-humans \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "agent_id": "<string>",
@@ -116,6 +116,8 @@ curl --request POST \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Headers
 

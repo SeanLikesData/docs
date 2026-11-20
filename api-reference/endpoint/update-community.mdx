@@ -17,7 +17,7 @@ Updates a community. Only the fields you send change. `digital_human_ids` replac
 ```bash cURL
 curl --request PUT \
   --url https://api.getbluejay.ai/v1/update-community/{community_id} \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "title": "<string>",
@@ -45,6 +45,8 @@ curl --request PUT \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Path parameters
 

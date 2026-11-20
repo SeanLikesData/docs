@@ -17,7 +17,7 @@ Deletes a call log. Set `recording_only=true` to delete only the recording file 
 ```bash cURL
 curl --request DELETE \
   --url https://api.getbluejay.ai/v1/call-log/{call_id} \
-  --header 'X-API-Key: <api-key>'
+  --header "X-API-Key: $BLUEJAY_API_KEY"
 ```
 
 </RequestExample>
@@ -32,6 +32,8 @@ curl --request DELETE \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Path parameters
 

@@ -21,7 +21,7 @@ Returns outcome counts, uptime percentage, and p50, p90, p95, and p99 latency pe
 ```bash cURL
 curl --request GET \
   --url https://api.getbluejay.ai/v1/uptime/monitors/{monitor_id}/series \
-  --header 'X-API-Key: <api-key>'
+  --header "Authorization: Bearer $BLUEJAY_USER_TOKEN"
 ```
 
 </RequestExample>
@@ -76,7 +76,7 @@ curl --request GET \
 
 ## Headers
 
-<FieldTable rows={[{"name": "X-API-Key", "type": "string", "required": true, "description": "API key required to authenticate requests."}]} />
+<FieldTable rows={[{"name": "Authorization", "type": "string", "required": true, "description": "Signed-in user token as `Bearer <token>`. API keys are rejected."}]} />
 
 ## Response
 

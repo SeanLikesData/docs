@@ -19,7 +19,7 @@ import { FieldTable } from "/snippets/field-table.jsx";
 ```bash cURL
 curl --request PATCH \
   --url https://api.getbluejay.ai/v1/scim/Users/{scim_user_id} \
-  --header 'X-API-Key: <api-key>'
+  --header "Authorization: Bearer $BLUEJAY_SCIM_TOKEN"
 ```
 
 </RequestExample>
@@ -30,7 +30,7 @@ curl --request PATCH \
 
 ## Headers
 
-<FieldTable rows={[{"name": "X-API-Key", "type": "string", "required": true, "description": "API key required to authenticate requests."}]} />
+<FieldTable rows={[{"name": "Authorization", "type": "string", "required": true, "description": "SCIM token as `Bearer <token>`. Not an API key."}]} />
 
 ## Response
 

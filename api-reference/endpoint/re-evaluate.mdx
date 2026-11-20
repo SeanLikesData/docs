@@ -19,7 +19,7 @@ The JSON body is optional. Send `{"version": 3}` to score against agent version 
 ```bash cURL
 curl --request POST \
   --url https://api.getbluejay.ai/v1/re-evaluate/{conversation_id} \
-  --header 'X-API-Key: <api-key>'
+  --header "X-API-Key: $BLUEJAY_API_KEY"
 ```
 
 </RequestExample>
@@ -35,6 +35,8 @@ curl --request POST \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Path parameters
 

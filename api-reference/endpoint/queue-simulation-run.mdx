@@ -26,7 +26,7 @@ Queues a run of a simulation and returns the run ID. The calls run after the res
 ```bash cURL
 curl --request POST \
   --url https://api.getbluejay.ai/v1/queue-simulation-run \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
@@ -75,6 +75,8 @@ curl --request POST \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Headers
 

@@ -21,7 +21,7 @@ Deletes one or many custom metrics. `custom_metric_ids` takes one metric ID or a
 ```bash cURL
 curl --request POST \
   --url https://api.getbluejay.ai/v2/delete-metrics \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "custom_metric_ids": [
@@ -44,6 +44,8 @@ curl --request POST \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Headers
 

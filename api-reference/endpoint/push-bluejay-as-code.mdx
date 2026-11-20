@@ -52,7 +52,7 @@ curl --request POST \
 ```bash cURL
 curl --request POST \
   --url https://api.getbluejay.ai/v1/bluejay-as-code \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "agents": [
@@ -93,6 +93,8 @@ curl --request POST \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Headers
 

@@ -17,7 +17,7 @@ Returns one call log and its evaluations. `credits_used` is the credits that the
 ```bash cURL
 curl --request GET \
   --url https://api.getbluejay.ai/v1/retrieve-call-log/{call_id} \
-  --header 'X-API-Key: <api-key>'
+  --header "X-API-Key: $BLUEJAY_API_KEY"
 ```
 
 </RequestExample>
@@ -186,6 +186,8 @@ curl --request GET \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Path parameters
 

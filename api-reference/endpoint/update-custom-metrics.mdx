@@ -19,7 +19,7 @@ Applies the same `updates` to each metric in `metric_ids`. Only the keys you sen
 ```bash cURL
 curl --request PUT \
   --url https://api.getbluejay.ai/v1/update-metrics \
-  --header 'X-API-Key: <api-key>' \
+  --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
     "metric_ids": [
@@ -56,6 +56,8 @@ curl --request PUT \
 ```
 
 </ResponseExample>
+
+<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
 
 ## Headers
 
