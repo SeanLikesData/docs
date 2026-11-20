@@ -140,10 +140,16 @@ def object_children(spec, schema, depth, seen=()):
     return rows
 
 
+# Plain-English rewrites of long spec descriptions. The spec text is also read by agents through
+# the MCP server, so it stays as written there. Keys are the exact spec text.
+OVERRIDES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "descriptions.json")))
+
+
 def clean(text):
     if not text:
         return ""
     text = re.sub(r"\s+", " ", str(text)).strip()
+    text = OVERRIDES.get(text, text)
     return text.replace("—", ",")
 
 
