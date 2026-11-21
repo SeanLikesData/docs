@@ -1059,6 +1059,19 @@
                 ]
               },
               {
+                "group": "Voices",
+                "icon": "microphone",
+                "expanded": true,
+                "pages": [
+                  "api-reference/endpoint/list-voices",
+                  "api-reference/endpoint/list-voice-clones",
+                  "api-reference/endpoint/create-voice-clone",
+                  "api-reference/endpoint/preview-voice-clone",
+                  "api-reference/endpoint/update-voice-clone",
+                  "api-reference/endpoint/delete-voice-clone"
+                ]
+              },
+              {
                 "group": "Communities",
                 "icon": "people-group",
                 "expanded": true,
