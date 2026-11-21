@@ -71,6 +71,17 @@ For the base URL and authentication, see the [API introduction](/api-reference/i
 | <Method>PATCH</Method> | [`/v1/personas/{persona_id}`](/api-reference/endpoint/update-persona) | Updates the fields you send and leaves the rest. |
 | <Method>DELETE</Method> | [`/v1/personas/{persona_id}`](/api-reference/endpoint/delete-persona) | Deletes a persona and takes it off every Digital Human that runs as it. |
 
+### Voices
+
+| Method | Path | Description |
+|---|---|---|
+| <Method>GET</Method> | [`/v1/voices`](/api-reference/endpoint/list-voices) | Returns the languages, accents and voices your workspace can give a Digital Human or persona. |
+| <Method>GET</Method> | [`/v1/voice-clones`](/api-reference/endpoint/list-voice-clones) | Returns the cloned and generated voices in your organization, newest first, under `voices`. |
+| <Method>POST</Method> | [`/v1/voice-clones`](/api-reference/endpoint/create-voice-clone) | Clones a voice from your audio clips, so a Digital Human can speak in it. |
+| <Method>POST</Method> | [`/v1/voice-clones/{voice_id}/preview`](/api-reference/endpoint/preview-voice-clone) | Returns a short spoken sample of a cloned or generated voice as an MP3 (`audio/mpeg`). |
+| <Method>PATCH</Method> | [`/v1/voice-clones/{voice_id}`](/api-reference/endpoint/update-voice-clone) | Renames a cloned or generated voice, sets its gender, or both. |
+| <Method>DELETE</Method> | [`/v1/voice-clones/{voice_id}`](/api-reference/endpoint/delete-voice-clone) | Removes a cloned or generated voice from the voices you can pick. |
+
 ### Communities
 
 | Method | Path | Description |
@@ -87,7 +98,7 @@ For the base URL and authentication, see the [API introduction](/api-reference/i
 | Method | Path | Description |
 |---|---|---|
 | <Method>GET</Method> | [`/v1/custom-background-noises`](/api-reference/endpoint/list-custom-background-noises) | Returns the custom background noises in your organization, oldest first. |
-| <Method>POST</Method> | [`/v1/custom-background-noises/upload-url`](/api-reference/endpoint/create-custom-background-noise-upload-url) | Returns `upload_url` and `storage_path`. |
+| <Method>POST</Method> | [`/v1/custom-background-noises/upload-url`](/api-reference/endpoint/create-custom-background-noise-upload-url) | Returns `upload_url`, `content_type` and `storage_path`. |
 | <Method>POST</Method> | [`/v1/custom-background-noises`](/api-reference/endpoint/create-custom-background-noise) | Adds an uploaded file to the background noise library. |
 | <Method>PATCH</Method> | [`/v1/custom-background-noises/{noise_id}`](/api-reference/endpoint/update-custom-background-noise) | Renames a custom background noise. |
 | <Method>DELETE</Method> | [`/v1/custom-background-noises/{noise_id}`](/api-reference/endpoint/delete-custom-background-noise) | Removes a custom background noise from the library. |

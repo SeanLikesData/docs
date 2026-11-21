@@ -30,6 +30,10 @@ ENDPOINT_DIR = "api-reference/endpoint"
 IGNORE_FILE = "scripts/api-ignore.txt"
 OTHER_GROUP = "Other"
 PRIVATE_SEGMENTS = {"internal", "admin", "health", ".well-known", "ping"}
+# ponytail: AccentType still lists old values the API accepts but that name a voice, not an accent.
+# Drop this once the API's enum lists only real accents.
+OLD_ACCENTS = re.compile(r"american2|mature|nigerian|watson\w*|fish\w*")
+ACCENT_NOTE = "[GET /v1/voices](/api-reference/endpoint/list-voices) lists the accents of each language."
 
 
 def is_private(path, op):
@@ -165,6 +169,9 @@ def field_rows(spec, props, required, depth=0, seen=()):
         enum = first.get("enum") or (first.get("items", {}) or {}).get("enum")
         if enum:
             row["values"] = [str(e) for e in enum]
+        if first.get("title") == "AccentType":
+            row["values"] = [v for v in row["values"] if not OLD_ACCENTS.fullmatch(v)]
+            row["description"] = f"{row['description'].rstrip('.')}. {ACCENT_NOTE}".lstrip(". ")
         children = object_children(spec, schema, depth, seen)
         if children:
             row["children"] = children
