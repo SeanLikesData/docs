@@ -31,7 +31,6 @@ DELETE /v1/simulation-result/{simulation_result_id}
 DELETE /v1/simulation-run/{simulation_run_id}
 DELETE /v1/uptime/v2/monitors/{monitor_id}
 DELETE /v1/usage-alerts/{usage_alert_id}
-DELETE /v1/voice-clones/{voice_id}
 DELETE /v1/workspaces/{workspace_id}
 DELETE /v1/workspaces/{workspace_id}/members/{user_id}
 GET /.well-known/jwks.json
@@ -112,7 +111,6 @@ GET /v1/uptime/v2/monitors/{monitor_id}/checks/{check_id}/transcript
 GET /v1/uptime/v2/monitors/{monitor_id}/incidents
 GET /v1/uptime/v2/monitors/{monitor_id}/series
 GET /v1/usage-alerts
-GET /v1/voice-clones
 GET /v1/workflow-extraction/jobs/{provider_job_id}
 GET /v1/workspaces
 GET /v1/workspaces/budget
@@ -266,8 +264,6 @@ POST /v1/uptime/v2/monitors/number-check
 POST /v1/uptime/v2/monitors/{monitor_id}/incidents/{incident_id}/acknowledge
 POST /v1/uptime/v2/monitors/{monitor_id}/incidents/{incident_id}/resolve
 POST /v1/usage-alerts
-POST /v1/voice-clones
-POST /v1/voice-clones/{voice_id}/preview
 POST /v1/voice-generation
 POST /v1/webhooks/firecrawl
 POST /v1/webhooks/reducto
