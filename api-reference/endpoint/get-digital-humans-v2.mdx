@@ -11,7 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="GET" path="/v2/digital-humans" />
 
-Returns the Digital Humans in your organization, newest first. `page_size` is 20 by default and 100 at most.
+List the Digital Humans in your organization, newest first. `page_size` is 20 by default and 100 at most.
 
 - Repeat `digital_human_id` to read specific Digital Humans. An unknown ID returns an empty list. Repeat `simulation_id` to read the Digital Humans linked to specific simulations. An unknown or unreadable `simulation_id` returns 404.
 - A Digital Human must match every filter you send, including `type` and `tags`, and any one of the values within a filter.

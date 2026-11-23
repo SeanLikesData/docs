@@ -11,7 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="POST" path="/v2/create-digital-humans" />
 
-Creates one or many Digital Humans. `digital_humans` takes one Digital Human object or a list of them, and the response is always a list.
+Create one or many Digital Humans with their intent, success criteria and call settings. `digital_humans` takes one Digital Human object or a list of them, and the response is always a list.
 
 ```json
 { "digital_humans": { "test_name": "Booking caller", "intent": "Book a table for two" } }

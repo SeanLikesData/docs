@@ -14,7 +14,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <Warning>This endpoint is deprecated. Use [`POST /v2/queue-simulation-run`](/api-reference/endpoint/queue-simulation-run-v2) instead.</Warning>
 
-Queues an SMS run of a simulation.
+Queue an SMS run of a simulation and get `simulation_run_id` and `simulation_result_ids`.
 
 - If `terminate_overlapping_simulations` is `true`, Bluejay ends running conversations that use the same pair of phone numbers.
 - `runs_per_digital_human` overrides the simulation setting for this run. The default is 1.

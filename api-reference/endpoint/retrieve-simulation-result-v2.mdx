@@ -11,7 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="GET" path="/v2/retrieve-simulation-result/{test_result_id}" />
 
-Returns the same result as [the `/v1` endpoint](/api-reference/endpoint/retrieve-simulation-result), with its success criteria graded one bullet at a time. `criteria_pass_rate` is the share of bullets that passed, from 0 to 100, and the result passes only when every bullet passed.
+Get a simulation result with each success-criteria bullet graded. The result matches [the `/v1` endpoint](/api-reference/endpoint/retrieve-simulation-result). `criteria_pass_rate` is the share of bullets that passed, from 0 to 100, and the result passes only when every bullet passed.
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

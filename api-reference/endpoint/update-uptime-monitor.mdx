@@ -11,7 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="PUT" path="/v1/uptime/monitors/{monitor_id}" />
 
-Updates an uptime monitor.
+Update an uptime monitor's checks, frequency, active window and notifications.
 
 - `checks` replaces the full list. Send every check you want to keep. For the shapes, see [Create Uptime Monitor](/api-reference/endpoint/create-uptime-monitor).
 - A change to `checks` or `agent_id` rebuilds the simulation of the monitor. Notification, pause, and resume changes do not.

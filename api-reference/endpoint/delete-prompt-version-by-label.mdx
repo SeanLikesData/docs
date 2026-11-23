@@ -11,7 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="DELETE" path="/v1/agents/{agent_id}/versions" />
 
-Deletes the version that has the `label` you send.
+Delete the agent version that has the `label` you send.
 
 - `production` returns 400. Move the label first.
 - A label with no version returns 404. A label on more than one version returns 400.

@@ -11,7 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="PUT" path="/v1/scenario/{workflow_id}" />
 
-Updates a scenario. Fields you do not send do not change.
+Update a scenario's name, description, agent links and graph definition.
 
 - `agent_ids` replaces all agent links. `[]` removes all links.
 - `definition` replaces the full graph. Bluejay validates it the same as [Create Scenario](/api-reference/endpoint/create-scenario).
