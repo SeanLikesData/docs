@@ -9,18 +9,20 @@ import { Code } from "/snippets/code.jsx";
 
 Use a custom endpoint to run [STT benchmarks](/benchmarks/stt) against a transcription service that is not in the model library, such as your own model or a self-hosted server. Pick the option whose format your service already speaks.
 
-| Option | Mode | Where the transcript comes back |
-|---|---|---|
-| **OpenAI-compatible (batch)** | Batch | In the response |
-| **OpenAI Realtime-compatible (streaming)** | Streaming | Over the WebSocket |
-| **Custom HTTP** | Batch | You post it to Bluejay |
-| **Custom CHIRP (WebSocket)** | Streaming | You post it to Bluejay |
+| Option | Mode | Where the transcript comes back | API `provider` |
+|---|---|---|---|
+| **OpenAI-compatible (batch)** | Batch | In the response | <Code>openai_compatible</Code> |
+| **OpenAI Realtime-compatible (streaming)** | Streaming | Over the WebSocket | <Code>openai_realtime_compatible</Code> |
+| **Custom HTTP** | Batch | You post it to Bluejay | <Code>custom_http</Code> |
+| **Custom CHIRP (WebSocket)** | Streaming | You post it to Bluejay | <Code>custom_chirp</Code> |
 
 None of the four receive the dataset's vocabulary. Only the two OpenAI options receive a language, the code of the first speaker's language, such as `en`.
 
 ## Add the model
 
 On the **Models** tab, click **Add model** and pick an option that starts with **Your own endpoint**. Bluejay stores the secret encrypted and never shows it again.
+
+To add it through the API, call [Create Model Config](/api-reference/endpoint/create-model-config) with the option's `provider`, your <Code>endpoint_url</Code> and <Code>endpoint_secret</Code>, and for the OpenAI options a `model`. Custom HTTP takes <Code>settings.auth_header</Code> and Custom CHIRP takes <Code>settings.username</Code>.
 
 A run keeps the endpoint URL it started with. A new secret applies at once, even to a run in progress.
 
@@ -131,7 +133,7 @@ Bluejay reads only `session.error` frames from your service, and only logs them.
 
 ## Post the transcript
 
-Custom HTTP and Custom CHIRP send the transcript back with one request. Authenticate with a [Bluejay API key](/api-reference/introduction) that can write to the run's workspace.
+Custom HTTP and Custom CHIRP send the transcript back with one request to [Post Run Item Transcript](/api-reference/endpoint/post-run-item-transcript). Authenticate with a [Bluejay API key](/api-reference/introduction) that can write to the run's workspace.
 
 ```bash
 curl -X POST "https://api.getbluejay.ai/v1/datasets/run-items/$RUN_ITEM_ID/transcript" \

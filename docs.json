@@ -912,13 +912,6 @@
             ]
           },
           {
-            "group": "Benchmarks",
-            "pages": [
-              "benchmarks/stt",
-              "benchmarks/stt-custom-endpoints"
-            ]
-          },
-          {
             "group": "Monitor",
             "pages": [
               {

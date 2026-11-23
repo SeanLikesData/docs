@@ -56,7 +56,7 @@ Editing a script generates its audio again. If audio fails to generate, click **
 
 ### Use your own recordings
 
-To score real recordings instead of generated audio, add the item through the API with <Code>audio_source</Code> set to `uploaded`, then upload the file with [Upload item audio](#use-the-api). The item's script becomes the reference transcript, so write exactly what is said. Bluejay plays the file as it is, without personas or an environment.
+To score real recordings instead of generated audio, add the item through the API with <Code>audio_source</Code> set to `uploaded`, then upload the file with [Upload item audio](/api-reference/endpoint/upload-item-audio). The item's script becomes the reference transcript, so write exactly what is said. Bluejay plays the file as it is, without personas or an environment.
 
 ### Vocabulary
 
@@ -136,17 +136,17 @@ Every step above works through the API, with the same API keys as the rest of Bl
 
 | Task | Method | Path |
 |---|---|---|
-| Create a dataset | `POST` | <Code>{"/v1/datasets"}</Code> |
-| Generate data | `POST` | <Code>{"/v1/datasets/{dataset_id}/generate"}</Code> |
-| Add items | `POST` | <Code>{"/v1/datasets/{dataset_id}/items"}</Code> |
-| Upload item audio | `PUT` | <Code>{"/v1/datasets/{dataset_id}/items/{item_id}/audio"}</Code> |
-| Retry failed audio | `POST` | <Code>{"/v1/datasets/{dataset_id}/build"}</Code> |
-| Add a model | `POST` | <Code>{"/v1/model-configs"}</Code> |
-| Start a run | `POST` | <Code>{"/v1/datasets/{dataset_id}/runs"}</Code> |
-| Read a run | `GET` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}"}</Code> |
-| Read a run's items | `GET` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}/items"}</Code> |
-| Cancel a run | `POST` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}/cancel"}</Code> |
-| Delete a run | `DELETE` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}"}</Code> |
+| [Create a dataset](/api-reference/endpoint/create-dataset) | `POST` | <Code>{"/v1/datasets"}</Code> |
+| [Generate data](/api-reference/endpoint/generate-items) | `POST` | <Code>{"/v1/datasets/{dataset_id}/generate"}</Code> |
+| [Add items](/api-reference/endpoint/create-items) | `POST` | <Code>{"/v1/datasets/{dataset_id}/items"}</Code> |
+| [Upload item audio](/api-reference/endpoint/upload-item-audio) | `PUT` | <Code>{"/v1/datasets/{dataset_id}/items/{item_id}/audio"}</Code> |
+| [Retry failed audio](/api-reference/endpoint/build-dataset) | `POST` | <Code>{"/v1/datasets/{dataset_id}/build"}</Code> |
+| [Add a model](/api-reference/endpoint/create-model-config) | `POST` | <Code>{"/v1/model-configs"}</Code> |
+| [Start a run](/api-reference/endpoint/create-run) | `POST` | <Code>{"/v1/datasets/{dataset_id}/runs"}</Code> |
+| [Read a run](/api-reference/endpoint/get-run) | `GET` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}"}</Code> |
+| [Read a run's items](/api-reference/endpoint/list-run-items) | `GET` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}/items"}</Code> |
+| [Cancel a run](/api-reference/endpoint/cancel-run) | `POST` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}/cancel"}</Code> |
+| [Delete a run](/api-reference/endpoint/delete-run) | `DELETE` | <Code>{"/v1/datasets/{dataset_id}/runs/{run_id}"}</Code> |
 
 Save provider keys in the app, on the **Integrations** page or when you add a model. A deleted run and its results cannot be recovered, and a run that is still running must be cancelled first.
 
