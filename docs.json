@@ -464,7 +464,7 @@
     },
     {
       "source": "/key-concepts/digital-humans/follow-up-sms",
-      "destination": "/integrations/phone-number#sms"
+      "destination": "/integrations/sms#text-after-a-call"
     },
     {
       "source": "/key-concepts/custom-metrics/metric-types",
@@ -966,6 +966,7 @@
             "pages": [
               "integrations/overview",
               "integrations/phone-number",
+              "integrations/sms",
               "integrations/sip",
               "integrations/websockets",
               "integrations/http-webhooks",
