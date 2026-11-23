@@ -8,6 +8,14 @@ export const TryIt = ({ operations = [] }) => {
   const [sending, setSending] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.origin === "https://app.getbluejay.ai" && e.data?.type === "bluejay-docs-key") setApiKey(e.data.apiKey);
+    };
+    window.addEventListener("message", onKey);
+    return () => window.removeEventListener("message", onKey);
+  }, []);
+
   const op = operations[index] || { params: [] };
   const groups = [];
   operations.forEach((o, i) => {
@@ -119,7 +127,12 @@ export const TryIt = ({ operations = [] }) => {
       ) : null}
 
       <label className="bj-tryit-field">
-        <span>API key</span>
+        <span>
+          API key{" "}
+          <button type="button" onClick={() => window.open("https://app.getbluejay.ai/docs-key", "bluejay-docs-key", "width=480,height=640")}>
+            Log in to fill my key
+          </button>
+        </span>
         <input
           type="password"
           autoComplete="off"
