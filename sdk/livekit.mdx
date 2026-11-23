@@ -1,69 +1,37 @@
 ---
 title: "LiveKit"
-sidebarTitle: "LiveKit"
-description: "Send a LiveKit Agents call to Bluejay."
+description: "Capture LiveKit Agents conversations and attach traces to simulations."
 icon: "/logo/livekit.svg"
 ---
 
-One line before the `session.start()` you already have. Spans, audio, transcript, and tool calls reach Bluejay. The call becomes a conversation when it hangs up. Install and the API key are on the [SDK](/sdk/overview) page.
+Use the LiveKit integration to capture transcript turns, audio, and native LiveKit spans. Bluejay builds the conversation at hang-up.
 
-## Prompt
+## Set up the SDK
 
-Paste this into your coding agent in the repo that runs the worker.
-
-```text
-Add the Bluejay Python SDK to this LiveKit Agents worker so each production call shows up as a Bluejay conversation. Do not also POST /v1/evaluate for a call the SDK traces.
-
-Install bluejay-sdk[livekit]. Read the API key from the BLUEJAY_API_KEY environment variable. Construct one BluejayClient at process startup and call init_tracing() once.
-
-Use the agent's external id from Bluejay as external_agent_id. Call this once before session.start():
-    client.instrument_livekit(ctx, session, external_agent_id=EXTERNAL_AGENT_ID)
-
-Do not add a second tracing stack. Do not change the agent's replies.
-```
-
-## Set up
-
-<Steps>
-<Step title="Install">
+Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview), then install the LiveKit extra.
 
 ```bash
-pip install "bluejay-sdk[livekit]"
+pip install "bluejay-sdk[livekit]>=0.4.0"
 ```
 
-</Step>
-<Step title="Set the API key">
-
-```bash
-export BLUEJAY_API_KEY=bj_...
-```
-
-</Step>
-<Step title="Initialize">
+Create the client once at startup. In your existing LiveKit job, attach Bluejay before starting the session.
 
 ```python
 from bluejay import BluejayClient
 
-client = BluejayClient()  # reads BLUEJAY_API_KEY
-client.init_tracing()
-```
+client = BluejayClient(tracing=True)
 
-</Step>
-<Step title="Instrument the session">
-
-Call this once before `session.start()`. `external_agent_id` is the agent's id in Bluejay. Reusing it attributes every call to that agent.
-
-```python
-client.instrument_livekit(ctx, session, external_agent_id="support-bot")
+# In your LiveKit job, after creating the AgentSession:
+client.instrument_livekit(ctx, session, external_agent_id="support-voice")
 await session.start(room=ctx.room, agent=SupportAgent())
 ```
 
-</Step>
-</Steps>
+Use the external ID configured on your Bluejay agent. You can also pass `agent_id` with its Bluejay ID. The integration uses LiveKit's native model and tool spans. Pass `record_audio=False` if you want spans and transcript without uploading audio.
 
-To have Bluejay place a test call into your LiveKit room, use [Connect LiveKit](/integrations/livekit). This page is the worker sending its own live calls.
+## Verify a call
 
-## Related
+Place a call and hang up. Open the conversation in [Logs](/monitor/logs) to inspect its transcript, audio, and trace.
 
-- [Logs](/monitor/logs)
-- [LiveKit integration](/integrations/livekit)
+## Attach traces to a simulation
+
+For Bluejay test calls, the SDK reads the `X-Simulation-Result-Id` participant attribute. If your transport supplies the ID as job metadata or a header, read it there and pass `simulation_result_id` to `instrument_livekit()`. See [Connect LiveKit](/integrations/livekit) for how each transport delivers it, and [Run simulations](/sdk/simulations) to queue a test from Python.

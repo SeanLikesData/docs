@@ -1,0 +1,101 @@
+---
+title: "Observe Your Agent"
+sidebarTitle: "Observability"
+description: "Send production transcripts, traces, and recordings to Bluejay."
+icon: waveform
+---
+
+Enable tracing at process startup, then use the integration for your agent. The SDK groups telemetry by session so the transcript and trace are available on the same conversation in [Logs](/monitor/logs).
+
+```python
+from bluejay import BluejayClient
+
+client = BluejayClient(tracing=True)
+```
+
+| Agent | What to add |
+| --- | --- |
+| LiveKit | Attach Bluejay before the agent session starts. The integration captures turns, spans, and audio. [LiveKit setup](/sdk/livekit) |
+| Pipecat | Add the tap to the pipeline and enable Pipecat tracing. The integration captures turns, spans, and audio. [Pipecat setup](/sdk/pipecat) |
+| Chat or SMS | Reuse the conversation ID and call `client.turn()` for each message. |
+| Custom voice | Record finalized speech with `client.turn()` and add spans for custom steps. |
+
+## Trace chat or SMS
+
+Use `@client.session(...)` on your message handler. The first argument selects a stable conversation ID from the handler's arguments. Use the same ID for every message in the conversation.
+
+```python
+@client.session(lambda chat_id, message: chat_id, external_agent_id="support-chat")
+def answer_message(chat_id, message):
+    client.turn("USER", message)
+    reply = generate_reply(message)
+    client.turn("AGENT", reply)
+    return reply
+```
+
+For SMS, use the conversation ID across messages and record the agent turn after your send succeeds:
+
+```python
+@client.session(lambda thread_id, sender, message: thread_id, external_agent_id="support-sms")
+async def respond_to_sms(thread_id, sender, message):
+    client.turn("USER", message)
+    reply = await generate_sms_reply(message)
+    await send_sms(sender, reply)
+    client.turn("AGENT", reply)
+```
+
+Use the external ID configured on your Bluejay agent. You can also pass `agent_id` with its Bluejay ID. If your app knows when a conversation ends, call `client.end_session(conversation_id, external_agent_id="support-chat")` then. Bluejay also builds idle sessions automatically.
+
+## Trace custom voice
+
+Keep one ID for the call. Record the caller's finalized transcript and the portion of the reply that played. Pass timezone-aware `datetime` values for speech timing.
+
+```python
+with client.session(call_id, external_agent_id="support-voice") as conversation:
+    conversation.turn("USER", caller_text, start_time=heard_at, end_time=heard_until)
+    conversation.turn(
+        "AGENT", played_text,
+        start_time=played_at,
+        end_time=played_until,
+        interrupted=caller_barged_in,
+    )
+
+conversation.end()
+```
+
+For callbacks, reopen the same session ID as each callback runs. A custom stack supplies its own audio. If you already have a recording and a transcript, you can submit the finished call through [Evaluate](/api-reference/endpoint/evaluate) as an alternative ingest path. Use one ingest path per conversation.
+
+## Add model and tool details
+
+`turn()` writes a transcript line. Supported provider calls are traced automatically inside the active session. See [OpenAI](/sdk/openai), [Anthropic](/sdk/anthropic), [Gemini](/sdk/gemini), or [Bedrock](/sdk/bedrock).
+
+Use `@client.observe()` when a custom function should appear as a step in the trace. The decorator records its arguments, result, and errors.
+
+```python
+@client.observe(kind="tool")
+def lookup_order(order_id):
+    return orders.get(order_id)
+```
+
+For a model request that has no provider or framework span, use a manual span and set its output and token counts.
+
+```python
+with client.span("generate reply", kind="llm", model=model_name, input=messages) as span:
+    result = model_client.generate(messages)
+    span.set_output(result.text, input_tokens=result.input_tokens, output_tokens=result.output_tokens)
+```
+
+## Configure data capture
+
+For advanced configuration, create the client and call `init_tracing()` once at startup:
+
+```python
+client = BluejayClient()
+client.init_tracing(redact_pii=True)
+```
+
+`redact_pii=True` strips supported content attributes such as transcript lines, prompts, and tool payloads from spans sent to Bluejay. For custom span attributes, provide a `mask` function. To disable audio upload, set `record_audio=False` on the LiveKit or Pipecat integration.
+
+## Verify the integration
+
+Send a message or place a call, then open the conversation in [Logs](/monitor/logs) and inspect its [trace](/monitor/traces). For text, call `end_session()` to request the build immediately. For a short-lived trace-only script, call `client.flush()` before exit.

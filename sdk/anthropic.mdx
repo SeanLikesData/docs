@@ -5,15 +5,17 @@ description: "Trace Anthropic SDK calls."
 icon: message
 ---
 
-`init_tracing()` traces the Anthropic SDK. No extra package. Messages `create` and `stream` are covered.
+`BluejayClient(tracing=True)` traces the Anthropic SDK. No extra package. Messages `create` and `stream` are covered.
 
 ```python
-client.init_tracing()
+from bluejay import BluejayClient
+
+client = BluejayClient(tracing=True)
 
 reply = anthropic_client.messages.create(model="claude-sonnet-4-5", max_tokens=1024, messages=messages)
 ```
 
-Inside a [session](/sdk/overview#write-each-utterance), the span joins that call.
+When the call runs inside a [session](/sdk/observability#trace-chat-or-sms), the span joins that call.
 
 ## Related
 

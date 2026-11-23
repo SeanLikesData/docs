@@ -1000,9 +1000,16 @@
         "icon": "terminal",
         "groups": [
           {
-            "group": "SDK",
+            "group": "Get started",
             "pages": [
               "sdk/overview"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "sdk/observability",
+              "sdk/simulations"
             ]
           },
           {

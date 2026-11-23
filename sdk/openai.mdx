@@ -5,16 +5,18 @@ description: "Trace OpenAI SDK calls."
 icon: "/logo/openai.svg"
 ---
 
-`init_tracing()` traces the OpenAI SDK. No extra package. Chat completions and responses are covered: `create`, `parse`, and `stream`, including Azure OpenAI and OpenAI-compatible clients.
+`BluejayClient(tracing=True)` traces the OpenAI SDK. No extra package. Chat completions and responses are covered: `create`, `parse`, and `stream`, including Azure OpenAI and OpenAI-compatible clients.
 
 ```python
-client.init_tracing()
+from bluejay import BluejayClient
+
+client = BluejayClient(tracing=True)
 
 # this call is a span, with the model, prompt, reply, tool calls, tokens, and finish reason
 reply = openai_client.chat.completions.create(model="gpt-4o-mini", messages=messages)
 ```
 
-Inside a [session](/sdk/overview#write-each-utterance), the span joins that call.
+When the call runs inside a [session](/sdk/observability#trace-chat-or-sms), the span joins that call.
 
 ## Related
 
