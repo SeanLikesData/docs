@@ -11,11 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="PUT" path="/v1/update-agent-by-external-id" />
 
-Updates an agent by `external_agent_id`, the ID of the agent at your voice provider.
-
-<Note>Fields you do not send keep their stored values.</Note>
-
-If you send `connection_type`, Bluejay clears the connection fields that the new type does not use. [Fields by connection type](/api-reference/endpoint/add-agent#fields-by-connection-type) lists the fields of each type.
+Updates an agent by `external_agent_id`, the ID of the agent at your voice provider. Fields you do not send keep their stored values. If you send `connection_type`, Bluejay clears the connection fields that the new type does not use. [Fields by connection type](/api-reference/endpoint/add-agent#fields-by-connection-type) lists the fields of each type.
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

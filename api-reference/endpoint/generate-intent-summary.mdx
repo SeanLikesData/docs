@@ -11,11 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="POST" path="/v1/generate-intent-summary" />
 
-Writes `intent_summary` on a Digital Human.
-
-<Note>If the intent is 500 characters or shorter, Bluejay clears `intent_summary` and the response has `skipped: true`.</Note>
-
-The response is 400 if the Digital Human has a workflow or voicemail tag, or has no intent.
+Writes `intent_summary` on a Digital Human. If the intent is 500 characters or shorter, Bluejay clears `intent_summary` and the response has `skipped: true`. The response is 400 if the Digital Human has a workflow or voicemail tag, or has no intent.
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

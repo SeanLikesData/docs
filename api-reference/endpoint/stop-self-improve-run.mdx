@@ -11,11 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="POST" path="/v1/self-improve/runs/{run_id}/stop" />
 
-Requests a stop and returns `STOP_REQUESTED`.
-
-<Note>If the run is not pending or running, the response returns the current status and does not change it.</Note>
-
-Rate limit: 30 requests per minute.
+Requests a stop and returns `STOP_REQUESTED`. If the run is not pending or running, the response returns the current status and does not change it. Rate limit: 30 requests per minute.
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

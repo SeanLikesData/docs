@@ -11,9 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="GET" path="/v1/uptime/monitors/{monitor_id}/series" />
 
-Returns outcome counts, uptime percentage, and p50, p90, p95, and p99 latency per time bucket.
-
-<Note>`days` is 7 by default and 365 at most.</Note>
+Returns outcome counts, uptime percentage, and p50, p90, p95, and p99 latency per time bucket. `days` is 7 by default and 365 at most.
 
 <Warning>
   This endpoint needs a signed-in user token. A request with an API key returns 400.

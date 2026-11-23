@@ -15,9 +15,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
   Use [Retrieve Simulation Results v2](/api-reference/endpoint/retrieve-simulation-results-v2) for new integrations. `/v2` grades each success-criteria bullet, while `/v1` returns only the overall `goal_success` grade.
 </Note>
 
-Returns a simulation run and one page of its results, oldest first.
-
-<Note>Each result includes evaluations and custom metric results. A result's `status` is one of the [call statuses](/test/simulations/reference#call-statuses).</Note>
+Returns a simulation run and one page of its results, oldest first. Each result includes evaluations and custom metric results.
 
 `limit` is 100 by default and 100 at most. Use `offset` to get the next page. Use `issue_ids` to keep only results linked to those simulation issues.
 

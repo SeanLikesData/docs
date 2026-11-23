@@ -11,9 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="PUT" path="/v1/update-digital-human/{digital_human_id}" />
 
-Updates a Digital Human.
-
-<Note>Validation uses the `tag` in the body. If you do not send `tag`, validation uses the stored `tag`.</Note>
+Updates a Digital Human. Validation uses the `tag` in the body.
 
 `success_criteria` is one string with a bullet per line. Sending it replaces every bullet.
 

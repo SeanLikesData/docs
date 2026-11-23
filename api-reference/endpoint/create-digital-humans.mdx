@@ -14,13 +14,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <Warning>This endpoint is deprecated. Use [`POST /v2/create-digital-humans`](/api-reference/endpoint/create-digital-humans-v2) instead.</Warning>
 
-Creates many Digital Humans in one request.
-
-<Note>Each item in `digital_humans` takes the same fields as [Create Digital Human](/api-reference/endpoint/create-digital-human). Items that fail validation return per-item errors. The other items are created.</Note>
-
-If you omit them, `allow_silence_tool` is `false` and `silence_tool_instructions` is `"default"`.
-
-Rate limit: 20 requests per minute.
+Creates many Digital Humans in one request. Each item in `digital_humans` takes the same fields as [Create Digital Human](/api-reference/endpoint/create-digital-human). If you omit them, `allow_silence_tool` is `false` and `silence_tool_instructions` is `"default"`.
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

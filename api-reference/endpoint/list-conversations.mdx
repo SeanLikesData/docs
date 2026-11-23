@@ -11,11 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="GET" path="/v1/observability/conversations" />
 
-Returns production conversations, newest first.
-
-<Note>Each row has `metric_results`.</Note>
-
-Set `group_by` to get counts per group instead of rows. You can group by status, agent, label, day, interface, direction, ended_by, a `metadata_path`, or `metric_value`. The same filters apply to rows and counts.
+Returns production conversations, newest first. Each row has `metric_results`. Set `group_by` to get counts per group instead of rows.
 
 `page_size` is 20 by default and 100 at most.
 

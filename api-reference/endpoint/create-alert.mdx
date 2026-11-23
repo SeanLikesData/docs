@@ -11,9 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="POST" path="/v1/create-alert" />
 
-Creates an alert.
-
-<Note>`source_scope` selects the data: `observability`, `simulation`, or `all`.</Note>
+Creates an alert. `source_scope` selects the data: `observability`, `simulation`, or `all`.
 
 - For `observability`, `threshold_time_interval` is a window in seconds. The default is 600. `min_events` defaults to 10.
 - For `simulation`, `threshold_time_interval` is the number of recent completed runs. The default is 1. `min_events` is not used.

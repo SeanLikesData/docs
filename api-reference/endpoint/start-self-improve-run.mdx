@@ -11,9 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="POST" path="/v1/self-improve/runs" />
 
-Starts a loop that changes the agent prompt, pushes it to the provider, and runs the simulation to score it.
-
-<Note>At the end, Bluejay saves the best prompt as one new `latest` version. The previous version stays. The `production` label does not move.</Note>
+Starts a loop that changes the agent prompt, pushes it to the provider, and runs the simulation to score it. At the end, Bluejay saves the best prompt as one new `latest` version.
 
 ## Confirm the run
 

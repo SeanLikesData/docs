@@ -11,9 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="POST" path="/v2/create-digital-humans" />
 
-Creates one or many Digital Humans.
-
-<Note>`digital_humans` takes one Digital Human object or a list of them, and the response is always a list. Items that fail validation return per-item errors in `errors`. The other items are created.</Note>
+Creates one or many Digital Humans. `digital_humans` takes one Digital Human object or a list of them, and the response is always a list.
 
 ```json
 { "digital_humans": { "test_name": "Booking caller", "intent": "Book a table for two" } }

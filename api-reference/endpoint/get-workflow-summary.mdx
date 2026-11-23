@@ -11,9 +11,7 @@ import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
 <EndpointBar method="GET" path="/v1/agents/{agent_id}/workflow/summary" />
 
-Returns the [workflow](/test/simulations/reference#workflow) of one agent as `nodes` and `edges`.
-
-<Note>Use a node ID in a [conditional metric](/test/metrics#add-metric-conditions). If the agent has no workflow provider, the request returns `400`.</Note>
+Returns the [workflow](/test/simulations/reference#workflow) of one agent as `nodes` and `edges`. Use a node ID in a [conditional metric](/test/metrics#add-metric-conditions).
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 
