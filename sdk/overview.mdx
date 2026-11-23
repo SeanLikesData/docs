@@ -1,0 +1,149 @@
+---
+title: "SDK"
+sidebarTitle: "Overview"
+description: "Trace a call and write each utterance. Bluejay builds the conversation."
+icon: code
+---
+
+Trace the call and write each utterance with `session.turn()`. Bluejay builds the conversation from those spans. That replaces sending a finished transcript to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate).
+
+Pick a language on any sample. The choice sticks for the rest of the page. JavaScript is not published yet, so that tab has the install line only and the samples below are Python.
+
+## Install
+
+<CodeGroup>
+
+```bash Python
+pip install bluejay-sdk
+# LiveKit:  pip install "bluejay-sdk[livekit]"
+# Pipecat:  pip install "bluejay-sdk[pipecat]"
+```
+
+```bash JavaScript
+# The JavaScript SDK is not published yet.
+```
+
+</CodeGroup>
+
+## Set an API key
+
+Create a key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys).
+
+<CodeGroup>
+
+```bash Python
+export BLUEJAY_API_KEY=bj_...
+```
+
+```bash JavaScript
+# The JavaScript SDK is not published yet.
+```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```python Python
+from bluejay import BluejayClient
+
+client = BluejayClient()  # or BluejayClient(api_key="bj_...", base_url="...")
+```
+
+```javascript JavaScript
+// The JavaScript SDK is not published yet.
+```
+
+</CodeGroup>
+
+In asyncio code, use `AsyncBluejayClient`. The methods are the same, and you `await` them.
+
+## Turn tracing on
+
+```python
+client.init_tracing()
+```
+
+Call it once at process startup for chat, [LiveKit](/sdk/livekit), or [Pipecat](/sdk/pipecat). For API calls alone, creating the client is enough.
+
+Bluejay traces model requests through [OpenAI](/sdk/openai), [Anthropic](/sdk/anthropic), [Gemini](/sdk/gemini), and [Bedrock](/sdk/bedrock). If LiveKit or Pipecat already traces a request, Bluejay uses the framework's span. The voice integrations also capture transcript and audio and finish the session at hang-up.
+
+## Write each utterance
+
+Open a session and write each line. A traced model call inside the session joins it.
+
+```python
+with client.session(chat_id, external_agent_id="chat-bot") as session:
+    session.turn("USER", user_message)
+    reply = run_agent(user_message)
+    session.turn("AGENT", reply)
+
+session.end()  # optional: otherwise the conversation builds after an hour idle
+```
+
+When the whole function is the session, decorate it. The lambda returns the id. `session.turn()` stays on the `with` form, where you have the session.
+
+```python
+@client.session(lambda chat_id, message: chat_id, external_agent_id="chat-bot")
+def handle(chat_id: str, message: str) -> str:
+    return run_agent(message)
+```
+
+Reopen the same id on the next request and the turns land in one conversation.
+
+On a voice pipeline you run yourself, the line also has a start, an end, and a span around the speech call:
+
+```python
+from datetime import datetime, timezone
+
+with client.session(call_id, external_agent_id="support-bot", direction="inbound") as session:
+    heard_at = datetime.now(timezone.utc)
+    with session.span("deepgram.stt"):
+        text = deepgram.listen(audio)
+    session.turn("USER", text, start_time=heard_at, end_time=datetime.now(timezone.utc))
+
+    spoken_at = datetime.now(timezone.utc)
+    with session.span("elevenlabs.tts"):
+        audio_out = elevenlabs.speak(reply)
+    session.turn(
+        "AGENT", played_text,
+        start_time=spoken_at, end_time=cut_off_at,
+        interrupted=caller_barged_in,
+    )
+```
+
+`interrupted=True` marks a barge-in, and the text is only the part that played. The speech span records that the call happened. The turn is the transcript line.
+
+A `turn` is a line on the [Log](/monitor/logs). Every other span is the [Trace](/monitor/traces) next to that Log.
+
+A production call carries no simulation result id, so the conversation lands in Logs. When Bluejay places a simulation, it puts `X-Simulation-Result-Id` on the call. [LiveKit](/sdk/livekit) reads that and the same spans attach to that simulation result instead of a Log. Pass `simulation_result_id` yourself only when your code is what receives that id, such as a Pipecat start body.
+
+## Integrations
+
+Libraries the SDK traces for you. LiveKit and Pipecat write the utterances. The model integrations trace the model call.
+
+<CardGroup cols={2}>
+  <Card title="LiveKit" icon="/logo/livekit.svg" href="/sdk/livekit">
+    Agents worker. One line before `session.start()`.
+  </Card>
+  <Card title="Pipecat" icon="/logo/pipecat.svg" href="/sdk/pipecat">
+    A tap after `transport.output()`.
+  </Card>
+  <Card title="OpenAI" icon="/logo/openai.svg" href="/sdk/openai">
+    Chat completions and responses, including Azure.
+  </Card>
+  <Card title="Anthropic" icon="message" href="/sdk/anthropic">
+    Messages, including streams.
+  </Card>
+  <Card title="Gemini" icon="google" href="/sdk/gemini">
+    `generate_content` on the Google Gen AI SDK, including Vertex.
+  </Card>
+  <Card title="Bedrock" icon="aws" href="/sdk/bedrock">
+    `converse` and `converse_stream`.
+  </Card>
+</CardGroup>
+
+## Related
+
+- [Logs](/monitor/logs)
+- [Traces](/monitor/traces)
+- [Traces on a simulation](/test/traces)

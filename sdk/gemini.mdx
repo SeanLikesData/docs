@@ -1,0 +1,21 @@
+---
+title: "Gemini"
+sidebarTitle: "Gemini"
+description: "Trace Google Gen AI SDK calls."
+icon: google
+---
+
+`init_tracing()` traces the Google Gen AI SDK. No extra package. `generate_content` and `generate_content_stream` are covered, including chats, Gemini, and Vertex AI.
+
+```python
+client.init_tracing()
+
+reply = genai_client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+```
+
+Inside a [session](/sdk/overview#write-each-utterance), the span joins that call.
+
+## Related
+
+- [SDK](/sdk/overview)
+- [Traces](/monitor/traces)

@@ -1,0 +1,79 @@
+---
+title: "Pipecat"
+sidebarTitle: "Pipecat"
+description: "Send a Pipecat call to Bluejay."
+icon: "/logo/pipecat.svg"
+---
+
+The tap goes after `transport.output()`. Pass its session id to the pipeline task. Install and the API key are on the [SDK](/sdk/overview) page.
+
+## Prompt
+
+Paste this into your coding agent in the repo that runs the bot.
+
+```text
+Add the Bluejay Python SDK to this Pipecat bot so each production call shows up as a Bluejay conversation. Do not also POST /v1/evaluate for a call the SDK traces.
+
+Install bluejay-sdk[pipecat]. Read the API key from the BLUEJAY_API_KEY environment variable. Construct one BluejayClient at process startup and call init_tracing() once.
+
+Use the agent's external id from Bluejay as external_agent_id. Add the tap right after transport.output(). Keep the existing user and assistant context aggregators, which the tap uses for the transcript. Pass the tap's session id when you create the pipeline worker:
+    tap = client.instrument_pipecat(external_agent_id=EXTERNAL_AGENT_ID)
+    worker = PipelineWorker(pipeline, enable_tracing=True, conversation_id=tap.session_id)
+
+enable_tracing=True is what emits Pipecat's spans. conversation_id is the Bluejay session, so the transcript and the trace land on one conversation.
+
+Do not add a second tracing stack. Do not change the agent's replies.
+```
+
+## Set up
+
+<Steps>
+<Step title="Install">
+
+```bash
+pip install "bluejay-sdk[pipecat]"
+```
+
+</Step>
+<Step title="Set the API key">
+
+```bash
+export BLUEJAY_API_KEY=bj_...
+```
+
+</Step>
+<Step title="Initialize">
+
+```python
+from bluejay import BluejayClient
+
+client = BluejayClient()  # reads BLUEJAY_API_KEY
+client.init_tracing()
+```
+
+</Step>
+<Step title="Add the tap">
+
+The tap goes after `transport.output()` and uses your existing context aggregators to capture the transcript. `enable_tracing=True` emits Pipecat's spans. `conversation_id` links the trace to the same Bluejay session.
+
+```python
+from pipecat.pipeline.pipeline import Pipeline
+from pipecat.pipeline.worker import PipelineWorker
+
+tap = client.instrument_pipecat(external_agent_id="support-bot")
+pipeline = Pipeline([
+    transport.input(), stt, user_aggregator, llm, tts,
+    transport.output(), tap, assistant_aggregator,
+])
+worker = PipelineWorker(pipeline, enable_tracing=True, conversation_id=tap.session_id)
+```
+
+</Step>
+</Steps>
+
+To have Bluejay place a test call to a Pipecat Cloud agent, use [Connect Pipecat](/integrations/pipecat). This page is your bot sending its own live calls.
+
+## Related
+
+- [Logs](/monitor/logs)
+- [Pipecat integration](/integrations/pipecat)

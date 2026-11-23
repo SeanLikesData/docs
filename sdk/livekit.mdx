@@ -1,0 +1,69 @@
+---
+title: "LiveKit"
+sidebarTitle: "LiveKit"
+description: "Send a LiveKit Agents call to Bluejay."
+icon: "/logo/livekit.svg"
+---
+
+One line before the `session.start()` you already have. Spans, audio, transcript, and tool calls reach Bluejay. The call becomes a conversation when it hangs up. Install and the API key are on the [SDK](/sdk/overview) page.
+
+## Prompt
+
+Paste this into your coding agent in the repo that runs the worker.
+
+```text
+Add the Bluejay Python SDK to this LiveKit Agents worker so each production call shows up as a Bluejay conversation. Do not also POST /v1/evaluate for a call the SDK traces.
+
+Install bluejay-sdk[livekit]. Read the API key from the BLUEJAY_API_KEY environment variable. Construct one BluejayClient at process startup and call init_tracing() once.
+
+Use the agent's external id from Bluejay as external_agent_id. Call this once before session.start():
+    client.instrument_livekit(ctx, session, external_agent_id=EXTERNAL_AGENT_ID)
+
+Do not add a second tracing stack. Do not change the agent's replies.
+```
+
+## Set up
+
+<Steps>
+<Step title="Install">
+
+```bash
+pip install "bluejay-sdk[livekit]"
+```
+
+</Step>
+<Step title="Set the API key">
+
+```bash
+export BLUEJAY_API_KEY=bj_...
+```
+
+</Step>
+<Step title="Initialize">
+
+```python
+from bluejay import BluejayClient
+
+client = BluejayClient()  # reads BLUEJAY_API_KEY
+client.init_tracing()
+```
+
+</Step>
+<Step title="Instrument the session">
+
+Call this once before `session.start()`. `external_agent_id` is the agent's id in Bluejay. Reusing it attributes every call to that agent.
+
+```python
+client.instrument_livekit(ctx, session, external_agent_id="support-bot")
+await session.start(room=ctx.room, agent=SupportAgent())
+```
+
+</Step>
+</Steps>
+
+To have Bluejay place a test call into your LiveKit room, use [Connect LiveKit](/integrations/livekit). This page is the worker sending its own live calls.
+
+## Related
+
+- [Logs](/monitor/logs)
+- [LiveKit integration](/integrations/livekit)

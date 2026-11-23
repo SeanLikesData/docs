@@ -1,0 +1,21 @@
+---
+title: "Anthropic"
+sidebarTitle: "Anthropic"
+description: "Trace Anthropic SDK calls."
+icon: message
+---
+
+`init_tracing()` traces the Anthropic SDK. No extra package. Messages `create` and `stream` are covered.
+
+```python
+client.init_tracing()
+
+reply = anthropic_client.messages.create(model="claude-sonnet-4-5", max_tokens=1024, messages=messages)
+```
+
+Inside a [session](/sdk/overview#write-each-utterance), the span joins that call.
+
+## Related
+
+- [SDK](/sdk/overview)
+- [Traces](/monitor/traces)

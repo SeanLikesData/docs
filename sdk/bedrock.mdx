@@ -1,0 +1,21 @@
+---
+title: "Bedrock"
+sidebarTitle: "Bedrock"
+description: "Trace Bedrock Converse calls."
+icon: aws
+---
+
+`init_tracing()` traces Bedrock through boto3. No extra package. `converse` and `converse_stream` are covered.
+
+```python
+client.init_tracing()
+
+reply = bedrock.converse(modelId="anthropic.claude-3-5-haiku-20241022-v1:0", messages=messages)
+```
+
+Inside a [session](/sdk/overview#write-each-utterance), the span joins that call.
+
+## Related
+
+- [SDK](/sdk/overview)
+- [Traces](/monitor/traces)
