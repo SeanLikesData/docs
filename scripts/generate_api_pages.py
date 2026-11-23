@@ -647,7 +647,7 @@ def add_new_pages(spec):
 def action_rank(method, title):
     """Order inside a sidebar section: create, list, get, update, delete, then other actions."""
     t = title.lower()
-    if t.startswith(("delete", "remove")) or method == "DELETE":
+    if t.startswith("delete") or method == "DELETE":
         return 4
     if t.startswith(("create", "provision", "schedule", "start", "import")) or t == "add an agent":
         return 0
