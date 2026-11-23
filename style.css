@@ -668,7 +668,7 @@ html.dark .callout[data-callout-type="danger"] {
   }
 }
 
-html.dark #sidebar img[src="/logo/anthropic.svg"] {
+html.dark #sidebar img[src*="/logo/anthropic.svg"] {
   content: url("/logo/anthropic-dark.svg");
 }
 
