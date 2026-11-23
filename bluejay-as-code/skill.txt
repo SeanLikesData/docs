@@ -121,7 +121,7 @@ Applies a BaC payload to Bluejay. Each entity is matched by `bluejay_as_code_id`
 | Found, fields unchanged | No-op |
 | Found, fields changed | Entity is updated |
 | Digital Human absent from payload | Detached from simulation (not deleted) |
-| Digital Human exists on another simulation | Re-linked, not duplicated |
+| Digital Human exists on another simulation | Linked to this simulation |
 
 **Response:**
 | Field | Type | Description |

@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns one span of a trace. This endpoint uses POST but does not change data.
+<EndpointBar method="POST" path="/v1/spans/{trace_id}/{span_id}" />
+
+Returns one span of a trace.
+
+<Note>This endpoint uses POST but does not change data.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

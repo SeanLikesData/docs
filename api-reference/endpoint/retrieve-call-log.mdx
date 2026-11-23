@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns one call log and its evaluations. `credits_used` is the credits that the call used. It is `null` until usage is recorded and priced.
+<EndpointBar method="GET" path="/v1/retrieve-call-log/{call_id}" />
+
+Returns one call log and its evaluations.
+
+<Note>`credits_used` is the credits that the call used. It is `null` until usage is recorded and priced.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Translates a transcript. Send `simulation_result_id` for a simulation, or `conversation_id` for a production call. `target_language` is a language code such as `es`. The default is `en`.
+<EndpointBar method="POST" path="/v1/translate-transcript" />
+
+Translates a transcript.
+
+<Note>Send `simulation_result_id` for a simulation, or `conversation_id` for a production call. `target_language` is a language code such as `es`. The default is `en`.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Links an agent to a Knowledge Base. A second request for the same pair does not add a duplicate.
+<EndpointBar method="POST" path="/v1/knowledge-base/{knowledge_base_id}/agents/{agent_id}" />
+
+Links an agent to a Knowledge Base.
+
+<Note>A second request for the same pair does not add a duplicate.</Note>
 
 Rate limit: 60 requests per minute.
 

@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Stops a red team test. Bluejay ends its live calls and returns their IDs in `ended_conversations`. A test that is already complete, stopped, or failed keeps its status.
+<EndpointBar method="POST" path="/v1/red-team-simulations/{test_id}/stop" />
+
+Stops a red team test.
+
+<Note>Bluejay ends its live calls and returns their IDs in `ended_conversations`. A test that is already complete, stopped, or failed keeps its status.</Note>
 
 Rate limit: 30 requests per minute.
 

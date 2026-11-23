@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns the AI agent names in one Amelia domain. Set `domain_code` to the domain code of the bot.
+<EndpointBar method="GET" path="/v1/integrations/amelia/agents" />
+
+Returns the AI agent names in one Amelia domain.
+
+<Note>Set `domain_code` to the domain code of the bot.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

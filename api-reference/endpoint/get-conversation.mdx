@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns one production conversation with its transcript and metric results. Set `include_transcript=false` to leave out the transcript.
+<EndpointBar method="GET" path="/v1/observability/conversations/{conversation_id}" />
+
+Returns one production conversation with its transcript and metric results.
+
+<Note>Set `include_transcript=false` to leave out the transcript.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

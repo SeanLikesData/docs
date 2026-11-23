@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Adds an uploaded file to the background noise library. Get `storage_path` from [Create Background Noise Upload URL](/api-reference/endpoint/create-custom-background-noise-upload-url).
+<EndpointBar method="POST" path="/v1/custom-background-noises" />
+
+Adds an uploaded file to the background noise library.
+
+<Note>Get `storage_path` from [Create Background Noise Upload URL](/api-reference/endpoint/create-custom-background-noise-upload-url).</Note>
 
 - An organization can have 20 custom background noises. The 21st returns 400.
 - The same file twice returns 409.

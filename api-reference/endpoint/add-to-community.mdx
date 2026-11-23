@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Adds Digital Humans to a community. Current members stay.
+<EndpointBar method="PUT" path="/v1/add-to-community/{community_id}" />
+
+Adds Digital Humans to a community.
+
+<Note>Current members stay.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

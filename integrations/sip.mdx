@@ -21,7 +21,7 @@ These steps are for an agent that answers calls. If your agent places calls, see
 Create an Inbound Voice agent with the **SIP** connection type, and choose where Bluejay dials:
 
 - **SIP URI**: one address for every call, in the form `sip:user@host`. To set the transport, use `sips:` or add `;transport=tls`, `tcp`, or `udp`. TLS without a port uses port 5061.
-- **Dynamic SIP Webhook URL**: a different destination for each call. Set this or **SIP URI**, not both. See [Dynamic SIP webhook](#dynamic-sip-webhook).
+- **Dynamic SIP Webhook URL**: a different destination for each call. Set either this or **SIP URI**. See [Dynamic SIP webhook](#dynamic-sip-webhook).
 
 If your agent needs digest auth, set **SIP Username** and **SIP Password** in the agent's **Connection Settings** after you create it.
 </Step>

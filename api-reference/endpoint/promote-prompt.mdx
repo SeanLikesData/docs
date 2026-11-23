@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Moves the `production` label to the latest version, or to the version in `version`. `prompt_id` is a deprecated alias for the version UUID. It is ignored when `version` is set.
+<EndpointBar method="POST" path="/v1/agents/{agent_id}/versions/promote" />
+
+Moves the `production` label to the latest version, or to the version in `version`.
+
+<Note>`prompt_id` is a deprecated alias for the version UUID. It is ignored when `version` is set.</Note>
 
 `POST /v1/agents/{agent_id}/prompts/promote` is the deprecated path of this endpoint.
 

@@ -7,6 +7,9 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="GET" path="/v1/agents/{agent_id}/versions/{version}/labels" />
 
 Returns the labels on one agent version.
 

@@ -7,6 +7,9 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="POST" path="/v1/uptime/monitors/{monitor_id}/checks/{check_id}/unresolve" />
 
 Opens a resolved DOWN check again.
 

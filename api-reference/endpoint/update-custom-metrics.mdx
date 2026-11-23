@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Applies the same `updates` to each metric in `metric_ids`. Only the keys you send change. A key with `null` is set to null.
+<EndpointBar method="PUT" path="/v1/update-metrics" />
+
+Applies the same `updates` to each metric in `metric_ids`.
+
+<Note>Only the keys you send change. A key with `null` is set to null.</Note>
 
 `PUT /v1/update-custom-metrics` is the deprecated path of this endpoint.
 

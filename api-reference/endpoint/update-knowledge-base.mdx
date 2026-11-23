@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Updates a Knowledge Base. Send at least one of `name` and `description`.
+<EndpointBar method="PUT" path="/v1/knowledge-base/{knowledge_base_id}" />
+
+Updates a Knowledge Base.
+
+<Note>Send at least one of `name` and `description`.</Note>
 
 Rate limit: 60 requests per minute.
 

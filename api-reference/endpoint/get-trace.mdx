@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns one trace and its spans. This endpoint uses POST but does not change data.
+<EndpointBar method="POST" path="/v1/traces/{trace_id}" />
+
+Returns one trace and its spans.
+
+<Note>This endpoint uses POST but does not change data.</Note>
 
 A trace with more than 200,000 spans returns 413. A trace that is not in your organization returns 403.
 

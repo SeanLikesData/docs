@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Updates a community. Only the fields you send change. `digital_human_ids` replaces the current members. To add members and keep the current ones, use [Add Digital Humans to Community](/api-reference/endpoint/add-to-community).
+<EndpointBar method="PUT" path="/v1/update-community/{community_id}" />
+
+Updates a community.
+
+<Note>Only the fields you send change. `digital_human_ids` replaces the current members. To add members and keep the current ones, use [Add Digital Humans to Community](/api-reference/endpoint/add-to-community).</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

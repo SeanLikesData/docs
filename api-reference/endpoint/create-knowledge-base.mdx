@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Creates an empty Knowledge Base. Add documents, then [attach it to an agent](/api-reference/endpoint/attach-agent-to-knowledge-base).
+<EndpointBar method="POST" path="/v1/knowledge-base" />
+
+Creates an empty Knowledge Base.
+
+<Note>Add documents, then [attach it to an agent](/api-reference/endpoint/attach-agent-to-knowledge-base).</Note>
 
 Rate limit: 60 requests per minute.
 

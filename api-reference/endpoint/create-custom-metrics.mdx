@@ -8,10 +8,15 @@ deprecated: true
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="POST" path="/v1/create-metrics" />
 
 <Warning>This endpoint is deprecated. Use [`POST /v2/create-metrics`](/api-reference/endpoint/create-metrics-v2) instead.</Warning>
 
-Creates many custom metrics in one request. Each item takes the fields of [Create Custom Metric](/api-reference/endpoint/create-custom-metric).
+Creates many custom metrics in one request.
+
+<Note>Each item takes the fields of [Create Custom Metric](/api-reference/endpoint/create-custom-metric).</Note>
 
 `POST /v1/create-custom-metrics` is the deprecated path of this endpoint.
 

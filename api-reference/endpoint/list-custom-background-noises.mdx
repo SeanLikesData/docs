@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns the custom background noises in your organization, oldest first. `usage_count` is the number of Digital Humans that use each noise.
+<EndpointBar method="GET" path="/v1/custom-background-noises" />
+
+Returns the custom background noises in your organization, oldest first.
+
+<Note>`usage_count` is the number of Digital Humans that use each noise.</Note>
 
 Rate limit: 60 requests per minute.
 

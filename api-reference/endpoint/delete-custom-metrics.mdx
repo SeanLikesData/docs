@@ -8,10 +8,15 @@ deprecated: true
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="POST" path="/v1/delete-metrics" />
 
 <Warning>This endpoint is deprecated. Use [`POST /v2/delete-metrics`](/api-reference/endpoint/delete-metrics-v2) instead.</Warning>
 
-Deletes many custom metrics. Each ID must exist and belong to your organization.
+Deletes many custom metrics.
+
+<Note>Each ID must exist and belong to your organization.</Note>
 
 `POST /v1/delete-custom-metrics` is the deprecated path of this endpoint.
 

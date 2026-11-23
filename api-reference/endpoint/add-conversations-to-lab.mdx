@@ -7,6 +7,9 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="POST" path="/v1/metrics-lab/lab/{lab_id}/conversations" />
 
 Adds conversations to a lab.
 
@@ -63,7 +66,7 @@ curl --request POST \
 
 ## Response
 
-<FieldTable rows={[{"name": "added_count", "type": "integer", "required": true, "description": "Number of conversations successfully added"}, {"name": "skipped_count", "type": "integer", "required": true, "description": "Number of conversations that were skipped (already existed)"}, {"name": "added_conversation_ids", "type": "object[]", "required": true, "description": "The conversations that were added, each {call_id, test_result_id}."}, {"name": "message", "type": "string or null", "required": false, "description": "Human-readable message about the operation"}]} />
+<FieldTable rows={[{"name": "added_count", "type": "integer", "required": true, "description": "Number of conversations successfully added"}, {"name": "skipped_count", "type": "integer", "required": true, "description": "Number of conversations that already existed and were left as they are."}, {"name": "added_conversation_ids", "type": "object[]", "required": true, "description": "The conversations that were added, each {call_id, test_result_id}."}, {"name": "message", "type": "string or null", "required": false, "description": "Human-readable message about the operation"}]} />
 
 ## Status codes
 

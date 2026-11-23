@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Ends running conversations. The response lists which IDs were marked to end and which failed.
+<EndpointBar method="POST" path="/v1/end-conversations" />
+
+Ends running conversations.
+
+<Note>The response lists which IDs were marked to end and which failed.</Note>
 
 Each ID must be a test result in RUNNING status. If the call does not end, Bluejay updates its status after 30 seconds.
 

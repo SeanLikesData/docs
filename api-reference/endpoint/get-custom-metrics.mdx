@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns custom metrics. Filter with `agent_id`. `page_size` is 50 by default.
+<EndpointBar method="GET" path="/v1/metrics" />
+
+Returns custom metrics.
+
+<Note>Filter with `agent_id`. `page_size` is 50 by default.</Note>
 
 `GET /v1/custom-metrics` is the deprecated path of this endpoint.
 

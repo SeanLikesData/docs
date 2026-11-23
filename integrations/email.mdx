@@ -95,7 +95,7 @@ Bluejay does not read an end signal from your agent's email. A conversation ends
 Bluejay grades the mail itself with built-in metrics, such as **SPF Pass Rate** and **DKIM Pass Rate** on your agent's reply. Three of them need a note:
 
 - **Spam Score**: lower is better.
-- **Delivered Rate**: checks the Digital Human's email, not your agent's reply. It passes when the email reached your agent's inbox without a hard bounce or a spam complaint.
+- **Delivered Rate**: checks the email the Digital Human sends. It passes when the email reached your agent's inbox without a hard bounce or a spam complaint.
 - **DMARC Pass Rate**: a domain with no DMARC policy fails this metric, even though Bluejay still accepts its reply.
 
 For an **Inbound** agent, Bluejay also records the time from the Digital Human's first email to your agent's first reply as the agent's latency.

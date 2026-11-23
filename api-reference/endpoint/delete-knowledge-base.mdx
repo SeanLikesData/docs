@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Deletes a Knowledge Base and returns 204. The Knowledge Base moves to Recently Deleted. Bluejay removes its indexed chunks and marks running ingestion jobs as failed. If you restore it, the documents are ingested again.
+<EndpointBar method="DELETE" path="/v1/knowledge-base/{knowledge_base_id}" />
+
+Deletes a Knowledge Base and returns 204.
+
+<Note>The Knowledge Base moves to Recently Deleted. Bluejay removes its indexed chunks and marks running ingestion jobs as failed. If you restore it, the documents are ingested again.</Note>
 
 Rate limit: 60 requests per minute.
 

@@ -21,6 +21,7 @@ SPEC_URL = "https://api.getbluejay.ai/openapi.json"
 BASE_URL = "https://api.getbluejay.ai"
 PAGE_GLOBS = ["api-reference/endpoint/*.mdx", "api-reference/webhook/*.mdx"]
 IMPORT = 'import { FieldTable } from "/snippets/field-table.jsx";'
+BAR_IMPORT = 'import { EndpointBar } from "/snippets/endpoint-bar.jsx";'
 START = "{/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}"
 END = "{/* END GENERATED */}"
 MAX_DEPTH = 6
@@ -485,7 +486,9 @@ def process(spec, page):
     for rx in PROMPT_RE:
         body = rx.sub("", body)
     body = re.sub(re.escape(START) + r".*?" + re.escape(END) + r"\n?", "", body, flags=re.S)
-    body = body.replace(IMPORT + "\n", "").strip("\n")
+    body = body.replace(IMPORT + "\n", "").replace(BAR_IMPORT + "\n", "")
+    body = re.sub(r"<EndpointBar [^>]*/>\n*", "", body).strip("\n")
+    bar = ""
 
     webhook = re.search(r'^(?:openapi:\s*["\']?WEBHOOK |webhook:\s*["\']?)(\w+)["\']?$', fm, re.M)
     if webhook:
@@ -515,8 +518,9 @@ def process(spec, page):
         if op.get("deprecated"):
             fm += "\ndeprecated: true"
         generated = generate(spec, method, path, op)
+        bar = f'<EndpointBar method="{method.upper()}" path="{path}" />\n\n'
 
-    out = f"---\n{fm}\n---\n\n{IMPORT}\n\n"
+    out = f"---\n{fm}\n---\n\n{IMPORT}\n" + (BAR_IMPORT + "\n" if bar else "") + "\n" + bar
     if body:
         out += body + "\n\n"
     out += generated + "\n"

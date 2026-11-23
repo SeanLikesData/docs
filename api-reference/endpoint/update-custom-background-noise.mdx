@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Renames a custom background noise. `storage_path` cannot change.
+<EndpointBar method="PATCH" path="/v1/custom-background-noises/{noise_id}" />
+
+Renames a custom background noise.
+
+<Note>`storage_path` cannot change.</Note>
 
 Rate limit: 30 requests per minute.
 

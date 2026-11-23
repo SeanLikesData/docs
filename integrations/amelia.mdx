@@ -63,7 +63,7 @@ In the API, use [Sync Amelia Agents](/api-reference/endpoint/sync-amelia-agents)
 | `Amelia flow '...' has no revision to sync. Deploy it in Amelia first.` | Deploy the flow in Amelia, then sync. |
 | `Amelia rejected the stored admin credentials` | Update the username or password on the **Amelia** tab. |
 | `Amelia rejected this graph: ...` on **Push** | Fix the errors that Amelia validation lists, then push again. |
-| `Amelia URL must be a public host` or `must start with https://` | Use an `https` address on the public internet, not `localhost`, an internal name, or a private address. |
+| `Amelia URL must be a public host` or `must start with https://` | Use an `https` address on the public internet. Bluejay rejects `localhost`, internal names, and private addresses. |
 
 ## Related
 

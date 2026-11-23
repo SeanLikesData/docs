@@ -168,8 +168,8 @@ The webhook you set in [Connect](#connect) also sends each production call to Bl
 
 | What you see | What to do |
 |---|---|
-| Live calls do not show, or results have no tool calls | Vapi's webhook got `401`. Check that the **Public API Key** is saved, the **Server URL** is set, and Vapi sends your public key in the `X-Vapi-Secret` header, not a header named `secret`. Check that the agent's **Assistant ID** matches the assistant. |
-| Sync runs but agents are missing | Vapi rejected the private key. Save the private key, not the public key, in **Private API Key**. |
+| Live calls do not show, or results have no tool calls | Vapi's webhook got `401`. Check that the **Public API Key** is saved, the **Server URL** is set, and Vapi sends your public key in the `X-Vapi-Secret` header. Check that the agent's **Assistant ID** matches the assistant. |
+| Sync runs but agents are missing | Vapi rejected the private key. Save the private key in **Private API Key**. |
 | **No Connection** with <Code>VAPI_AUTH_FAILED</Code>, <Code>MISSING_VAPI_INTEGRATION</Code>, or <Code>MISSING_VAPI_ASSISTANT_ID</Code> | Save a valid private key, or set **VAPI Assistant ID** on the agent. |
 | **No Connection** with <Code>VAPI_BRIDGE_CONNECT_FAILED</Code> or <Code>VAPI_SESSION_SETUP_FAILED</Code> | Vapi rejected the call, or the connection did not open. Run the call again. |
 | **No Connection** with <Code>CUSTOMER_CONCURRENCY_LIMIT</Code> | Vapi returned `429`. Lower the max concurrency in Bluejay. |

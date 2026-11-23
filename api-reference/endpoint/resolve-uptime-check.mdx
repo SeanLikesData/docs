@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Resolves one DOWN check. Other incidents stay open.
+<EndpointBar method="POST" path="/v1/uptime/monitors/{monitor_id}/checks/{check_id}/resolve" />
+
+Resolves one DOWN check.
+
+<Note>Other incidents stay open.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

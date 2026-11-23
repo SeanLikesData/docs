@@ -55,7 +55,7 @@ Use the metrics, alerts, and dashboards you built for AI agents to score calls t
       }'
     ```
 
-    In `metadata`, send ids and labels you want to slice by, not names or other personal data. Each key becomes a filter on the Logs page and a [dynamic variable](/monitor/metrics/llm-as-a-judge#dynamic-variables) that a custom metric can read. Use `agent_type` to mark the calls as human, and `external_conversation_id` to [update a call later](/monitor/logs#send-conversations-with-the-api). Each evaluation is billed, and the API allows 100 requests per minute for each organization.
+    In `metadata`, send ids and labels you want to slice by. Leave out names and other personal data. Each key becomes a filter on the Logs page and a [dynamic variable](/monitor/metrics/llm-as-a-judge#dynamic-variables) that a custom metric can read. Use `agent_type` to mark the calls as human, and `external_conversation_id` to [update a call later](/monitor/logs#send-conversations-with-the-api). Each evaluation is billed, and the API allows 100 requests per minute for each organization.
 
     **Single-channel and multichannel recordings**
 
@@ -216,7 +216,7 @@ One agent holds the whole team, and each rep is a label on it. This works for a 
 
 ### Send the rep as the label
 
-Add `label` to each call you send to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate). Use the rep's id from your phone system, not a name.
+Add `label` to each call you send to [`POST /v1/evaluate`](/api-reference/endpoint/evaluate). Use the rep's id from your phone system.
 
 ```json
 {

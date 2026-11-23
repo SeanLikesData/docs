@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns one scenario with its full `definition`. The path parameter `workflow_id` is the scenario UUID.
+<EndpointBar method="GET" path="/v1/scenario/{workflow_id}" />
+
+Returns one scenario with its full `definition`.
+
+<Note>The path parameter `workflow_id` is the scenario UUID.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

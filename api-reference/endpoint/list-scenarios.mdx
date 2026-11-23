@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns `workflows` and `total_count`. The key `workflows` holds the scenarios. The name stays for backward compatibility. The agent filter applies only to agents in your organization.
+<EndpointBar method="GET" path="/v1/scenario" />
+
+Returns `workflows` and `total_count`.
+
+<Note>The key `workflows` holds the scenarios. The name stays for backward compatibility. The agent filter applies only to agents in your organization.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Requests a stop and returns `STOP_REQUESTED`. If the run is not pending or running, the response returns the current status and does not change it.
+<EndpointBar method="POST" path="/v1/self-improve/runs/{run_id}/stop" />
+
+Requests a stop and returns `STOP_REQUESTED`.
+
+<Note>If the run is not pending or running, the response returns the current status and does not change it.</Note>
 
 Rate limit: 30 requests per minute.
 

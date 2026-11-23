@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Creates or updates the human label for one metric on one conversation. Send `call_id` for a production call or `test_result_id` for a simulation result.
+<EndpointBar method="PUT" path="/v1/metrics-lab/lab/{lab_id}/human-evaluation" />
+
+Creates or updates the human label for one metric on one conversation.
+
+<Note>Send `call_id` for a production call or `test_result_id` for a simulation result.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 

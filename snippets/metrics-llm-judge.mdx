@@ -24,7 +24,7 @@ An LLM as a Judge metric sends your prompt and the conversation to the judge, th
 - Write criteria that a reader can answer from the transcript or the audio.
 - Test one thing per metric. If two results matter independently, write two metrics.
 - Replace words such as "good", "appropriate", or "well" with behavior that you can see in the transcript.
-- Write what the metric verifies, not what the agent must do. Agent instructions go in the agent prompt.
+- Write what the metric verifies. Put agent instructions in the agent prompt.
 
 ### Prompts by response type
 
@@ -63,7 +63,7 @@ An LLM as a Judge metric sends your prompt and the conversation to the judge, th
   </Tab>
   <Tab title="Text">
     ```
-    Set a fixed structure and a word limit, so that you can compare outputs across calls. Ask for observations, not opinions.
+    Set a fixed structure and a word limit, so that you can compare outputs across calls. Ask for observations.
 
     Summarize how the agent handled customer objections.
 

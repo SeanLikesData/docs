@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Creates one or many custom metrics. `metrics` takes one metric object or a list of them, and the response is always a list. `summary` is the short description shown with a metric. Link a metric to agents with `agent_ids`.
+<EndpointBar method="POST" path="/v2/create-metrics" />
+
+Creates one or many custom metrics.
+
+<Note>`metrics` takes one metric object or a list of them, and the response is always a list. `summary` is the short description shown with a metric. Link a metric to agents with `agent_ids`.</Note>
 
 ```json
 { "metrics": { "name": "Greeting", "prompt": "Did the agent greet the caller?", "response_type": "pass_fail" } }

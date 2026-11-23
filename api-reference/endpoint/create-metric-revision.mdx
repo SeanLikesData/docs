@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Creates a revision of a custom metric in a lab. Bluejay sets the revision number. The custom metric does not change.
+<EndpointBar method="POST" path="/v1/metrics-lab/lab/{lab_id}/metric-revisions" />
+
+Creates a revision of a custom metric in a lab.
+
+<Note>Bluejay sets the revision number. The custom metric does not change.</Note>
 
 {/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
 
@@ -66,7 +71,7 @@ curl --request POST \
 
 ## Request body
 
-<FieldTable rows={[{"name": "custom_metric_id", "type": "string", "required": true, "description": "The metric to rewrite: its id (a uuid), one of the lab's metrics as listed by GET /v1/metrics-lab/lab/{lab_id}."}, {"name": "description", "type": "string or null", "required": false, "description": "The revised judge instruction to test, the counterpart of the metric's prompt; usually a sharper wording."}, {"name": "scoring_guidance", "type": "string or null", "required": false, "description": "Revised rubric text for the judge, e.g. how to treat borderline cases."}, {"name": "eval_route", "type": "string or null", "required": false, "description": "Which judge lane scores the revision: 'AUDIO' (recording), 'TEXT' (transcript) or 'AUTO'."}, {"name": "model", "type": "string or null", "required": false, "description": "Text judge model to score this revision with."}, {"name": "audio_model", "type": "string or null", "required": false, "description": "Audio judge model to score this revision with."}, {"name": "temperature", "type": "number or null", "required": false, "description": "Judge sampling temperature for this revision, from 0 to 2."}, {"name": "allow_not_applicable", "type": "boolean", "required": false, "description": "true lets the judge answer not_applicable instead of forcing a verdict; stored as false when omitted.", "default": false}]} />
+<FieldTable rows={[{"name": "custom_metric_id", "type": "string", "required": true, "description": "The metric to rewrite: its id (a uuid), one of the lab's metrics as listed by GET /v1/metrics-lab/lab/{lab_id}."}, {"name": "description", "type": "string or null", "required": false, "description": "The revised judge instruction to test, the counterpart of the metric's prompt; usually a sharper wording."}, {"name": "scoring_guidance", "type": "string or null", "required": false, "description": "Revised rubric text for the judge, e.g. how to treat borderline cases."}, {"name": "eval_route", "type": "string or null", "required": false, "description": "Which judge lane scores the revision: 'AUDIO' (recording), 'TEXT' (transcript) or 'AUTO'."}, {"name": "model", "type": "string or null", "required": false, "description": "Text judge model to score this revision with."}, {"name": "audio_model", "type": "string or null", "required": false, "description": "Audio judge model to score this revision with."}, {"name": "temperature", "type": "number or null", "required": false, "description": "Judge sampling temperature for this revision, from 0 to 2."}, {"name": "allow_not_applicable", "type": "boolean", "required": false, "description": "When true, the judge can answer not_applicable. When false, it always gives a verdict. Stored as false if omitted.", "default": false}]} />
 
 ## Response
 

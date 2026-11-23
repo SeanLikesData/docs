@@ -7,8 +7,13 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
 
-Returns the agent versions of an agent. Filter with `label` or `version`.
+<EndpointBar method="GET" path="/v1/agents/{agent_id}/versions" />
+
+Returns the agent versions of an agent.
+
+<Note>Filter with `label` or `version`.</Note>
 
 `GET /v1/agents/{agent_id}/prompts/versions` is the deprecated path of this endpoint.
 
@@ -52,7 +57,7 @@ curl --request GET \
 
 ## Query parameters
 
-<FieldTable rows={[{"name": "label", "type": "string or null", "required": false, "description": "Only return versions that carry this label, e.g. production, latest or one of your own; the text must match exactly. Omit for all versions."}, {"name": "version", "type": "integer or null", "required": false, "description": "Return only this version number; when set, label and limit are ignored. Omit to list versions."}, {"name": "limit", "type": "integer", "required": false, "description": "Most versions to return, counted from the newest; 50 when omitted.", "default": 50}]} />
+<FieldTable rows={[{"name": "label", "type": "string or null", "required": false, "description": "Only return versions that carry this label, e.g. production, latest or one of your own; the text must match exactly. Omit for all versions."}, {"name": "version", "type": "integer or null", "required": false, "description": "Returns only this version. When set, label and limit have no effect. Leave it out to list versions."}, {"name": "limit", "type": "integer", "required": false, "description": "Most versions to return, counted from the newest; 50 when omitted.", "default": 50}]} />
 
 ## Headers
 

@@ -36,7 +36,7 @@ Use a [Customer Journey](/test/simulation-types/customer-journeys) when your voi
     - If your agent texts from a different number than the one saved on the agent, add **Different phone number** to the step with that number. Bluejay only matches texts from the step's number.
   </Step>
   <Step title="Give the agent enough time">
-    Add **Response timeout** to the text step if your agent texts more than a few minutes after the call. Without it, the step lasts at most 15 minutes. The timeout covers the whole text conversation, not only the first text, and can be up to 72 hours.
+    Add **Response timeout** to the text step if your agent texts more than a few minutes after the call. Without it, the step lasts at most 15 minutes. The timeout covers the whole text conversation and can be up to 72 hours.
 
     <img className="block dark:hidden" src="/images/cookbook-call-then-text-timeout.png" alt="The plus menu on the SMS step open, listing Delay before this step, Response timeout, Different phone number, and Digital Human stays silent" />
     <img className="hidden dark:block" src="/images/cookbook-call-then-text-timeout-dark.png" alt="The plus menu on the SMS step open, listing Delay before this step, Response timeout, Different phone number, and Digital Human stays silent" />

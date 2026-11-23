@@ -7,6 +7,9 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="DELETE" path="/v1/agents/{agent_id}/versions/{version}/labels" />
 
 Removes labels from one agent version.
 
@@ -50,7 +53,7 @@ curl --request DELETE \
 
 ## Query parameters
 
-<FieldTable rows={[{"name": "labels", "type": "string[] or null", "required": false, "description": "Labels to remove, repeated per label, e.g. ?labels=staging&labels=qa, matched to existing labels ignoring case. production is never detached (move it to another version instead), nor latest from the newest version. Omit to remove every other label."}]} />
+<FieldTable rows={[{"name": "labels", "type": "string[] or null", "required": false, "description": "Labels to remove, repeated for each label, such as `?labels=staging&labels=qa`. Matching ignores case. `production` and `latest` stay on the newest version. Leave it out to remove every other label."}]} />
 
 ## Headers
 

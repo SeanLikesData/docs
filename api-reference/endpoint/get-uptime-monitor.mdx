@@ -7,6 +7,9 @@ playground: "none"
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="GET" path="/v1/uptime/monitors/{monitor_id}" />
 
 Returns one uptime monitor and its recent checks.
 

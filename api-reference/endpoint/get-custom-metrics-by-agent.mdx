@@ -8,6 +8,9 @@ deprecated: true
 ---
 
 import { FieldTable } from "/snippets/field-table.jsx";
+import { EndpointBar } from "/snippets/endpoint-bar.jsx";
+
+<EndpointBar method="GET" path="/v1/custom-metrics-by-agent/{agent_id}" />
 
 <Warning>
   This endpoint is deprecated. Use [Get Custom Metrics](/api-reference/endpoint/get-custom-metrics) with `agent_id`.
