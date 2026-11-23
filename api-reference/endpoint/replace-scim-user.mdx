@@ -25,6 +25,25 @@ curl --request PUT \
   --header "Authorization: Bearer $BLUEJAY_SCIM_TOKEN"
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/scim/Users/{scim_user_id}",
+    headers={"Authorization": "Bearer " + os.environ["BLUEJAY_SCIM_TOKEN"]},
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/scim/Users/{scim_user_id}", {
+  method: "PUT",
+  headers: { "Authorization": `Bearer ${process.env.BLUEJAY_SCIM_TOKEN}` },
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 ## Path parameters

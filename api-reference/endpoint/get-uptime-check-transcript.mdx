@@ -25,6 +25,25 @@ curl --request GET \
   --header "X-API-Key: $BLUEJAY_API_KEY"
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.get(
+    "https://api.getbluejay.ai/v1/uptime/monitors/{monitor_id}/checks/{check_id}/transcript",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/uptime/monitors/{monitor_id}/checks/{check_id}/transcript", {
+  method: "GET",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY },
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 ## Path parameters

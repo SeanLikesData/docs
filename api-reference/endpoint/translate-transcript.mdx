@@ -30,6 +30,33 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/translate-transcript",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "simulation_result_id": 4821,
+        "target_language": "en"
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/translate-transcript", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "simulation_result_id": 4821,
+    "target_language": "en"
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

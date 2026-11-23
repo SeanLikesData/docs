@@ -87,6 +87,139 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/personas",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "name": "Refund request test",
+        "role_description": "<string>",
+        "gender": "male",
+        "language": "en",
+        "accent": "multilingual",
+        "custom_voice_id": "<string>",
+        "voice_speed": "slowest",
+        "emotion_map": {},
+        "temperature": 1.5,
+        "verbosity": "low",
+        "fluency": "beginner",
+        "endpointing_delay": 1.5,
+        "silence_timeout": 123,
+        "interruption_configs": {},
+        "speaks_first": True,
+        "speaks_first_config": {
+            "speaks_first": True,
+            "mode": "custom",
+            "message": "<string>",
+            "dynamic": True
+        },
+        "background_noise": "none",
+        "background_noise_volume": 1.5,
+        "custom_background_noise_url": "<string>",
+        "audio_quality": "high",
+        "hangup_phrases": [
+            "<string>"
+        ],
+        "hangup_instructions": "<string>",
+        "scripted_responses": [
+            {
+                "match_type": "exact",
+                "match_phrase": "<string>",
+                "response_type": "phrase",
+                "response_value": "<string>",
+                "scripted_response_audio_snippet_url": "<string>",
+                "occurrence_mode": "always",
+                "occurrence_n": 123,
+                "silence_duration": 123
+            }
+        ],
+        "scripted_responses_ordered": True,
+        "journey_steps": [
+            {
+                "step": 123,
+                "intent": "",
+                "success_criteria": "",
+                "modality": "voice",
+                "direction": "inbound",
+                "wait_seconds": 123,
+                "response_window_seconds": 123,
+                "unresponsive": False,
+                "phone_number": "+14155550123"
+            }
+        ]
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/personas", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "name": "Refund request test",
+    "role_description": "<string>",
+    "gender": "male",
+    "language": "en",
+    "accent": "multilingual",
+    "custom_voice_id": "<string>",
+    "voice_speed": "slowest",
+    "emotion_map": {},
+    "temperature": 1.5,
+    "verbosity": "low",
+    "fluency": "beginner",
+    "endpointing_delay": 1.5,
+    "silence_timeout": 123,
+    "interruption_configs": {},
+    "speaks_first": true,
+    "speaks_first_config": {
+      "speaks_first": true,
+      "mode": "custom",
+      "message": "<string>",
+      "dynamic": true
+    },
+    "background_noise": "none",
+    "background_noise_volume": 1.5,
+    "custom_background_noise_url": "<string>",
+    "audio_quality": "high",
+    "hangup_phrases": [
+      "<string>"
+    ],
+    "hangup_instructions": "<string>",
+    "scripted_responses": [
+      {
+        "match_type": "exact",
+        "match_phrase": "<string>",
+        "response_type": "phrase",
+        "response_value": "<string>",
+        "scripted_response_audio_snippet_url": "<string>",
+        "occurrence_mode": "always",
+        "occurrence_n": 123,
+        "silence_duration": 123
+      }
+    ],
+    "scripted_responses_ordered": true,
+    "journey_steps": [
+      {
+        "step": 123,
+        "intent": "",
+        "success_criteria": "",
+        "modality": "voice",
+        "direction": "inbound",
+        "wait_seconds": 123,
+        "response_window_seconds": 123,
+        "unresponsive": false,
+        "phone_number": "+14155550123"
+      }
+    ]
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

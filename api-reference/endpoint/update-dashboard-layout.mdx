@@ -39,6 +39,51 @@ curl --request PUT \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/dashboards/{dashboard_id}/layout",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "layouts": [
+            {
+                "widget_id": "<string>",
+                "layout": {
+                    "x": 123,
+                    "y": 123,
+                    "w": 123,
+                    "h": 123
+                }
+            }
+        ]
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/dashboards/{dashboard_id}/layout", {
+  method: "PUT",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "layouts": [
+      {
+        "widget_id": "<string>",
+        "layout": {
+          "x": 123,
+          "y": 123,
+          "w": 123,
+          "h": 123
+        }
+      }
+    ]
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

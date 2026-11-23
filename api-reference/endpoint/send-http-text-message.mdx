@@ -50,6 +50,41 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/send-http-text-message",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "simulation_result_id": "<string>",
+        "end_conversation": False,
+        "end_turn": True,
+        "message_id": "<string>",
+        "type": "message",
+        "message": "<string>"
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/send-http-text-message", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "simulation_result_id": "<string>",
+    "end_conversation": false,
+    "end_turn": true,
+    "message_id": "<string>",
+    "type": "message",
+    "message": "<string>"
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

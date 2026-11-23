@@ -29,6 +29,25 @@ curl --request GET \
   --header "Authorization: Bearer $BLUEJAY_USER_TOKEN"
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.get(
+    "https://api.getbluejay.ai/v1/uptime/monitors/{monitor_id}/series",
+    headers={"Authorization": "Bearer " + os.environ["BLUEJAY_USER_TOKEN"]},
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/uptime/monitors/{monitor_id}/series", {
+  method: "GET",
+  headers: { "Authorization": `Bearer ${process.env.BLUEJAY_USER_TOKEN}` },
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

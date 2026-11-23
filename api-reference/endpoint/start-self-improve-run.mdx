@@ -52,6 +52,49 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/self-improve/runs",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "agent_id": 1337,
+        "simulation_id": 2045,
+        "target_pass_rate": 0.9,
+        "max_iterations": 5,
+        "min_improvement": 0.02,
+        "metric_count": 5,
+        "success_metric_ids": [
+            "<string>"
+        ],
+        "confirmed": False
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/self-improve/runs", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "agent_id": 1337,
+    "simulation_id": 2045,
+    "target_pass_rate": 0.9,
+    "max_iterations": 5,
+    "min_improvement": 0.02,
+    "metric_count": 5,
+    "success_metric_ids": [
+      "<string>"
+    ],
+    "confirmed": false
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

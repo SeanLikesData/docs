@@ -35,6 +35,35 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v2/delete-metrics",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "custom_metric_ids": [
+            "<string>"
+        ]
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v2/delete-metrics", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "custom_metric_ids": [
+      "<string>"
+    ]
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

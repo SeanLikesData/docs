@@ -59,6 +59,91 @@ curl --request PUT \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/update-metric/{metric_id}",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "bluejay_as_code_id": "<string>",
+        "name": "Refund request test",
+        "prompt": "<string>",
+        "summary": "<string>",
+        "metric_type": "<string>",
+        "settings": {},
+        "eval_segment": "agent",
+        "scope": "observability",
+        "response_type": "pass_fail",
+        "agent_ids": [
+            123
+        ],
+        "min_value": 1.5,
+        "max_value": 1.5,
+        "category": "<string>",
+        "tags": [
+            "billing"
+        ],
+        "scoring_guidance": "<string>",
+        "eval_modality": "AUDIO",
+        "model": "<string>",
+        "audio_model": "<string>",
+        "temperature": 1.5,
+        "enum_options": [
+            "<string>"
+        ],
+        "tool_names": [
+            "<string>"
+        ],
+        "json_schema": {},
+        "allow_not_applicable": True
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/update-metric/{metric_id}", {
+  method: "PUT",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "bluejay_as_code_id": "<string>",
+    "name": "Refund request test",
+    "prompt": "<string>",
+    "summary": "<string>",
+    "metric_type": "<string>",
+    "settings": {},
+    "eval_segment": "agent",
+    "scope": "observability",
+    "response_type": "pass_fail",
+    "agent_ids": [
+      123
+    ],
+    "min_value": 1.5,
+    "max_value": 1.5,
+    "category": "<string>",
+    "tags": [
+      "billing"
+    ],
+    "scoring_guidance": "<string>",
+    "eval_modality": "AUDIO",
+    "model": "<string>",
+    "audio_model": "<string>",
+    "temperature": 1.5,
+    "enum_options": [
+      "<string>"
+    ],
+    "tool_names": [
+      "<string>"
+    ],
+    "json_schema": {},
+    "allow_not_applicable": true
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

@@ -48,6 +48,65 @@ curl --request PUT \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/update-metrics",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "metric_ids": [
+            "<string>"
+        ],
+        "updates": {
+            "tags": [
+                "billing"
+            ],
+            "agent_ids": [
+                123
+            ],
+            "eval_modality": "AUDIO",
+            "eval_segment": "agent",
+            "scope": "observability",
+            "model": "<string>",
+            "audio_model": "<string>",
+            "temperature": 1.5,
+            "allow_not_applicable": True
+        }
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/update-metrics", {
+  method: "PUT",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "metric_ids": [
+      "<string>"
+    ],
+    "updates": {
+      "tags": [
+        "billing"
+      ],
+      "agent_ids": [
+        123
+      ],
+      "eval_modality": "AUDIO",
+      "eval_segment": "agent",
+      "scope": "observability",
+      "model": "<string>",
+      "audio_model": "<string>",
+      "temperature": 1.5,
+      "allow_not_applicable": true
+    }
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

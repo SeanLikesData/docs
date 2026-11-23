@@ -25,6 +25,25 @@ curl --request POST \
   --header "Authorization: Bearer $BLUEJAY_SCIM_TOKEN"
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/scim/Users",
+    headers={"Authorization": "Bearer " + os.environ["BLUEJAY_SCIM_TOKEN"]},
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/scim/Users", {
+  method: "POST",
+  headers: { "Authorization": `Bearer ${process.env.BLUEJAY_SCIM_TOKEN}` },
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 ## Headers

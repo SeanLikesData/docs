@@ -67,6 +67,79 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/create-alert",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "sample_size": 123,
+        "name": "Refund request test",
+        "description": "Checks that the agent handles a refund request.",
+        "is_enabled": True,
+        "entity_type": "standard_metric",
+        "entity_field": "<string>",
+        "operator": "equals",
+        "comparison_value": "<string>",
+        "notification_channels": [
+            {
+                "type": "<string>",
+                "target": "<string>"
+            }
+        ],
+        "applies_to_all_agents": True,
+        "agent_ids": [
+            123
+        ],
+        "simulation_id": 2045,
+        "evaluation_scope": "per_test_result",
+        "aggregation": "none",
+        "threshold_time_interval": 123,
+        "min_events": 123,
+        "min_events_type": "events",
+        "source_scope": "all"
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/create-alert", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "sample_size": 123,
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
+    "is_enabled": true,
+    "entity_type": "standard_metric",
+    "entity_field": "<string>",
+    "operator": "equals",
+    "comparison_value": "<string>",
+    "notification_channels": [
+      {
+        "type": "<string>",
+        "target": "<string>"
+      }
+    ],
+    "applies_to_all_agents": true,
+    "agent_ids": [
+      123
+    ],
+    "simulation_id": 2045,
+    "evaluation_scope": "per_test_result",
+    "aggregation": "none",
+    "threshold_time_interval": 123,
+    "min_events": 123,
+    "min_events_type": "events",
+    "source_scope": "all"
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

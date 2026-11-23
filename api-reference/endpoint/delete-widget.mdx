@@ -23,6 +23,25 @@ curl --request DELETE \
   --header "X-API-Key: $BLUEJAY_API_KEY"
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.delete(
+    "https://api.getbluejay.ai/v1/widgets/{widget_id}",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/widgets/{widget_id}", {
+  method: "DELETE",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY },
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

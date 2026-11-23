@@ -87,6 +87,113 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/update-simulation-result",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "simulation_result_id": "<string>",
+        "start_time": "2026-01-01T00:00:00Z",
+        "end_time": "2026-01-01T00:00:00Z",
+        "duration": 123,
+        "events": [
+            {
+                "title": "<string>",
+                "start_offset_ms": 123,
+                "description": "Checks that the agent handles a refund request.",
+                "end_offset_ms": 123,
+                "tags": [
+                    "billing"
+                ],
+                "metadata": {}
+            }
+        ],
+        "tool_calls": [
+            {
+                "name": "Refund request test",
+                "start_offset_ms": 123,
+                "description": "Checks that the agent handles a refund request.",
+                "parameters": {},
+                "output": None
+            }
+        ],
+        "recorded_transcript": [
+            {
+                "start_offset_ms": 123,
+                "end_offset_ms": 123,
+                "speaker": "AGENT",
+                "utterance": "<string>",
+                "filler_utterance": True
+            }
+        ],
+        "tags": [
+            "billing"
+        ],
+        "metadata": {},
+        "trace_ids": [
+            "<string>"
+        ],
+        "session_id": "<string>"
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/update-simulation-result", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "simulation_result_id": "<string>",
+    "start_time": "2026-01-01T00:00:00Z",
+    "end_time": "2026-01-01T00:00:00Z",
+    "duration": 123,
+    "events": [
+      {
+        "title": "<string>",
+        "start_offset_ms": 123,
+        "description": "Checks that the agent handles a refund request.",
+        "end_offset_ms": 123,
+        "tags": [
+          "billing"
+        ],
+        "metadata": {}
+      }
+    ],
+    "tool_calls": [
+      {
+        "name": "Refund request test",
+        "start_offset_ms": 123,
+        "description": "Checks that the agent handles a refund request.",
+        "parameters": {},
+        "output": null
+      }
+    ],
+    "recorded_transcript": [
+      {
+        "start_offset_ms": 123,
+        "end_offset_ms": 123,
+        "speaker": "AGENT",
+        "utterance": "<string>",
+        "filler_utterance": true
+      }
+    ],
+    "tags": [
+      "billing"
+    ],
+    "metadata": {},
+    "trace_ids": [
+      "<string>"
+    ],
+    "session_id": "<string>"
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

@@ -113,6 +113,195 @@ curl --request PUT \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/update-agent-by-external-id",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "external_agent_id": "<string>",
+        "name": "Refund request test",
+        "system_prompt": "You are a friendly support agent for Acme.",
+        "phone_number": "+14155550123",
+        "goals": [
+            "<string>"
+        ],
+        "type": "INBOUND",
+        "connection_type": "SMS",
+        "mode": "VOICE",
+        "keyterms": [
+            "<string>"
+        ],
+        "follow_up_sms_sender_numbers": [
+            "<string>"
+        ],
+        "folder": "<string>",
+        "websocket_url": "<string>",
+        "websocket_username": "<string>",
+        "websocket_password": "<string>",
+        "sip_uri": "<string>",
+        "sip_username": "<string>",
+        "sip_password": "<string>",
+        "custom_sip_headers": {
+            "key": "<string>"
+        },
+        "dynamic_sip_webhook_url": "<string>",
+        "outbound_trigger_webhook_url": "<string>",
+        "outbound_trigger_payload_template": {},
+        "redact_pii": True,
+        "livekit_agent_name": "<string>",
+        "livekit_metadata": {},
+        "livekit_customer_tool_topic": "<string>",
+        "livekit_token_webhook_url": "<string>",
+        "livekit_token_webhook_auth": "<string>",
+        "pipecat_agent_name": "<string>",
+        "pipecat_agent_configuration": {},
+        "pipecat_room_properties": {},
+        "http_webhook": "<string>",
+        "http_webhook_sync_reply": True,
+        "voice_provider": "<string>",
+        "provider_id": "<string>",
+        "eleven_labs_agent_id": "<string>",
+        "retell_agent_id": "<string>",
+        "vapi_assistant_id": "<string>",
+        "ces_app_id": "<string>",
+        "ces_deployment_id": "<string>",
+        "dfcx_project_id": "<string>",
+        "dfcx_location": "<string>",
+        "dfcx_agent_id": "<string>",
+        "amelia_base_url": "<string>",
+        "amelia_domain_code": "<string>",
+        "amelia_flow_name": "<string>",
+        "amelia_agent_name": "<string>",
+        "kore_host": "<string>",
+        "kore_bot_id": "<string>",
+        "kore_client_id": "<string>",
+        "kore_client_secret": "<string>",
+        "openai_base_url": "<string>",
+        "openai_api_key": "<string>",
+        "openai_model": "<string>",
+        "openai_realtime_url": "<string>",
+        "openai_realtime_session": {},
+        "openai_prompt_id": "<string>",
+        "openai_prompt_version": "<string>",
+        "email_address": "<string>",
+        "email_reply_addresses": [
+            "<string>"
+        ],
+        "bland_pathway_id": "<string>",
+        "bland_agent_id": "<string>",
+        "sierra_agent_token": "<string>",
+        "sierra_release": "<string>",
+        "sierra_agent_parameters": {},
+        "telnyx_assistant_id": "<string>",
+        "telnyx_api_key": "<string>",
+        "bland_call_settings": {},
+        "provider_request_data": {},
+        "ces_session_parameters": {},
+        "enable_outbound_call_auto_start": True,
+        "simulations_disabled": True,
+        "workflow": {},
+        "provider": "CUSTOM"
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/update-agent-by-external-id", {
+  method: "PUT",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "external_agent_id": "<string>",
+    "name": "Refund request test",
+    "system_prompt": "You are a friendly support agent for Acme.",
+    "phone_number": "+14155550123",
+    "goals": [
+      "<string>"
+    ],
+    "type": "INBOUND",
+    "connection_type": "SMS",
+    "mode": "VOICE",
+    "keyterms": [
+      "<string>"
+    ],
+    "follow_up_sms_sender_numbers": [
+      "<string>"
+    ],
+    "folder": "<string>",
+    "websocket_url": "<string>",
+    "websocket_username": "<string>",
+    "websocket_password": "<string>",
+    "sip_uri": "<string>",
+    "sip_username": "<string>",
+    "sip_password": "<string>",
+    "custom_sip_headers": {
+      "key": "<string>"
+    },
+    "dynamic_sip_webhook_url": "<string>",
+    "outbound_trigger_webhook_url": "<string>",
+    "outbound_trigger_payload_template": {},
+    "redact_pii": true,
+    "livekit_agent_name": "<string>",
+    "livekit_metadata": {},
+    "livekit_customer_tool_topic": "<string>",
+    "livekit_token_webhook_url": "<string>",
+    "livekit_token_webhook_auth": "<string>",
+    "pipecat_agent_name": "<string>",
+    "pipecat_agent_configuration": {},
+    "pipecat_room_properties": {},
+    "http_webhook": "<string>",
+    "http_webhook_sync_reply": true,
+    "voice_provider": "<string>",
+    "provider_id": "<string>",
+    "eleven_labs_agent_id": "<string>",
+    "retell_agent_id": "<string>",
+    "vapi_assistant_id": "<string>",
+    "ces_app_id": "<string>",
+    "ces_deployment_id": "<string>",
+    "dfcx_project_id": "<string>",
+    "dfcx_location": "<string>",
+    "dfcx_agent_id": "<string>",
+    "amelia_base_url": "<string>",
+    "amelia_domain_code": "<string>",
+    "amelia_flow_name": "<string>",
+    "amelia_agent_name": "<string>",
+    "kore_host": "<string>",
+    "kore_bot_id": "<string>",
+    "kore_client_id": "<string>",
+    "kore_client_secret": "<string>",
+    "openai_base_url": "<string>",
+    "openai_api_key": "<string>",
+    "openai_model": "<string>",
+    "openai_realtime_url": "<string>",
+    "openai_realtime_session": {},
+    "openai_prompt_id": "<string>",
+    "openai_prompt_version": "<string>",
+    "email_address": "<string>",
+    "email_reply_addresses": [
+      "<string>"
+    ],
+    "bland_pathway_id": "<string>",
+    "bland_agent_id": "<string>",
+    "sierra_agent_token": "<string>",
+    "sierra_release": "<string>",
+    "sierra_agent_parameters": {},
+    "telnyx_assistant_id": "<string>",
+    "telnyx_api_key": "<string>",
+    "bland_call_settings": {},
+    "provider_request_data": {},
+    "ces_session_parameters": {},
+    "enable_outbound_call_auto_start": true,
+    "simulations_disabled": true,
+    "workflow": {},
+    "provider": "CUSTOM"
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

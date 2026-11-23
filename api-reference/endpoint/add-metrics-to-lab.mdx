@@ -33,6 +33,39 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/metrics-lab/lab/{lab_id}/metrics",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "lab_id": "<string>",
+        "metric_ids": [
+            "<string>"
+        ],
+        "evaluate_conversations": False
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/metrics-lab/lab/{lab_id}/metrics", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "lab_id": "<string>",
+    "metric_ids": [
+      "<string>"
+    ],
+    "evaluate_conversations": false
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

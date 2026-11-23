@@ -72,6 +72,117 @@ curl --request PUT \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/widgets/{widget_id}",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "name": "Refund request test",
+        "description": "Checks that the agent handles a refund request.",
+        "chart_type": "line",
+        "chart_mode": "time_series",
+        "bar_mode": "stacked",
+        "aggregation": [
+            "count"
+        ],
+        "time_bucket": "hour",
+        "group_by": "agent",
+        "simulation_ids": [
+            123
+        ],
+        "show_indeterminate": False,
+        "filters": [
+            None
+        ],
+        "column_visibility": {
+            "key": True
+        },
+        "color_overrides": {
+            "key": "<string>"
+        },
+        "center_label": {
+            "slice": "<string>",
+            "clamp_pct": 1.5,
+            "label": "<string>",
+            "benchmark": 1.5,
+            "compare_previous": True,
+            "unit": "<string>"
+        },
+        "show_legend": True,
+        "metrics": [
+            {
+                "metric": "<string>",
+                "custom_metric_id": "<string>",
+                "goal": "<string>",
+                "tool_call_id": "<string>",
+                "metadata_path": "<string>",
+                "threshold_operator": "lt",
+                "threshold_value": 1.5,
+                "metadata_type": "<string>"
+            }
+        ]
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/widgets/{widget_id}", {
+  method: "PUT",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
+    "chart_type": "line",
+    "chart_mode": "time_series",
+    "bar_mode": "stacked",
+    "aggregation": [
+      "count"
+    ],
+    "time_bucket": "hour",
+    "group_by": "agent",
+    "simulation_ids": [
+      123
+    ],
+    "show_indeterminate": false,
+    "filters": [
+      null
+    ],
+    "column_visibility": {
+      "key": true
+    },
+    "color_overrides": {
+      "key": "<string>"
+    },
+    "center_label": {
+      "slice": "<string>",
+      "clamp_pct": 1.5,
+      "label": "<string>",
+      "benchmark": 1.5,
+      "compare_previous": true,
+      "unit": "<string>"
+    },
+    "show_legend": true,
+    "metrics": [
+      {
+        "metric": "<string>",
+        "custom_metric_id": "<string>",
+        "goal": "<string>",
+        "tool_call_id": "<string>",
+        "metadata_path": "<string>",
+        "threshold_operator": "lt",
+        "threshold_value": 1.5,
+        "metadata_type": "<string>"
+      }
+    ]
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

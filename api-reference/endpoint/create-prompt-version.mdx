@@ -37,6 +37,43 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/agents/{agent_id}/versions",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "prompt_text": "<string>",
+        "commit_message": "<string>",
+        "labels": [
+            "<string>"
+        ],
+        "override_label": False,
+        "metadata": {}
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/agents/{agent_id}/versions", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "prompt_text": "<string>",
+    "commit_message": "<string>",
+    "labels": [
+      "<string>"
+    ],
+    "override_label": false,
+    "metadata": {}
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

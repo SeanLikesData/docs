@@ -72,6 +72,113 @@ curl --request POST \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.post(
+    "https://api.getbluejay.ai/v1/scenario",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "agent_ids": [],
+        "definition": {
+            "edges": [
+                {
+                    "id": "e-wf-start-n-greet",
+                    "source": "wf-start",
+                    "target": "n-greet"
+                }
+            ],
+            "nodes": [
+                {
+                    "data": {
+                        "id": "wf-start"
+                    },
+                    "deletable": False,
+                    "draggable": True,
+                    "id": "wf-start",
+                    "position": {
+                        "x": 100,
+                        "y": 50
+                    },
+                    "type": "start"
+                },
+                {
+                    "data": {
+                        "criteria": "Greet the caller and offer help",
+                        "id": "n-greet",
+                        "speaker": "agent",
+                        "turn": 0,
+                        "type": "message"
+                    },
+                    "id": "n-greet",
+                    "position": {
+                        "x": 200,
+                        "y": 180
+                    },
+                    "type": "single"
+                }
+            ]
+        },
+        "description": "Password reset IVR",
+        "name": "Support reset flow"
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/scenario", {
+  method: "POST",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "agent_ids": [],
+    "definition": {
+      "edges": [
+        {
+          "id": "e-wf-start-n-greet",
+          "source": "wf-start",
+          "target": "n-greet"
+        }
+      ],
+      "nodes": [
+        {
+          "data": {
+            "id": "wf-start"
+          },
+          "deletable": false,
+          "draggable": true,
+          "id": "wf-start",
+          "position": {
+            "x": 100,
+            "y": 50
+          },
+          "type": "start"
+        },
+        {
+          "data": {
+            "criteria": "Greet the caller and offer help",
+            "id": "n-greet",
+            "speaker": "agent",
+            "turn": 0,
+            "type": "message"
+          },
+          "id": "n-greet",
+          "position": {
+            "x": 200,
+            "y": 180
+          },
+          "type": "single"
+        }
+      ]
+    },
+    "description": "Password reset IVR",
+    "name": "Support reset flow"
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

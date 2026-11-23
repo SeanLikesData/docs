@@ -156,6 +156,277 @@ curl --request PUT \
   }'
 ```
 
+```python Python
+import os
+import requests
+
+response = requests.put(
+    "https://api.getbluejay.ai/v1/update-digital-human/{digital_human_id}",
+    headers={"X-API-Key": os.environ["BLUEJAY_API_KEY"]},
+    json={
+        "intent": "Ask for a refund on an order from last week.",
+        "success_criteria": "<string>",
+        "name": "Refund request test",
+        "tag": "<string>",
+        "tags": [
+            "billing"
+        ],
+        "type": "voicemail_custom",
+        "language": "en",
+        "accent": "multilingual",
+        "gender": "male",
+        "custom_voice_id": "<string>",
+        "background_noise": "none",
+        "custom_background_noise_url": "<string>",
+        "voice_speed": "slowest",
+        "audio_quality": "high",
+        "fluency": "beginner",
+        "verbosity": "low",
+        "phone_number": "+14155550123",
+        "extension": "<string>",
+        "outbound_text_number": "<string>",
+        "background_noise_volume": 1.5,
+        "expected_tool_calls": [
+            {
+                "name": "Refund request test",
+                "parameters": {},
+                "output": None
+            }
+        ],
+        "allow_end_call_tool": True,
+        "speak_scripted_end_phrases": True,
+        "allow_silence_tool": True,
+        "allow_dtmf_tool": True,
+        "default_dtmf_or_voiced": "voiced",
+        "silence_tool_instructions": "<string>",
+        "endpointing_delay": 1.5,
+        "creativity": 1.5,
+        "hangup_phrases": [
+            "<string>"
+        ],
+        "hangup_instructions": "<string>",
+        "silence_timeout": 123,
+        "simulation_ids": [
+            123
+        ],
+        "traits": [
+            {
+                "trait_name": "<string>",
+                "trait_data_type": "BOOLEAN",
+                "value": None,
+                "is_sip_header": False
+            }
+        ],
+        "traits_mode": "replace",
+        "interruptions": {
+            "type": "none"
+        },
+        "scripted_responses": [
+            {
+                "match_type": "exact",
+                "match_phrase": "<string>",
+                "response_type": "phrase",
+                "response_value": "<string>",
+                "scripted_response_audio_snippet_url": "<string>",
+                "occurrence_mode": "always",
+                "occurrence_n": 123,
+                "silence_duration": 123
+            }
+        ],
+        "scripted_responses_ordered": True,
+        "role_description": "<string>",
+        "speaks_first_config": {
+            "speaks_first": True,
+            "mode": "custom",
+            "message": "<string>",
+            "dynamic": True
+        },
+        "original_transcript": "<string>",
+        "formatted_transcript": [
+            {
+                "key": "<string>"
+            }
+        ],
+        "enriched_playback": [
+            {}
+        ],
+        "num_runs": 123,
+        "tool_responses": {},
+        "livekit_metadata": {},
+        "provider_request_data": {},
+        "always_on_mode": True,
+        "always_on_active": True,
+        "test_name": "<string>",
+        "journey_steps": [
+            {
+                "step": 123,
+                "intent": "",
+                "success_criteria": "",
+                "modality": "voice",
+                "direction": "inbound",
+                "wait_seconds": 123,
+                "response_window_seconds": 123,
+                "unresponsive": False,
+                "phone_number": "+14155550123"
+            }
+        ],
+        "override_conflict": False,
+        "system_prompt_rule_ids": [
+            "<string>"
+        ],
+        "system_prompt_rule_quotes": [
+            "<string>"
+        ],
+        "workflow_v2_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+        "workflow_path_index": 123,
+        "tested_path": [
+            "<string>"
+        ],
+        "attack_vector": "<string>",
+        "attack_type": "<string>",
+        "attack_plan": {},
+        "persona_ids": [
+            "3c90c3cc-0d44-4b50-8888-8dd25736052a"
+        ]
+    },
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.getbluejay.ai/v1/update-digital-human/{digital_human_id}", {
+  method: "PUT",
+  headers: { "X-API-Key": process.env.BLUEJAY_API_KEY, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    "intent": "Ask for a refund on an order from last week.",
+    "success_criteria": "<string>",
+    "name": "Refund request test",
+    "tag": "<string>",
+    "tags": [
+      "billing"
+    ],
+    "type": "voicemail_custom",
+    "language": "en",
+    "accent": "multilingual",
+    "gender": "male",
+    "custom_voice_id": "<string>",
+    "background_noise": "none",
+    "custom_background_noise_url": "<string>",
+    "voice_speed": "slowest",
+    "audio_quality": "high",
+    "fluency": "beginner",
+    "verbosity": "low",
+    "phone_number": "+14155550123",
+    "extension": "<string>",
+    "outbound_text_number": "<string>",
+    "background_noise_volume": 1.5,
+    "expected_tool_calls": [
+      {
+        "name": "Refund request test",
+        "parameters": {},
+        "output": null
+      }
+    ],
+    "allow_end_call_tool": true,
+    "speak_scripted_end_phrases": true,
+    "allow_silence_tool": true,
+    "allow_dtmf_tool": true,
+    "default_dtmf_or_voiced": "voiced",
+    "silence_tool_instructions": "<string>",
+    "endpointing_delay": 1.5,
+    "creativity": 1.5,
+    "hangup_phrases": [
+      "<string>"
+    ],
+    "hangup_instructions": "<string>",
+    "silence_timeout": 123,
+    "simulation_ids": [
+      123
+    ],
+    "traits": [
+      {
+        "trait_name": "<string>",
+        "trait_data_type": "BOOLEAN",
+        "value": null,
+        "is_sip_header": false
+      }
+    ],
+    "traits_mode": "replace",
+    "interruptions": {
+      "type": "none"
+    },
+    "scripted_responses": [
+      {
+        "match_type": "exact",
+        "match_phrase": "<string>",
+        "response_type": "phrase",
+        "response_value": "<string>",
+        "scripted_response_audio_snippet_url": "<string>",
+        "occurrence_mode": "always",
+        "occurrence_n": 123,
+        "silence_duration": 123
+      }
+    ],
+    "scripted_responses_ordered": true,
+    "role_description": "<string>",
+    "speaks_first_config": {
+      "speaks_first": true,
+      "mode": "custom",
+      "message": "<string>",
+      "dynamic": true
+    },
+    "original_transcript": "<string>",
+    "formatted_transcript": [
+      {
+        "key": "<string>"
+      }
+    ],
+    "enriched_playback": [
+      {}
+    ],
+    "num_runs": 123,
+    "tool_responses": {},
+    "livekit_metadata": {},
+    "provider_request_data": {},
+    "always_on_mode": true,
+    "always_on_active": true,
+    "test_name": "<string>",
+    "journey_steps": [
+      {
+        "step": 123,
+        "intent": "",
+        "success_criteria": "",
+        "modality": "voice",
+        "direction": "inbound",
+        "wait_seconds": 123,
+        "response_window_seconds": 123,
+        "unresponsive": false,
+        "phone_number": "+14155550123"
+      }
+    ],
+    "override_conflict": false,
+    "system_prompt_rule_ids": [
+      "<string>"
+    ],
+    "system_prompt_rule_quotes": [
+      "<string>"
+    ],
+    "workflow_v2_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
+    "workflow_path_index": 123,
+    "tested_path": [
+      "<string>"
+    ],
+    "attack_vector": "<string>",
+    "attack_type": "<string>",
+    "attack_plan": {},
+    "persona_ids": [
+      "3c90c3cc-0d44-4b50-8888-8dd25736052a"
+    ]
+  }),
+});
+console.log(await response.json());
+```
+
 </RequestExample>
 
 <ResponseExample>

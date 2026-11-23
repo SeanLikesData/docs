@@ -379,13 +379,78 @@ def curl(spec, method, path, op):
     return "\n".join(lines)
 
 
+def request_parts(spec, method, path, op):
+    """Shared pieces for the Python and JavaScript snippets."""
+    query = [p["name"] for p in op.get("parameters", []) if p.get("in") == "query" and p.get("required")]
+    name, _, var = auth(path, op)[0].partition(": ")
+    var = var.replace("Bearer ", "").lstrip("$")
+    prefix = "Bearer " if name == "Authorization" else ""
+    ctype, schema, _ = body_schema(op)
+    return query, name, var, prefix, ctype, schema
+
+
+def python_example(spec, method, path, op):
+    query, name, var, prefix, ctype, schema = request_parts(spec, method, path, op)
+    auth_val = f'"{prefix}" + os.environ["{var}"]' if prefix else f'os.environ["{var}"]'
+    lines = ["import os", "import requests", "", f"response = requests.{method.lower()}(", f'    "{BASE_URL}{path}",']
+    if query:
+        lines.append("    params={" + ", ".join(f'"{q}": "<{q}>"' for q in query) + "},")
+    lines.append(f'    headers={{"{name}": {auth_val}}},')
+    if ctype == "application/json":
+        body = json.dumps(example(spec, schema), indent=4)
+        body = re.sub(r'(?m)(: |^\s*)(true|false|null)(,?)$', lambda m: m[1] + {"true": "True", "false": "False", "null": "None"}[m[2]] + m[3], body)
+        lines.append("    json=" + body.replace("\n", "\n    ") + ",")
+    elif ctype == "multipart/form-data":
+        resolved, _ = resolve(spec, schema)
+        files, data = [], []
+        for n, sch in resolved.get("properties", {}).items():
+            if type_label(spec, sch) == "file":
+                files.append(f'"{n}": open("<file>", "rb")')
+            else:
+                data.append(f'"{n}": "<{n}>"')
+        if files:
+            lines.append("    files={" + ", ".join(files) + "},")
+        if data:
+            lines.append("    data={" + ", ".join(data) + "},")
+    lines += [")", "print(response.json())"]
+    return "\n".join(lines)
+
+
+def javascript_example(spec, method, path, op):
+    query, name, var, prefix, ctype, schema = request_parts(spec, method, path, op)
+    auth_val = f"`{prefix}${{process.env.{var}}}`" if prefix else f"process.env.{var}"
+    url = BASE_URL + path + ("?" + "&".join(f"{q}=<{q}>" for q in query) if query else "")
+    lines = []
+    headers = [f'"{name}": {auth_val}']
+    extra = []
+    if ctype == "application/json":
+        headers.append('"Content-Type": "application/json"')
+        body = json.dumps(example(spec, schema), indent=2).replace("\n", "\n  ")
+        extra.append("  body: JSON.stringify(" + body + "),")
+    elif ctype == "multipart/form-data":
+        resolved, _ = resolve(spec, schema)
+        lines.append("const form = new FormData();")
+        for n, sch in resolved.get("properties", {}).items():
+            if type_label(spec, sch) == "file":
+                lines.append(f'form.append("{n}", new Blob(["<file contents>"]), "<file>");')
+            else:
+                lines.append(f'form.append("{n}", "<{n}>");')
+        lines.append("")
+        extra.append("  body: form,")
+    lines += [f'const response = await fetch("{url}", {{', f'  method: "{method.upper()}",',
+              "  headers: { " + ", ".join(headers) + " },"] + extra + ["});", "console.log(await response.json());"]
+    return "\n".join(lines)
+
+
 def table(rows):
     return "<FieldTable rows={" + json.dumps(rows, ensure_ascii=False) + "} />"
 
 
 def generate(spec, method, path, op):
     parts = [START, ""]
-    rail = ["<RequestExample>", "", "```bash cURL", curl(spec, method, path, op), "```", "", "</RequestExample>", ""]
+    rail = ["<RequestExample>", "", "```bash cURL", curl(spec, method, path, op), "```", "",
+            "```python Python", python_example(spec, method, path, op), "```", "",
+            "```javascript JavaScript", javascript_example(spec, method, path, op), "```", "", "</RequestExample>", ""]
     params = op.get("parameters", [])
     for where, heading in (("path", "Path parameters"), ("query", "Query parameters"), ("header", "Headers")):
         rows = param_rows(spec, params, where)
