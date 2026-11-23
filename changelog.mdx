@@ -18,6 +18,14 @@ import { ChangelogFilters } from "/snippets/changelog-filters.jsx";
   [Create Simulation](/api-reference/endpoint/create-simulation)
 </Update>
 
+<Update label="November 17th, 2026" tags={["Improvement", "API", "Observability"]}>
+  ## Repeat calls on Evaluate return 409
+
+  `POST /v1/evaluate` now rejects a call when its audio and transcript match an earlier call for the same agent. The response is `409` with the `call_id` of the earlier call. To evaluate the same call again, pass `is_duplicate: true`, or use Re-evaluate with the earlier `call_id`.
+
+  [Evaluate](/api-reference/endpoint/evaluate) · [Re-evaluate](/api-reference/endpoint/re-evaluate)
+</Update>
+
 <Update label="November 4th, 2026" tags={["Improvement", "API", "Digital Humans"]}>
   ## Digital Human tags
 
