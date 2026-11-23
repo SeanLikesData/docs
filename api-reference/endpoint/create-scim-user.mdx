@@ -46,6 +46,22 @@ console.log(await response.json());
 
 </RequestExample>
 
+<ResponseExample>
+
+```json 401
+{
+  "detail": "Invalid API key"
+}
+```
+
+```json 429
+{
+  "error": "Rate limit exceeded: 100 per 1 minute"
+}
+```
+
+</ResponseExample>
+
 ## Headers
 
 <FieldTable rows={[{"name": "Authorization", "type": "string", "required": true, "description": "SCIM token as `Bearer <token>`. Not an API key."}]} />

@@ -495,8 +495,28 @@ def generate(spec, method, path, op):
         parts += ["## Status codes", "", "| Status | Meaning |", "|---|---|"]
         parts += [f"| `{c}` | {d} |" for c, d in statuses]
         parts += [""]
+    tabs = []
     if resp_schema:
-        rail += ["<ResponseExample>", "", "```json " + code, json.dumps(example(spec, resp_schema), indent=2), "```", "", "</ResponseExample>", ""]
+        tabs.append((code, example(spec, resp_schema)))
+    declared = op.get("responses", {})
+    errors = {
+        "400": {"detail": "The request is not valid for the current state."},
+        "401": {"detail": "Invalid API key"},
+        "404": {"detail": "Not found"},
+        "409": {"detail": "The request conflicts with current data."},
+        "422": {"detail": [{"loc": ["body", "name"], "msg": "Field required", "type": "missing"}]},
+        "429": {"error": "Rate limit exceeded: 100 per 1 minute"},
+    }
+    for c, body in errors.items():
+        # 401 and 429 apply to every route. 404 applies where the path names one item.
+        if c in declared or c in ("401", "429") or (c == "404" and "{" in path):
+            tabs.append((c, body))
+    tabs.sort(key=lambda t: t[0])
+    if tabs:
+        rail += ["<ResponseExample>", ""]
+        for c, body in tabs:
+            rail += ["```json " + c, json.dumps(body, indent=2), "```", ""]
+        rail += ["</ResponseExample>", ""]
     note = auth(path, op)[2]
     parts[2:2] = rail + ([f"<Note>{note}</Note>", ""] if note else [])
     parts.append(END)

@@ -60,6 +60,39 @@ console.log(await response.json());
 }
 ```
 
+```json 401
+{
+  "detail": "Invalid API key"
+}
+```
+
+```json 404
+{
+  "detail": "Not found"
+}
+```
+
+```json 422
+{
+  "detail": [
+    {
+      "loc": [
+        "body",
+        "name"
+      ],
+      "msg": "Field required",
+      "type": "missing"
+    }
+  ]
+}
+```
+
+```json 429
+{
+  "error": "Rate limit exceeded: 100 per 1 minute"
+}
+```
+
 </ResponseExample>
 
 ## Path parameters
