@@ -146,6 +146,10 @@ def object_children(spec, schema, depth, seen=()):
 OVERRIDES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "descriptions.json")))
 
 
+# Short sidebar and page titles, by page file name. Pages not listed use their description minus articles.
+TITLES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "titles.json")))
+
+
 def clean(text):
     if not text:
         return ""
@@ -349,8 +353,7 @@ def auth(path, op):
         return ("Authorization: Bearer $BLUEJAY_SCIM_TOKEN", ("Authorization", "SCIM token as `Bearer <token>`. Not an API key."), "")
     if path in USER_TOKEN_PATHS:
         return ("Authorization: Bearer $BLUEJAY_USER_TOKEN", ("Authorization", "Signed-in user token as `Bearer <token>`. API keys are rejected."), "")
-    return ("X-API-Key: $BLUEJAY_API_KEY", ("X-API-Key", "API key required to authenticate requests."),
-            f"Create an API key on the [API Keys page]({KEYS_URL}), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.")
+    return ("X-API-Key: $BLUEJAY_API_KEY", ("X-API-Key", "API key required to authenticate requests."), "")
 
 
 def curl(spec, method, path, op):
@@ -508,7 +511,8 @@ def process(spec, page):
             return f"{method} {path} not in spec"
         fm = re.sub(r"^openapi:.*\n?", "", fm, flags=re.M).rstrip("\n")
         d = re.search(r'^description:\s*"(.*)"\s*$', fm, re.M)
-        title = (d.group(1).rstrip(".") if d else "") or (op.get("summary") or f"{method} {path}")
+        title = TITLES.get(os.path.basename(page)[:-4]) or (d.group(1).rstrip(".") if d else "") or (op.get("summary") or f"{method} {path}")
+        title = re.sub(r"\b(a|an|the|your) ", "", title)
         title = title[:1].upper() + title[1:]
         fm = set_key(fm, "title", title)
         fm = set_key(fm, "sidebarTitle", title)

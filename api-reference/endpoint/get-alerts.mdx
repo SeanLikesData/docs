@@ -70,8 +70,6 @@ curl --request GET \
 
 </ResponseExample>
 
-<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
-
 ## Query parameters
 
 <FieldTable rows={[{"name": "source_scope", "type": "string or null", "required": false, "description": "Only return alerts whose source_scope is this value: observability, simulation, or all (alerts that fire from both sources). Omit to return every alert.", "values": ["all", "observability", "simulation"]}]} />

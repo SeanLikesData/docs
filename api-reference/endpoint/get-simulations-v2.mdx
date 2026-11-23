@@ -67,8 +67,6 @@ curl --request GET \
 
 </ResponseExample>
 
-<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
-
 ## Query parameters
 
 <FieldTable rows={[{"name": "simulation_id", "type": "integer[] or null", "required": false, "description": "Only this simulation: its id from POST /v1/create-simulation. Repeat the parameter for several. Omit for every simulation in the org."}, {"name": "agent_id", "type": "integer[] or null", "required": false, "description": "Only this agent's simulations: its Bluejay agent id (from GET /v1/all-agents). Repeat the parameter for several. Omit for every agent."}]} />

@@ -133,8 +133,6 @@ curl --request GET \
 
 </ResponseExample>
 
-<Note>Create an API key on the [API Keys page](https://app.getbluejay.ai/settings/api-keys), then run `export BLUEJAY_API_KEY=<your key>` so the examples work as written.</Note>
-
 ## Query parameters
 
 <FieldTable rows={[{"name": "agent_id", "type": "integer or null", "required": false, "description": "Only metrics attached to this agent: its Bluejay agent id (from GET /v1/all-agents). Omit for every metric in the org."}, {"name": "page", "type": "integer", "required": false, "description": "Which page to return, counting from 1; 1 when omitted.", "default": 1}, {"name": "page_size", "type": "integer", "required": false, "description": "Metrics per page, at most 100; 50 when omitted.", "default": 50}, {"name": "source", "type": "string or null", "required": false, "description": "Narrow the org-wide listing: custom for the org's own metrics, standard for Bluejay's builtins. Omit for both. Ignored when agent_id is set.", "values": ["custom", "standard"]}]} />
