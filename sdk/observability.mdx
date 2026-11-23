@@ -7,11 +7,19 @@ icon: waveform
 
 Enable tracing at process startup, then use the integration for your agent. The SDK groups telemetry by session so the transcript and trace are available on the same conversation in [Logs](/monitor/logs).
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 | Agent | What to add |
 | --- | --- |
@@ -24,7 +32,9 @@ client = BluejayClient(tracing=True)
 
 Use `@client.session(...)` on your message handler. The first argument selects a stable conversation ID from the handler's arguments. Use the same ID for every message in the conversation.
 
-```python
+<CodeGroup>
+
+```python Python
 @client.session(lambda chat_id, message: chat_id, external_agent_id="support-chat")
 def answer_message(chat_id, message):
     client.turn("USER", message)
@@ -33,9 +43,17 @@ def answer_message(chat_id, message):
     return reply
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 For SMS, use the conversation ID across messages and record the agent turn after your send succeeds:
 
-```python
+<CodeGroup>
+
+```python Python
 @client.session(lambda thread_id, sender, message: thread_id, external_agent_id="support-sms")
 async def respond_to_sms(thread_id, sender, message):
     client.turn("USER", message)
@@ -44,13 +62,21 @@ async def respond_to_sms(thread_id, sender, message):
     client.turn("AGENT", reply)
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 Use the external ID configured on your Bluejay agent. You can also pass `agent_id` with its Bluejay ID. If your app knows when a conversation ends, call `client.end_session(conversation_id, external_agent_id="support-chat")` then. Bluejay also builds idle sessions automatically.
 
 ## Trace custom voice
 
 Keep one ID for the call. Record the caller's finalized transcript and the portion of the reply that played. Pass timezone-aware `datetime` values for speech timing.
 
-```python
+<CodeGroup>
+
+```python Python
 with client.session(call_id, external_agent_id="support-voice") as conversation:
     conversation.turn("USER", caller_text, start_time=heard_at, end_time=heard_until)
     conversation.turn(
@@ -63,6 +89,12 @@ with client.session(call_id, external_agent_id="support-voice") as conversation:
 conversation.end()
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 For callbacks, reopen the same session ID as each callback runs. A custom stack supplies its own audio. If you already have a recording and a transcript, you can submit the finished call through [Evaluate](/api-reference/endpoint/evaluate) as an alternative ingest path. Use one ingest path per conversation.
 
 ## Add model and tool details
@@ -71,28 +103,52 @@ For callbacks, reopen the same session ID as each callback runs. A custom stack 
 
 Use `@client.observe()` when a custom function should appear as a step in the trace. The decorator records its arguments, result, and errors.
 
-```python
+<CodeGroup>
+
+```python Python
 @client.observe(kind="tool")
 def lookup_order(order_id):
     return orders.get(order_id)
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 For a model request that has no provider or framework span, use a manual span and set its output and token counts.
 
-```python
+<CodeGroup>
+
+```python Python
 with client.span("generate reply", kind="llm", model=model_name, input=messages) as span:
     result = model_client.generate(messages)
     span.set_output(result.text, input_tokens=result.input_tokens, output_tokens=result.output_tokens)
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 ## Configure data capture
 
 For advanced configuration, create the client and call `init_tracing()` once at startup:
 
-```python
+<CodeGroup>
+
+```python Python
 client = BluejayClient()
 client.init_tracing(redact_pii=True)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 `redact_pii=True` strips supported content attributes such as transcript lines, prompts, and tool payloads from spans sent to Bluejay. For custom span attributes, provide a `mask` function. To disable audio upload, set `record_audio=False` on the LiveKit or Pipecat integration.
 

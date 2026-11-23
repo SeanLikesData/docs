@@ -7,13 +7,21 @@ icon: aws
 
 `BluejayClient(tracing=True)` traces Bedrock through boto3. No extra package. `converse` and `converse_stream` are covered.
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
 
 reply = bedrock.converse(modelId="anthropic.claude-3-5-haiku-20241022-v1:0", messages=messages)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 When the call runs inside a [session](/sdk/observability#trace-chat-or-sms), the span joins that call.
 

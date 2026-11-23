@@ -10,13 +10,23 @@ Use the LiveKit integration to capture transcript turns, audio, and native LiveK
 
 Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview), then install the LiveKit extra.
 
-```bash
+<CodeGroup>
+
+```bash Python
 pip install "bluejay-sdk[livekit]>=0.4.0"
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 Create the client once at startup. In your existing LiveKit job, attach Bluejay before starting the session.
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
@@ -25,6 +35,12 @@ client = BluejayClient(tracing=True)
 client.instrument_livekit(ctx, session, external_agent_id="support-voice")
 await session.start(room=ctx.room, agent=SupportAgent())
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 Use the external ID configured on your Bluejay agent. You can also pass `agent_id` with its Bluejay ID. The integration uses LiveKit's native model and tool spans. Pass `record_audio=False` if you want spans and transcript without uploading audio.
 

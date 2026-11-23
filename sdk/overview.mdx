@@ -1,11 +1,11 @@
 ---
-title: "Python SDK"
+title: "SDK"
 sidebarTitle: "Quickstart"
 description: "Install the SDK, configure your API key, and make your first request."
 icon: code
 ---
 
-Use the Bluejay Python SDK to observe production conversations, run simulations, and call the Bluejay API.
+Use the Bluejay SDK to observe production conversations, run simulations, and call the Bluejay API. The SDK is available for Python. TypeScript support is coming.
 
 <CardGroup cols={2}>
   <Card title="Observe your agent" icon="waveform" href="/sdk/observability">
@@ -18,11 +18,19 @@ Use the Bluejay Python SDK to observe production conversations, run simulations,
 
 ## Install and authenticate
 
-These guides require `bluejay-sdk` 0.4.0 or later. The SDK requires Python 3.10 or later. The Pipecat extra requires Python 3.11 or later.
+The Python examples require `bluejay-sdk` 0.4.0 or later and Python 3.10 or later. The Pipecat extra requires Python 3.11 or later.
 
-```bash
+<CodeGroup>
+
+```bash Python
 pip install "bluejay-sdk>=0.4.0"
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 Create a key in [API Keys](https://app.getbluejay.ai/settings/api-keys) and set it in the environment where the SDK runs.
 
@@ -32,13 +40,21 @@ export BLUEJAY_API_KEY="your-api-key"
 
 ## Make your first request
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient()
 for agent in client.agents.list():
     print(agent.id)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 Use `BluejayClient()` to call the API. Use `BluejayClient(tracing=True)` once at startup in a process that sends agent telemetry. Both clients read the same API key. Add the [observability integration](/sdk/observability) for your agent to capture conversations.
 

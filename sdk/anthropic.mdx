@@ -7,13 +7,21 @@ icon: message
 
 `BluejayClient(tracing=True)` traces the Anthropic SDK. No extra package. Messages `create` and `stream` are covered.
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
 
 reply = anthropic_client.messages.create(model="claude-sonnet-4-5", max_tokens=1024, messages=messages)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 When the call runs inside a [session](/sdk/observability#trace-chat-or-sms), the span joins that call.
 

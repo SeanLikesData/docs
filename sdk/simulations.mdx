@@ -11,7 +11,9 @@ Run an existing simulation from Python and use its run ID to read the results. T
 
 [Connect your agent](/integrations/overview) and [create a simulation](/test/simulations/create) in Bluejay. Copy the simulation ID from the simulation page.
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient()
@@ -20,17 +22,31 @@ print(run.simulation_run_id)
 print(run.run_url)
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 The API returns when the run is queued. The simulation's configured Digital Humans are used unless you pass `digital_human_ids`. See the [queue API](/api-reference/endpoint/queue-simulation-run-v2) for run overrides and SMS requirements.
 
 ## Read results
 
 Fetch the results using the run ID. The run can still be `RUNNING`. For automation, poll until `COMPLETED` or until your job times out.
 
-```python
+<CodeGroup>
+
+```python Python
 results = client.simulation_results.list(run.simulation_run_id, limit=20)
 print(results.simulation_run.status)
 print(results.simulation_run.success_rate)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 The response includes the run summary and a page of conversations. Increment `offset` by `limit` to read more. For pull request or pipeline reporting, see [CI/CD](/native-integrations/overview). [Results API](/api-reference/endpoint/retrieve-simulation-results-v2)
 

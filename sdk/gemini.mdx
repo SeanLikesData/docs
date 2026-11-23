@@ -7,13 +7,21 @@ icon: google
 
 `BluejayClient(tracing=True)` traces the Google Gen AI SDK. No extra package. `generate_content` and `generate_content_stream` are covered, including chats, Gemini, and Vertex AI.
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
 
 reply = genai_client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 When the call runs inside a [session](/sdk/observability#trace-chat-or-sms), the span joins that call.
 

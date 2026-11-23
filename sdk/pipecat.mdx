@@ -10,13 +10,23 @@ Use the Pipecat integration to capture transcripts, audio, and spans. Bluejay bu
 
 Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview), then install the Pipecat extra.
 
-```bash
+<CodeGroup>
+
+```bash Python
 pip install "bluejay-sdk[pipecat]>=0.4.0"
 ```
 
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
+
 Create the client once at startup. In your existing pipeline, leave the user and assistant context aggregators in place. The tap uses their finalized turn events to write the transcript.
 
-```python
+<CodeGroup>
+
+```python Python
 from bluejay import BluejayClient
 from pipecat.pipeline.pipeline import Pipeline
 from pipecat.pipeline.worker import PipelineWorker
@@ -35,6 +45,12 @@ worker = PipelineWorker(
     conversation_id=tap.session_id,
 )
 ```
+
+```typescript TypeScript
+// The TypeScript SDK is coming.
+```
+
+</CodeGroup>
 
 Use the external ID configured on your Bluejay agent. You can also pass `agent_id` with its Bluejay ID. The tap goes immediately after `transport.output()`. The worker flag makes Pipecat emit its native spans. Pass `record_audio=False` to the tap if you want spans and transcript without uploading audio.
 
