@@ -1721,18 +1721,6 @@ html.dark [data-bj-method="DELETE"] {
   line-height: 0 !important;
 }
 
-/* An endpoint title (its sidebar link has a pill) waits for the script, so it does not swap from plain text; it shows after 2s if the script never runs. */
-body:has(#sidebar a[aria-current="page"] .method-nav-pill) #page-title:not([data-bj-method]) {
-  visibility: hidden;
-  animation: bj-method-title-fallback 0s 2s forwards;
-}
-
-@keyframes bj-method-title-fallback {
-  to {
-    visibility: visible;
-  }
-}
-
 #page-title[data-bj-method]::before {
   content: attr(data-bj-method);
   content: attr(data-bj-method) / "";
