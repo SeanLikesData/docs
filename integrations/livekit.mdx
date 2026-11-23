@@ -224,6 +224,8 @@ Call `force_flush()` before the POST, or the trace can be missing.
 </Tab>
 <Tab title="Monitor">
 
+To score your live calls from the worker, use the [SDK](/sdk/livekit). The code and webhook below are the paths that do not install it. Use the code path if you need tool calls and you are not using the SDK.
+
 ## Code
 
 Send each finished call to [`/v1/evaluate`](/api-reference/endpoint/evaluate) with its trace, so Bluejay sees the system prompt and tool calls.
@@ -337,6 +339,7 @@ Set `agent_name` in `WorkerOptions`. Bluejay creates an agent for each new [disp
 
 ## Related
 
+- [SDK](/sdk/livekit)
 - [Agents API](/api-reference/endpoint/add-agent)
 - [Agents MCP tools](/mcp/testing-tools#agents)
 - [Logs](/monitor/logs)

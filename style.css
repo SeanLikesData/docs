@@ -668,6 +668,10 @@ html.dark .callout[data-callout-type="danger"] {
   }
 }
 
+html.dark #sidebar img[src*="/logo/anthropic.svg"] {
+  content: url("/logo/anthropic-dark.svg");
+}
+
 /* Sidebar: a nested group's header is blue whenever any page inside it is active */
 
 li[data-group-tag][data-active="true"] > button {

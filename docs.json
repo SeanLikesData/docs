@@ -26,6 +26,26 @@
   },
   "redirects": [
     {
+      "source": "/sdk/one-prompt",
+      "destination": "/sdk/overview"
+    },
+    {
+      "source": "/sdk/what-shows-up",
+      "destination": "/sdk/overview"
+    },
+    {
+      "source": "/sdk/text",
+      "destination": "/sdk/overview"
+    },
+    {
+      "source": "/sdk/manual",
+      "destination": "/sdk/overview"
+    },
+    {
+      "source": "/sdk/python",
+      "destination": "/sdk/overview"
+    },
+    {
       "source": "/test/custom-metrics/overview",
       "destination": "/test/metrics"
     },
@@ -971,6 +991,37 @@
             "pages": [
               "administration/sso-and-provisioning",
               "administration/workspaces"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "SDK",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "sdk/overview"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "sdk/observability",
+              "sdk/simulations"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              "sdk/livekit",
+              "sdk/pipecat",
+              "sdk/openai",
+              "sdk/anthropic",
+              "sdk/gemini",
+              "sdk/bedrock"
             ]
           }
         ]
