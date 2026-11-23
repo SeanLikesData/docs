@@ -5,7 +5,7 @@ description: "Install the SDK, configure your API key, and make your first reque
 icon: code
 ---
 
-Use the Bluejay SDK to observe production conversations, run simulations, and call the Bluejay API. The SDK is available for Python. TypeScript support is coming.
+Use the Bluejay SDK to observe production conversations, run simulations, and call the Bluejay API. The SDK supports Python and Node.js. The Node.js preview package works with JavaScript and TypeScript.
 
 <CardGroup cols={2}>
   <Card title="Observe your agent" icon="waveform" href="/sdk/observability">
@@ -18,7 +18,7 @@ Use the Bluejay SDK to observe production conversations, run simulations, and ca
 
 ## Install and authenticate
 
-The Python examples require `bluejay-sdk` 0.4.0 or later and Python 3.10 or later. The Pipecat extra requires Python 3.11 or later.
+The Python examples require `bluejay-sdk` 0.4.0 or later and Python 3.10 or later. The Pipecat extra requires Python 3.11 or later. The Node.js preview requires Node.js 22 or later.
 
 <CodeGroup>
 
@@ -26,8 +26,9 @@ The Python examples require `bluejay-sdk` 0.4.0 or later and Python 3.10 or late
 pip install "bluejay-sdk>=0.4.0"
 ```
 
-```typescript TypeScript
-// The TypeScript SDK is coming.
+```bash TypeScript
+# Install a preview tarball on Node.js 22 or later.
+npm install /path/to/getbluejay-sdk-0.4.0.tgz
 ```
 
 </CodeGroup>
@@ -51,15 +52,22 @@ for agent in client.agents.list():
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+import { BluejayClient } from "@getbluejay/sdk";
+
+const client = new BluejayClient();
+for (const agent of await client.agents.list()) {
+  console.log(agent.id);
+}
 ```
 
 </CodeGroup>
 
-Use `BluejayClient()` to call the API. Use `BluejayClient(tracing=True)` once at startup in a process that sends agent telemetry. Both clients read the same API key. Add the [observability integration](/sdk/observability) for your agent to capture conversations.
+The default client calls the API. To capture conversations and traces, enable tracing once at startup and follow the [observability guide](/sdk/observability).
 
-In asyncio applications, use `AsyncBluejayClient` and await HTTP methods such as `client.agents.list()` and `client.simulations.run(...)`. Methods that write spans, such as `client.turn()`, are synchronous.
+Node.js API methods return promises. In Python asyncio applications, use `AsyncBluejayClient` and await HTTP methods such as `client.agents.list()`. Writing `client.turn()` is synchronous in both SDKs.
 
 ## API reference
 
 The SDK groups API methods by resource. For example, use `client.agents.list()` for agents, `client.simulations.run(...)` to queue a test, and `client.simulation_results.list(...)` to read a run. The [API reference](/api-reference/endpoint/get-all-agents) describes request fields and response models.
+
+<Note>The Node.js SDK is available as a preview tarball. Install that build to try the TypeScript examples before npm release.</Note>

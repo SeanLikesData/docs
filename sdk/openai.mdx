@@ -19,7 +19,17 @@ reply = openai_client.chat.completions.create(model="gpt-4o-mini", messages=mess
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+import { BluejayClient } from "@getbluejay/sdk";
+
+const client = new BluejayClient({ tracing: true });
+const { OpenAI } = await import("openai");
+const openai = new OpenAI();
+
+const reply = await openai.chat.completions.create({
+  model: "gpt-4o-mini",
+  messages: [{ role: "user", content: "Hello" }],
+});
+await client.flush();
 ```
 
 </CodeGroup>
@@ -30,3 +40,5 @@ When the call runs inside a [session](/sdk/observability#trace-chat-or-sms), the
 
 - [SDK](/sdk/overview)
 - [Traces](/monitor/traces)
+
+Node.js supports OpenAI versions 4.19 through 6.x. Initialize Bluejay before loading OpenAI. For ES modules, run Node with `--experimental-loader=@opentelemetry/instrumentation/hook.mjs` and dynamically import OpenAI after initialization.

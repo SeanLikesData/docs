@@ -8,7 +8,7 @@ Use the LiveKit integration to capture transcript turns, audio, and native LiveK
 
 ## Set up the SDK
 
-Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview), then install the LiveKit extra.
+Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview). Install the LiveKit extra for Python or LiveKit Agents 1.10.1 or later for Node.js.
 
 <CodeGroup>
 
@@ -16,8 +16,9 @@ Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview), then install 
 pip install "bluejay-sdk[livekit]>=0.4.0"
 ```
 
-```typescript TypeScript
-// The TypeScript SDK is coming.
+```bash TypeScript
+# Install the SDK preview tarball first.
+npm install @livekit/agents
 ```
 
 </CodeGroup>
@@ -37,7 +38,17 @@ await session.start(room=ctx.room, agent=SupportAgent())
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+import { BluejayClient } from "@getbluejay/sdk";
+import { instrumentLiveKit } from "@getbluejay/sdk/livekit";
+
+const client = new BluejayClient({ tracing: true });
+
+// In the LiveKit job, start your existing AgentSession through the integration.
+await instrumentLiveKit(client, ctx, session, { externalAgentId: "support-voice" }, {
+  room: ctx.room,
+  agent,
+  record: { audio: true },
+});
 ```
 
 </CodeGroup>
@@ -51,3 +62,5 @@ Place a call and hang up. Open the conversation in [Logs](/monitor/logs) to insp
 ## Attach traces to a simulation
 
 For Bluejay test calls, the SDK reads the `X-Simulation-Result-Id` participant attribute. If your transport supplies the ID as job metadata or a header, read it there and pass `simulation_result_id` to `instrument_livekit()`. See [Connect LiveKit](/integrations/livekit) for how each transport delivers it, and [Run simulations](/sdk/simulations) to queue a test from Python.
+
+Node.js uses LiveKit’s finalized recording and FFmpeg to upload audio at hang-up. Keep FFmpeg on the worker’s PATH and set LiveKit’s recording options to the categories you want to capture. Set `recordAudio: false` to skip the Bluejay audio upload.

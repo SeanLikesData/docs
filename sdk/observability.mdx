@@ -16,7 +16,9 @@ client = BluejayClient(tracing=True)
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+import { BluejayClient } from "@getbluejay/sdk";
+
+const client = new BluejayClient({ tracing: true });
 ```
 
 </CodeGroup>
@@ -30,7 +32,7 @@ client = BluejayClient(tracing=True)
 
 ## Trace chat or SMS
 
-Use `@client.session(...)` on your message handler. The first argument selects a stable conversation ID from the handler's arguments. Use the same ID for every message in the conversation.
+Use `@client.session(...)` in Python or a `client.session(...)` callback in Node.js. Choose a stable conversation ID from the handler's arguments. Use the same ID for every message in the conversation.
 
 <CodeGroup>
 
@@ -44,7 +46,14 @@ def answer_message(chat_id, message):
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+async function answerMessage(chatId: string, message: string) {
+  return client.session({ sessionId: chatId, externalAgentId: "support-chat" }, async () => {
+    client.turn("USER", message);
+    const reply = await generateReply(message);
+    client.turn("AGENT", reply);
+    return reply;
+  });
+}
 ```
 
 </CodeGroup>
@@ -63,12 +72,19 @@ async def respond_to_sms(thread_id, sender, message):
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+async function respondToSms(threadId: string, sender: string, message: string) {
+  return client.session({ sessionId: threadId, externalAgentId: "support-sms" }, async () => {
+    client.turn("USER", message);
+    const reply = await generateSmsReply(message);
+    await sendSms(sender, reply);
+    client.turn("AGENT", reply);
+  });
+}
 ```
 
 </CodeGroup>
 
-Use the external ID configured on your Bluejay agent. You can also pass `agent_id` with its Bluejay ID. If your app knows when a conversation ends, call `client.end_session(conversation_id, external_agent_id="support-chat")` then. Bluejay also builds idle sessions automatically.
+Use the external ID configured on your Bluejay agent. To build the conversation when your app knows it has ended, call `client.end_session()` in Python or `await client.endSession()` in Node.js. Pass the conversation ID and the same agent ID. Bluejay also builds idle sessions automatically.
 
 ## Trace custom voice
 
@@ -90,7 +106,14 @@ conversation.end()
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+const conversation = client.createSession({ sessionId: callId, externalAgentId: "support-voice" });
+conversation.turn("USER", callerText, { startTime: heardAt, endTime: heardUntil });
+conversation.turn("AGENT", playedText, {
+  startTime: playedAt,
+  endTime: playedUntil,
+  interrupted: callerBargedIn,
+});
+await conversation.end();
 ```
 
 </CodeGroup>
@@ -99,9 +122,9 @@ For callbacks, reopen the same session ID as each callback runs. A custom stack 
 
 ## Add model and tool details
 
-`turn()` writes a transcript line. Supported provider calls are traced automatically inside the active session. See [OpenAI](/sdk/openai), [Anthropic](/sdk/anthropic), [Gemini](/sdk/gemini), or [Bedrock](/sdk/bedrock).
+`turn()` writes a transcript line. Supported provider calls are traced automatically inside the active session. Node.js has built-in OpenAI tracing. For other providers, use existing OpenTelemetry instrumentation or a manual model span. See [OpenAI](/sdk/openai), [Anthropic](/sdk/anthropic), [Gemini](/sdk/gemini), or [Bedrock](/sdk/bedrock).
 
-Use `@client.observe()` when a custom function should appear as a step in the trace. The decorator records its arguments, result, and errors.
+Wrap a custom function with `observe()` to record its arguments, result, and errors. Use a decorator in Python or wrap the function in Node.js.
 
 <CodeGroup>
 
@@ -112,7 +135,11 @@ def lookup_order(order_id):
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+const lookupOrder = client.observe(
+  "lookup order",
+  async (orderId: string) => orders.get(orderId),
+  { kind: "tool" },
+);
 ```
 
 </CodeGroup>
@@ -128,14 +155,19 @@ with client.span("generate reply", kind="llm", model=model_name, input=messages)
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+const result = await client.span("generate reply", async (span) => {
+  const reply = await modelClient.generate(messages);
+  span.setAttribute("gen_ai.usage.input_tokens", reply.inputTokens);
+  span.setAttribute("gen_ai.usage.output_tokens", reply.outputTokens);
+  return reply.text;
+}, { kind: "llm", model: modelName, input: messages });
 ```
 
 </CodeGroup>
 
 ## Configure data capture
 
-For advanced configuration, create the client and call `init_tracing()` once at startup:
+Configure trace redaction when initializing the client at startup:
 
 <CodeGroup>
 
@@ -145,13 +177,13 @@ client.init_tracing(redact_pii=True)
 ```
 
 ```typescript TypeScript
-// The TypeScript SDK is coming.
+const client = new BluejayClient({ tracing: { redactPii: true } });
 ```
 
 </CodeGroup>
 
-`redact_pii=True` strips supported content attributes such as transcript lines, prompts, and tool payloads from spans sent to Bluejay. For custom span attributes, provide a `mask` function. To disable audio upload, set `record_audio=False` on the LiveKit or Pipecat integration.
+`redact_pii=True` in Python and `redactPii: true` in Node.js strip supported content attributes such as transcript lines, prompts, and tool payloads from spans sent to Bluejay. For custom span attributes, provide a `mask` function. The voice integrations have separate audio upload settings.
 
 ## Verify the integration
 
-Send a message or place a call, then open the conversation in [Logs](/monitor/logs) and inspect its [trace](/monitor/traces). For text, call `end_session()` to request the build immediately. For a short-lived trace-only script, call `client.flush()` before exit.
+Send a message or place a call, then open the conversation in [Logs](/monitor/logs) and inspect its [trace](/monitor/traces). For a short-lived trace-only script, flush spans before exit with `client.flush()` in Python or `await client.flush()` in Node.js.
