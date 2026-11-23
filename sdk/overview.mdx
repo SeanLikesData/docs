@@ -5,7 +5,7 @@ description: "Install the SDK, configure your API key, and make your first reque
 icon: code
 ---
 
-Use the Bluejay SDK to observe production conversations, run simulations, and call the Bluejay API. The SDK supports Python and Node.js. The Node.js preview package works with JavaScript and TypeScript.
+Use the Bluejay SDK to observe production conversations, run simulations, and call the Bluejay API. The SDK supports Python and Node.js. The Node.js preview package works with JavaScript and TypeScript. The TypeScript tabs use examples you can also copy into JavaScript.
 
 <CardGroup cols={2}>
   <Card title="Observe your agent" icon="waveform" href="/sdk/observability">
@@ -22,11 +22,11 @@ The Python examples require `bluejay-sdk` 0.4.0 or later and Python 3.10 or late
 
 <CodeGroup>
 
-```bash Python
+```bash Python icon="/logo/python.svg"
 pip install "bluejay-sdk>=0.4.0"
 ```
 
-```bash TypeScript
+```bash TypeScript icon="/logo/typescript.svg"
 # Install a preview tarball on Node.js 22 or later.
 npm install /path/to/getbluejay-sdk-0.4.0.tgz
 ```
@@ -43,7 +43,7 @@ export BLUEJAY_API_KEY="your-api-key"
 
 <CodeGroup>
 
-```python Python
+```python Python icon="/logo/python.svg"
 from bluejay import BluejayClient
 
 client = BluejayClient()
@@ -51,7 +51,7 @@ for agent in client.agents.list():
     print(agent.id)
 ```
 
-```typescript TypeScript
+```typescript TypeScript icon="/logo/typescript.svg"
 import { BluejayClient } from "@getbluejay/sdk";
 
 const client = new BluejayClient();

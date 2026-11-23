@@ -2,14 +2,14 @@
 title: "Anthropic"
 sidebarTitle: "Anthropic"
 description: "Trace Anthropic SDK calls."
-icon: message
+icon: "/logo/anthropic.svg"
 ---
 
 `BluejayClient(tracing=True)` traces the Anthropic SDK. No extra package. Messages `create` and `stream` are covered.
 
 <CodeGroup>
 
-```python Python
+```python Python icon="/logo/python.svg"
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
@@ -17,7 +17,7 @@ client = BluejayClient(tracing=True)
 reply = anthropic_client.messages.create(model="claude-sonnet-4-5", max_tokens=1024, messages=messages)
 ```
 
-```typescript TypeScript
+```typescript TypeScript icon="/logo/typescript.svg"
 // In Node.js, use an OpenTelemetry instrumentor or a manual model span.
 ```
 

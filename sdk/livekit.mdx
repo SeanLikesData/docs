@@ -12,11 +12,11 @@ Set `BLUEJAY_API_KEY` as shown in the [quickstart](/sdk/overview). Install the L
 
 <CodeGroup>
 
-```bash Python
+```bash Python icon="/logo/python.svg"
 pip install "bluejay-sdk[livekit]>=0.4.0"
 ```
 
-```bash TypeScript
+```bash TypeScript icon="/logo/typescript.svg"
 # Install the SDK preview tarball first.
 npm install @livekit/agents
 ```
@@ -27,7 +27,7 @@ Create the client once at startup. In your existing LiveKit job, attach Bluejay 
 
 <CodeGroup>
 
-```python Python
+```python Python icon="/logo/python.svg"
 from bluejay import BluejayClient
 
 client = BluejayClient(tracing=True)
@@ -37,7 +37,7 @@ client.instrument_livekit(ctx, session, external_agent_id="support-voice")
 await session.start(room=ctx.room, agent=SupportAgent())
 ```
 
-```typescript TypeScript
+```typescript TypeScript icon="/logo/typescript.svg"
 import { BluejayClient } from "@getbluejay/sdk";
 import { instrumentLiveKit } from "@getbluejay/sdk/livekit";
 

@@ -13,7 +13,7 @@ Run an existing simulation from Python or Node.js and use its run ID to read the
 
 <CodeGroup>
 
-```python Python
+```python Python icon="/logo/python.svg"
 from bluejay import BluejayClient
 
 client = BluejayClient()
@@ -22,7 +22,7 @@ print(run.simulation_run_id)
 print(run.run_url)
 ```
 
-```typescript TypeScript
+```typescript TypeScript icon="/logo/typescript.svg"
 import { BluejayClient } from "@getbluejay/sdk";
 
 const client = new BluejayClient();
@@ -40,13 +40,13 @@ Fetch the results using the run ID. The run can still be `RUNNING`. For automati
 
 <CodeGroup>
 
-```python Python
+```python Python icon="/logo/python.svg"
 results = client.simulation_results.list(run.simulation_run_id, limit=20)
 print(results.simulation_run.status)
 print(results.simulation_run.success_rate)
 ```
 
-```typescript TypeScript
+```typescript TypeScript icon="/logo/typescript.svg"
 const results = await client.simulationResults.list({
   simulation_run_id: run.simulation_run_id,
   limit: 20,
