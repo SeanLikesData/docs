@@ -996,17 +996,17 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/create-simulation",
-                  "api-reference/endpoint/add-digital-humans-to-simulation",
-                  "api-reference/endpoint/remove-digital-humans-from-simulation",
-                  "api-reference/endpoint/update-simulation",
-                  "api-reference/endpoint/get-simulation-v2",
                   "api-reference/endpoint/get-simulations-v2",
+                  "api-reference/endpoint/get-simulation-v2",
+                  "api-reference/endpoint/update-simulation",
+                  "api-reference/endpoint/remove-digital-humans-from-simulation",
                   "api-reference/endpoint/delete-simulation",
+                  "api-reference/endpoint/add-digital-humans-to-simulation",
                   "api-reference/endpoint/queue-http-text-simulation-run",
                   "api-reference/endpoint/send-http-text-message",
-                  "api-reference/endpoint/get-simulation",
                   "api-reference/endpoint/get-all-simulations",
-                  "api-reference/endpoint/get-simulations-by-agent"
+                  "api-reference/endpoint/get-simulations-by-agent",
+                  "api-reference/endpoint/get-simulation"
                 ]
               },
               {
@@ -1014,13 +1014,13 @@
                 "icon": "play",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/queue-simulation-run-v2",
                   "api-reference/endpoint/get-simulation-runs",
-                  "api-reference/endpoint/update-simulation-result",
                   "api-reference/endpoint/retrieve-simulation-results-v2",
                   "api-reference/endpoint/retrieve-simulation-results",
                   "api-reference/endpoint/retrieve-simulation-result-v2",
                   "api-reference/endpoint/retrieve-simulation-result",
+                  "api-reference/endpoint/queue-simulation-run-v2",
+                  "api-reference/endpoint/update-simulation-result",
                   "api-reference/endpoint/end-conversations",
                   "api-reference/endpoint/queue-simulation-run",
                   "api-reference/endpoint/queue-sms-simulation-run"
@@ -1032,18 +1032,18 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/create-digital-humans-v2",
-                  "api-reference/endpoint/generate-digital-humans",
-                  "api-reference/endpoint/update-digital-human",
-                  "api-reference/endpoint/get-digital-human-v2",
                   "api-reference/endpoint/get-digital-humans-v2",
+                  "api-reference/endpoint/get-digital-human-v2",
+                  "api-reference/endpoint/update-digital-human",
                   "api-reference/endpoint/delete-digital-human",
+                  "api-reference/endpoint/generate-digital-humans",
                   "api-reference/endpoint/generate-objectives",
                   "api-reference/endpoint/generate-intent-summary",
                   "api-reference/endpoint/create-digital-human",
                   "api-reference/endpoint/create-digital-humans",
-                  "api-reference/endpoint/get-digital-human",
                   "api-reference/endpoint/get-all-digital-humans",
-                  "api-reference/endpoint/get-digital-humans-by-simulation"
+                  "api-reference/endpoint/get-digital-humans-by-simulation",
+                  "api-reference/endpoint/get-digital-human"
                 ]
               },
               {
@@ -1051,8 +1051,8 @@
                 "icon": "masks-theater",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/list-personas",
                   "api-reference/endpoint/create-persona",
+                  "api-reference/endpoint/list-personas",
                   "api-reference/endpoint/get-persona",
                   "api-reference/endpoint/update-persona",
                   "api-reference/endpoint/delete-persona"
@@ -1064,10 +1064,10 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/create-community",
+                  "api-reference/endpoint/get-communities",
+                  "api-reference/endpoint/get-community",
                   "api-reference/endpoint/update-community",
                   "api-reference/endpoint/add-to-community",
-                  "api-reference/endpoint/get-community",
-                  "api-reference/endpoint/get-communities",
                   "api-reference/endpoint/delete-community"
                 ]
               },
@@ -1076,11 +1076,11 @@
                 "icon": "volume-high",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/list-custom-background-noises",
-                  "api-reference/endpoint/create-custom-background-noise-upload-url",
                   "api-reference/endpoint/create-custom-background-noise",
+                  "api-reference/endpoint/list-custom-background-noises",
                   "api-reference/endpoint/update-custom-background-noise",
-                  "api-reference/endpoint/delete-custom-background-noise"
+                  "api-reference/endpoint/delete-custom-background-noise",
+                  "api-reference/endpoint/create-custom-background-noise-upload-url"
                 ]
               },
               {
@@ -1115,8 +1115,8 @@
                   "api-reference/endpoint/start-red-team-simulation",
                   "api-reference/endpoint/list-red-team-simulations",
                   "api-reference/endpoint/get-red-team-simulation",
-                  "api-reference/endpoint/stop-red-team-simulation",
-                  "api-reference/endpoint/get-red-team-entitlements"
+                  "api-reference/endpoint/get-red-team-entitlements",
+                  "api-reference/endpoint/stop-red-team-simulation"
                 ]
               },
               {
@@ -1125,10 +1125,10 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/create-metrics-v2",
+                  "api-reference/endpoint/get-custom-metrics",
+                  "api-reference/endpoint/get-custom-metric",
                   "api-reference/endpoint/update-custom-metric",
                   "api-reference/endpoint/update-custom-metrics",
-                  "api-reference/endpoint/get-custom-metric",
-                  "api-reference/endpoint/get-custom-metrics",
                   "api-reference/endpoint/delete-metrics-v2",
                   "api-reference/endpoint/create-custom-metric",
                   "api-reference/endpoint/create-custom-metrics",
@@ -1147,12 +1147,12 @@
                 "icon": "list",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/evaluate",
-                  "api-reference/endpoint/re-evaluate",
                   "api-reference/endpoint/list-conversations",
                   "api-reference/endpoint/get-conversation",
                   "api-reference/endpoint/retrieve-call-log",
                   "api-reference/endpoint/delete-call-log",
+                  "api-reference/endpoint/evaluate",
+                  "api-reference/endpoint/re-evaluate",
                   "api-reference/endpoint/translate-transcript",
                   "api-reference/endpoint/retrieve-call-logs"
                 ]
@@ -1162,16 +1162,16 @@
                 "icon": "wave-pulse",
                 "expanded": true,
                 "pages": [
+                  "api-reference/endpoint/create-uptime-monitor",
                   "api-reference/endpoint/list-uptime-monitors",
                   "api-reference/endpoint/get-uptime-monitor",
-                  "api-reference/endpoint/create-uptime-monitor",
+                  "api-reference/endpoint/get-uptime-monitor-series",
+                  "api-reference/endpoint/get-uptime-check-transcript",
                   "api-reference/endpoint/update-uptime-monitor",
                   "api-reference/endpoint/delete-uptime-monitor",
-                  "api-reference/endpoint/get-uptime-monitor-series",
                   "api-reference/endpoint/resolve-uptime-incidents",
                   "api-reference/endpoint/resolve-uptime-check",
-                  "api-reference/endpoint/unresolve-uptime-check",
-                  "api-reference/endpoint/get-uptime-check-transcript"
+                  "api-reference/endpoint/unresolve-uptime-check"
                 ]
               },
               {
@@ -1190,9 +1190,9 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/create-alert",
-                  "api-reference/endpoint/update-alert",
                   "api-reference/endpoint/get-alerts",
                   "api-reference/endpoint/get-alert-results",
+                  "api-reference/endpoint/update-alert",
                   "api-reference/endpoint/delete-alert"
                 ]
               },
@@ -1201,19 +1201,19 @@
                 "icon": "table-columns",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/list-dashboards",
                   "api-reference/endpoint/create-dashboard",
+                  "api-reference/endpoint/create-widget",
+                  "api-reference/endpoint/list-dashboards",
+                  "api-reference/endpoint/list-widgets",
                   "api-reference/endpoint/get-dashboard",
+                  "api-reference/endpoint/get-widget",
                   "api-reference/endpoint/update-dashboard",
                   "api-reference/endpoint/update-dashboard-layout",
-                  "api-reference/endpoint/duplicate-dashboard",
-                  "api-reference/endpoint/delete-dashboard",
-                  "api-reference/endpoint/list-widgets",
-                  "api-reference/endpoint/create-widget",
-                  "api-reference/endpoint/get-widget",
                   "api-reference/endpoint/update-widget",
-                  "api-reference/endpoint/duplicate-widget",
-                  "api-reference/endpoint/delete-widget"
+                  "api-reference/endpoint/delete-dashboard",
+                  "api-reference/endpoint/delete-widget",
+                  "api-reference/endpoint/duplicate-dashboard",
+                  "api-reference/endpoint/duplicate-widget"
                 ]
               },
               {
@@ -1256,18 +1256,18 @@
                 "icon": "flask",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/list-labs",
                   "api-reference/endpoint/create-lab",
+                  "api-reference/endpoint/create-metric-revision",
+                  "api-reference/endpoint/list-labs",
                   "api-reference/endpoint/get-lab",
                   "api-reference/endpoint/update-lab",
                   "api-reference/endpoint/update-lab-settings",
+                  "api-reference/endpoint/set-human-evaluation",
                   "api-reference/endpoint/delete-lab",
+                  "api-reference/endpoint/remove-conversations-from-lab",
                   "api-reference/endpoint/add-metrics-to-lab",
                   "api-reference/endpoint/add-conversations-to-lab",
-                  "api-reference/endpoint/remove-conversations-from-lab",
-                  "api-reference/endpoint/evaluate-lab-conversation",
-                  "api-reference/endpoint/set-human-evaluation",
-                  "api-reference/endpoint/create-metric-revision"
+                  "api-reference/endpoint/evaluate-lab-conversation"
                 ]
               }
             ]
@@ -1281,32 +1281,32 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/add-agent",
-                  "api-reference/endpoint/update-agent",
-                  "api-reference/endpoint/update-agent-by-external-id",
-                  "api-reference/endpoint/move-agent-to-folder",
+                  "api-reference/endpoint/get-agents-by-folder",
+                  "api-reference/endpoint/get-all-agents",
                   "api-reference/endpoint/get-agent",
                   "api-reference/endpoint/get-agent-by-external-id",
                   "api-reference/endpoint/get-workflow-summary",
-                  "api-reference/endpoint/sync-agent-workflow",
-                  "api-reference/endpoint/get-agents-by-folder",
-                  "api-reference/endpoint/get-all-agents",
+                  "api-reference/endpoint/update-agent",
+                  "api-reference/endpoint/update-agent-by-external-id",
+                  "api-reference/endpoint/move-agent-to-folder",
                   "api-reference/endpoint/delete-agent",
+                  "api-reference/endpoint/sync-agent-workflow",
                   {
                     "group": "Agent Versions",
                     "icon": "file-pen",
                     "expanded": true,
                     "pages": [
                       "api-reference/endpoint/create-prompt-version",
-                      "api-reference/endpoint/promote-prompt",
                       "api-reference/endpoint/list-prompt-versions",
+                      "api-reference/endpoint/list-prompt-version-labels",
                       "api-reference/endpoint/get-prompt-version",
                       "api-reference/endpoint/get-prompt-by-id",
                       "api-reference/endpoint/delete-prompt-version",
                       "api-reference/endpoint/delete-prompt-version-by-label",
                       "api-reference/endpoint/delete-prompt-by-id",
-                      "api-reference/endpoint/list-prompt-version-labels",
-                      "api-reference/endpoint/add-prompt-version-labels",
                       "api-reference/endpoint/remove-prompt-version-labels",
+                      "api-reference/endpoint/promote-prompt",
+                      "api-reference/endpoint/add-prompt-version-labels",
                       "api-reference/endpoint/get-prompt-by-label"
                     ]
                   },
@@ -1320,8 +1320,8 @@
                       "api-reference/endpoint/get-knowledge-base",
                       "api-reference/endpoint/update-knowledge-base",
                       "api-reference/endpoint/delete-knowledge-base",
-                      "api-reference/endpoint/attach-agent-to-knowledge-base",
-                      "api-reference/endpoint/detach-agent-from-knowledge-base"
+                      "api-reference/endpoint/detach-agent-from-knowledge-base",
+                      "api-reference/endpoint/attach-agent-to-knowledge-base"
                     ]
                   }
                 ]
@@ -1332,16 +1332,16 @@
                 "expanded": true,
                 "pages": [
                   "api-reference/endpoint/create-label",
-                  "api-reference/endpoint/list-labels",
-                  "api-reference/endpoint/get-label-by-id",
-                  "api-reference/endpoint/update-label",
-                  "api-reference/endpoint/delete-label",
                   "api-reference/endpoint/create-folder",
-                  "api-reference/endpoint/update-folder",
-                  "api-reference/endpoint/get-folder",
+                  "api-reference/endpoint/list-labels",
                   "api-reference/endpoint/get-all-folders",
-                  "api-reference/endpoint/delete-folder",
-                  "api-reference/endpoint/phone-numbers"
+                  "api-reference/endpoint/phone-numbers",
+                  "api-reference/endpoint/get-label-by-id",
+                  "api-reference/endpoint/get-folder",
+                  "api-reference/endpoint/update-label",
+                  "api-reference/endpoint/update-folder",
+                  "api-reference/endpoint/delete-label",
+                  "api-reference/endpoint/delete-folder"
                 ]
               },
               {
@@ -1359,8 +1359,8 @@
                 "icon": "id-badge",
                 "expanded": true,
                 "pages": [
-                  "api-reference/endpoint/list-scim-users",
                   "api-reference/endpoint/create-scim-user",
+                  "api-reference/endpoint/list-scim-users",
                   "api-reference/endpoint/get-scim-user",
                   "api-reference/endpoint/replace-scim-user",
                   "api-reference/endpoint/update-scim-user",

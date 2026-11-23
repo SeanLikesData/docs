@@ -644,7 +644,54 @@ def add_new_pages(spec):
     return added
 
 
+def action_rank(method, title):
+    """Order inside a sidebar section: create, list, get, update, delete, then other actions."""
+    t = title.lower()
+    if t.startswith(("delete", "remove")) or method == "DELETE":
+        return 4
+    if t.startswith(("create", "provision", "schedule", "start", "import")) or t == "add an agent":
+        return 0
+    if method == "GET":
+        return 1 if t.startswith("list") else 2
+    if method in ("PUT", "PATCH") or t.startswith(("update", "move")):
+        return 3
+    return 5
+
+
+def sort_nav():
+    """Sort each sidebar section so every section reads the same way. Deprecated pages go last."""
+    path = os.path.join(DOCS_DIR, "docs.json")
+    nav = json.load(open(path))
+    meta = {}
+    for page in glob.glob(os.path.join(DOCS_DIR, ENDPOINT_DIR, "*.mdx")):
+        text = open(page).read()
+        api = re.search(r'^api: "(\w+) ', text, re.M)
+        title = re.search(r'^title: "(.*)"$', text, re.M)
+        meta[f"{ENDPOINT_DIR}/{os.path.basename(page)[:-4]}"] = (
+            api.group(1) if api else "", title.group(1) if title else "", "deprecated: true" in text)
+
+    def walk(node):
+        if isinstance(node, dict):
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            slots = [i for i, x in enumerate(node) if isinstance(x, str) and x in meta]
+            if len(slots) > 1:
+                ordered = sorted((node[i] for i in slots), key=lambda x: (meta[x][2], action_rank(meta[x][0], meta[x][1])))
+                for i, x in zip(slots, ordered):
+                    node[i] = x
+            for x in node:
+                walk(x)
+
+    walk(nav)
+    with open(path, "w") as f:
+        f.write(json.dumps(nav, indent=2, ensure_ascii=False) + "\n")
+
+
 def main():
+    if "--sort-nav" in sys.argv:
+        sort_nav()
+        return
     spec = load_spec(sys.argv[1] if len(sys.argv) > 1 else SPEC_URL)
     added = add_new_pages(spec)
     print(f"new pages: {len(added)}")
