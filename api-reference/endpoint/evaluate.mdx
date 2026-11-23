@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/evaluate"
+title: "Score a production conversation"
 description: "Score a production conversation."
-sidebarTitle: "/\u200bv1/\u200bevaluate"
+sidebarTitle: "Score a production conversation"
 api: "POST https://api.getbluejay.ai/v1/evaluate"
 playground: "none"
 ---
@@ -38,9 +38,9 @@ curl --request POST \
     "participants": [
       {
         "role": "AGENT",
-        "name": "<string>",
+        "name": "Refund request test",
         "spoke_first": false,
-        "phone_number": "<string>"
+        "phone_number": "+14155550123"
       }
     ],
     "call_direction": "INBOUND",
@@ -63,9 +63,9 @@ curl --request POST \
     ],
     "tool_calls": [
       {
-        "name": "<string>",
+        "name": "Refund request test",
         "start_offset_ms": 123,
-        "description": "<string>",
+        "description": "Checks that the agent handles a refund request.",
         "parameters": {},
         "output": null
       }
@@ -74,16 +74,16 @@ curl --request POST \
       {
         "title": "<string>",
         "start_offset_ms": 123,
-        "description": "<string>",
+        "description": "Checks that the agent handles a refund request.",
         "end_offset_ms": 123,
         "tags": [
-          "<string>"
+          "billing"
         ],
         "metadata": {}
       }
     ],
     "tags": [
-      "<string>"
+      "billing"
     ],
     "trace_id": "<string>",
     "trace_ids": [
@@ -114,7 +114,7 @@ curl --request POST \
 
 ```json 200
 {
-  "status": "<string>",
+  "status": "completed",
   "call_id": "<string>",
   "message": "<string>",
   "warning": "<string>"

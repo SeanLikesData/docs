@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/generate-intent-summary"
+title: "Summarize a Digital Human intent"
 description: "Summarize a Digital Human intent."
-sidebarTitle: "/\u200bv1/\u200bgenerate-intent-summary"
+sidebarTitle: "Summarize a Digital Human intent"
 api: "POST https://api.getbluejay.ai/v1/generate-intent-summary"
 playground: "none"
 ---
@@ -22,7 +22,7 @@ curl --request POST \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "test_case_id": 123
+    "test_case_id": 4821
   }'
 ```
 
@@ -33,7 +33,7 @@ curl --request POST \
 ```json 200
 {
   "intent_summary": "<string>",
-  "test_case_id": 123,
+  "test_case_id": 4821,
   "skipped": false
 }
 ```

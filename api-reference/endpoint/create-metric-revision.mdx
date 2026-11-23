@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/metrics-lab/lab/{lab_id}/metric-revisions"
+title: "Create a metric revision in a lab"
 description: "Create a metric revision in a lab."
-sidebarTitle: "/\u200bv1/\u200bmetrics-lab/\u200blab/\u200b{lab_id}/\u200bmetric-revisions"
+sidebarTitle: "Create a metric revision in a lab"
 api: "POST https://api.getbluejay.ai/v1/metrics-lab/lab/{lab_id}/metric-revisions"
 playground: "none"
 ---
@@ -21,7 +21,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "custom_metric_id": "<string>",
-    "description": "<string>",
+    "description": "Checks that the agent handles a refund request.",
     "scoring_guidance": "<string>",
     "eval_route": "<string>",
     "model": "<string>",
@@ -41,7 +41,7 @@ curl --request POST \
   "lab_id": "<string>",
   "custom_metric_id": "<string>",
   "revision_number": 123,
-  "description": "<string>",
+  "description": "Checks that the agent handles a refund request.",
   "scoring_guidance": "<string>",
   "eval_route": "<string>",
   "model": "<string>",

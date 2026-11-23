@@ -164,7 +164,41 @@ def plain(name):
         return "When it was " + " ".join(words[:-1]) + "."
     if len(words) > 1 and words[-1] == "by":
         return "Who " + " ".join(words[:-1]) + " it."
-    return ""
+    common = {
+        "name": "Display name.", "description": "Free-text note about this item.", "tags": "Labels you can filter by.",
+        "type": "The kind of item.", "status": "Current state.", "email": "Email address.", "url": "Web address.",
+        "pinned": "Whether it is pinned to the top of lists.", "enabled": "Whether it is turned on.",
+        "settings": "Configuration options.", "metadata": "Extra JSON you attach to the item.", "language": "Language code, such as `en`.",
+        "timezone": "Timezone name, such as `America/Los_Angeles`.", "limit": "Maximum number of items to return.",
+        "offset": "Number of items to skip.", "page": "Page number, starting at 1.", "page_size": "Items per page.",
+        "message": "Human-readable message.", "error": "What went wrong.", "success": "Whether the request worked.",
+        "transcript": "The conversation text, turn by turn.", "duration": "Length in seconds.", "count": "Number of items.",
+        "total": "Total number of matching items.", "version": "Version number.", "label": "Short display label.",
+        "phone_number": "Phone number in international format, such as `+14155550123`.", "start_time": "When it started.", "end_time": "When it ended.",
+    }
+    common.update({
+        "agent_description": "What the agent does. Used to guide test generation.", "goals": "What the agent is meant to achieve.",
+        "email_address": "Address the email agent receives mail at.", "email_reply_addresses": "Addresses the agent replies from.",
+        "follow_up_sms_sender_numbers": "Numbers the follow-up text is sent from.", "websocket_url": "WebSocket URL Bluejay connects to.",
+        "redact_pii": "Whether to hide personal data in transcripts.", "updated_by_api_key": "ID of the API key that last changed it.",
+        "keyterms": "Words the speech recognizer should expect, such as product names.", "voice_provider": "Voice provider the agent uses.",
+        "websocket_username": "Username for the WebSocket connection.", "websocket_password": "Password for the WebSocket connection.",
+        "sip_uri": "SIP address Bluejay calls.", "custom_sip_headers": "Extra SIP headers sent with the call.",
+        "sip_username": "Username for the SIP connection.", "sip_password": "Password for the SIP connection.",
+        "simulation_notifications": "Where to send simulation results.", "livekit_agent_name": "Name of the LiveKit agent to dispatch.",
+        "livekit_metadata": "Metadata sent to the LiveKit agent.", "livekit_customer_tool_topic": "LiveKit topic used for tool calls.",
+        "livekit_token_webhook_url": "URL Bluejay calls to get a LiveKit token.", "livekit_token_webhook_auth": "How Bluejay signs in to that URL.",
+        "pipecat_agent_name": "Name of the Pipecat agent.", "pipecat_agent_configuration": "Settings passed to the Pipecat agent.",
+        "pipecat_room_properties": "Room settings for the Pipecat call.", "http_webhook": "Webhook settings for HTTP text agents.",
+        "http_webhook_key": "Secret key sent with webhook requests.", "http_webhook_sync_reply": "Whether the agent answers in the webhook response.",
+        "dynamic_sip_webhook_url": "URL Bluejay calls at dial time to get the SIP address.", "mock_tools": "Fake tool results used during simulations.",
+        "outbound_trigger_webhook_url": "URL Bluejay calls to make the agent place an outbound call.",
+        "outbound_trigger_payload_template": "Body Bluejay sends to that URL.", "dfcx_location": "Google Dialogflow CX region.",
+        "amelia_base_url": "Base URL of your Amelia server.", "amelia_domain_code": "Amelia domain code.", "amelia_flow_name": "Amelia flow to test.",
+        "amelia_agent_name": "Amelia agent to test.", "bland_call_settings": "Extra settings sent to Bland for each call.",
+        "provider_request_data": "Variables for the agent, filled into `{{name}}` tokens.",
+    })
+    return common.get(name, "")
 
 
 def field_rows(spec, props, required, depth=0, seen=()):
@@ -216,6 +250,27 @@ def param_rows(spec, params, where):
     return rows
 
 
+SAMPLES = {
+    "name": "Refund request test", "agent_name": "Support line", "description": "Checks that the agent handles a refund request.",
+    "email": "alex@example.com", "phone_number": "+14155550123", "caller_number": "+14155550123", "url": "https://example.com/webhook",
+    "intent": "Ask for a refund on an order from last week.", "persona": "Impatient customer", "status": "completed",
+    "created_at": "2026-11-20T09:30:00Z", "updated_at": "2026-11-20T09:45:00Z", "start_time": "2026-11-20T09:30:00Z",
+    "end_time": "2026-11-20T09:34:12Z", "language": "en", "timezone": "America/Los_Angeles", "tags": ["billing"],
+    "system_prompt": "You are a friendly support agent for Acme.", "first_name": "Alex", "last_name": "Rivera",
+}
+SAMPLE_IDS = {"id": 4821, "agent_id": 1337, "simulation_id": 2045, "digital_human_id": 9912, "run_id": 7710, "folder_id": 58, "metric_id": 311}
+
+
+def sample(name, t):
+    if t == "string" and name in SAMPLES:
+        return SAMPLES[name]
+    if t == "array" and name in SAMPLES:
+        return SAMPLES[name]
+    if t == "integer" and (name in SAMPLE_IDS or name.endswith("_id")):
+        return SAMPLE_IDS.get(name, 4821)
+    return None
+
+
 def example(spec, schema, depth=0, seen=(), name=""):
     schema, _ = resolve(spec, schema, seen)
     if "example" in schema:
@@ -234,7 +289,8 @@ def example(spec, schema, depth=0, seen=(), name=""):
     if depth >= MAX_DEPTH:
         return {} if t == "object" else None
     if t == "array":
-        return [example(spec, v.get("items", {}), depth + 1, seen)]
+        got = sample(name, "array")
+        return got if got is not None else [example(spec, v.get("items", {}), depth + 1, seen, name)]
     if t == "object" or "properties" in v:
         out = {k: example(spec, s, depth + 1, seen, k) for k, s in v.get("properties", {}).items()}
         extra = v.get("additionalProperties")
@@ -253,9 +309,11 @@ def example(spec, schema, depth=0, seen=(), name=""):
             return "https://example.com"
         if fmt == "email":
             return "name@example.com"
-        return "<string>"
+        got = sample(name, "string")
+        return got if got is not None else "<string>"
     if t == "integer":
-        return 123
+        got = sample(name, "integer")
+        return got if got is not None else 123
     if t == "number":
         return 1.5
     if t == "boolean":
@@ -446,9 +504,11 @@ def process(spec, page):
         if not op:
             return f"{method} {path} not in spec"
         fm = re.sub(r"^openapi:.*\n?", "", fm, flags=re.M).rstrip("\n")
-        fm = set_key(fm, "title", f"{method} {path}")
-        # A zero-width space after each slash lets a long path wrap at a slash, not inside a word.
-        fm = set_key(fm, "sidebarTitle", path.replace("/", "/\\u200b"))
+        d = re.search(r'^description:\s*"(.*)"\s*$', fm, re.M)
+        title = (d.group(1).rstrip(".") if d else "") or (op.get("summary") or f"{method} {path}")
+        title = title[:1].upper() + title[1:]
+        fm = set_key(fm, "title", title)
+        fm = set_key(fm, "sidebarTitle", title)
         fm = set_key(fm, "api", f"{method} {BASE_URL}{path}")
         fm = set_key(fm, "playground", "none")
         fm = re.sub(r"^deprecated:.*\n?", "", fm, flags=re.M).rstrip("\n")
@@ -596,6 +656,19 @@ def main():
         err = process(spec, page)
         if err:
             problems.append(f"{os.path.relpath(page, DOCS_DIR)}: {err}")
+    # Two pages with one title (a /v1 and its /v2) get a version tag so the sidebar tells them apart.
+    seen = {}
+    for page in pages:
+        text = open(page).read()
+        t = re.search(r'^title: "(.*)"$', text, re.M)
+        v = re.search(r'^api: "\w+ \S*/(v\d)/', text, re.M)
+        if t and v:
+            seen.setdefault(t.group(1), []).append((page, text, v.group(1)))
+    for title, items in seen.items():
+        if len(items) > 1:
+            for page, text, ver in items:
+                text = re.sub(r'^(title|sidebarTitle): ".*"$', lambda m: f'{m.group(1)}: "{title} ({ver})"', text, count=2, flags=re.M)
+                open(page, "w").write(text)
     print(f"pages: {len(pages)}, skipped: {len(problems)}")
     for p in problems:
         print("  " + p)

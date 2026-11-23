@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/custom-metrics-by-agent/{agent_id}"
+title: "List the custom metrics of an agent"
 description: "List the custom metrics of an agent."
-sidebarTitle: "/\u200bv1/\u200bcustom-metrics-by-agent/\u200b{agent_id}"
+sidebarTitle: "List the custom metrics of an agent"
 api: "GET https://api.getbluejay.ai/v1/custom-metrics-by-agent/{agent_id}"
 playground: "none"
 deprecated: true
@@ -35,9 +35,9 @@ curl --request GET \
     {
       "id": "<string>",
       "bluejay_as_code_id": "<string>",
-      "name": "<string>",
+      "name": "Refund request test",
       "prompt": "<string>",
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "summary": "<string>",
       "metric_type": "llm_judge",
       "eval_method": "llm_judge",
@@ -52,7 +52,7 @@ curl --request GET \
       "max_value": 1.5,
       "category": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "scoring_guidance": "<string>",
       "created_at": "2026-01-01T00:00:00Z",
@@ -85,9 +85,9 @@ curl --request GET \
     {
       "id": "<string>",
       "bluejay_as_code_id": "<string>",
-      "name": "<string>",
+      "name": "Refund request test",
       "prompt": "<string>",
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "summary": "<string>",
       "metric_type": "llm_judge",
       "eval_method": "llm_judge",
@@ -102,7 +102,7 @@ curl --request GET \
       "max_value": 1.5,
       "category": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "scoring_guidance": "<string>",
       "created_at": "2026-01-01T00:00:00Z",

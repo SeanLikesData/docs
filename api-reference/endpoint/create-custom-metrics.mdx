@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/create-metrics"
+title: "Create several custom metrics"
 description: "Create several custom metrics."
-sidebarTitle: "/\u200bv1/\u200bcreate-metrics"
+sidebarTitle: "Create several custom metrics"
 api: "POST https://api.getbluejay.ai/v1/create-metrics"
 playground: "none"
 deprecated: true
@@ -28,11 +28,11 @@ curl --request POST \
     "metrics": [
       {
         "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-        "agent_id": 123,
+        "agent_id": 1337,
         "agent_ids": [
           123
         ],
-        "name": "<string>",
+        "name": "Refund request test",
         "prompt": "<string>",
         "summary": "<string>",
         "metric_type": "llm_judge",
@@ -44,7 +44,7 @@ curl --request POST \
         "max_value": 1.5,
         "category": "<string>",
         "tags": [
-          "<string>"
+          "billing"
         ],
         "scoring_guidance": "<string>",
         "eval_modality": "AUDIO",
@@ -75,9 +75,9 @@ curl --request POST \
     {
       "id": "<string>",
       "bluejay_as_code_id": "<string>",
-      "name": "<string>",
+      "name": "Refund request test",
       "prompt": "<string>",
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "summary": "<string>",
       "metric_type": "llm_judge",
       "eval_method": "llm_judge",
@@ -92,7 +92,7 @@ curl --request POST \
       "max_value": 1.5,
       "category": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "scoring_guidance": "<string>",
       "created_at": "2026-01-01T00:00:00Z",

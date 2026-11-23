@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/uptime/monitors/{monitor_id}"
+title: "Get an uptime monitor"
 description: "Get an uptime monitor."
-sidebarTitle: "/\u200bv1/\u200buptime/\u200bmonitors/\u200b{monitor_id}"
+sidebarTitle: "Get an uptime monitor"
 api: "GET https://api.getbluejay.ai/v1/uptime/monitors/{monitor_id}"
 playground: "none"
 ---
@@ -27,7 +27,7 @@ curl --request GET \
 ```json 200
 {
   "id": "<string>",
-  "agent_id": 123,
+  "agent_id": 1337,
   "frequency": "<string>",
   "active_window": {},
   "checks": [
@@ -35,8 +35,8 @@ curl --request GET \
   ],
   "notifications": {},
   "enabled": true,
-  "simulation_id": 123,
-  "experiment_id": 123,
+  "simulation_id": 2045,
+  "experiment_id": 4821,
   "last_status": "<string>",
   "last_checked_at": "2026-01-01T00:00:00Z",
   "last_latency_ms": 1.5,

@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/red-team-simulations"
+title: "List Red Teaming runs"
 description: "List Red Teaming runs."
-sidebarTitle: "/\u200bv1/\u200bred-team-simulations"
+sidebarTitle: "List Red Teaming runs"
 api: "GET https://api.getbluejay.ai/v1/red-team-simulations"
 playground: "none"
 ---
@@ -28,12 +28,12 @@ curl --request GET \
 {
   "tests": [
     {
-      "id": 123,
+      "id": 4821,
       "organization_id": "<string>",
-      "agent_id": 123,
-      "simulation_id": 123,
+      "agent_id": 1337,
+      "simulation_id": 2045,
       "objective": "<string>",
-      "status": "<string>",
+      "status": "completed",
       "config": {},
       "overall": "<string>",
       "owasp_scorecard": {},
@@ -46,9 +46,9 @@ curl --request GET \
       ],
       "coverage": {},
       "bluejay_analysis": "<string>",
-      "final_simulation_run_id": 123,
-      "created_at": "<string>",
-      "updated_at": "<string>"
+      "final_simulation_run_id": 4821,
+      "created_at": "2026-11-20T09:30:00Z",
+      "updated_at": "2026-11-20T09:45:00Z"
     }
   ]
 }

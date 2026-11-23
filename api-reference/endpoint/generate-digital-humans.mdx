@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/generate-digital-humans"
+title: "Generate Digital Humans from an agent prompt"
 description: "Generate Digital Humans from an agent prompt."
-sidebarTitle: "/\u200bv1/\u200bgenerate-digital-humans"
+sidebarTitle: "Generate Digital Humans from an agent prompt"
 api: "POST https://api.getbluejay.ai/v1/generate-digital-humans"
 playground: "none"
 ---
@@ -50,8 +50,8 @@ curl --request POST \
     ],
     "customer_personas": [
       {
-        "name": "<string>",
-        "description": "<string>",
+        "name": "Refund request test",
+        "description": "Checks that the agent handles a refund request.",
         "goal": "<string>",
         "num_calls": 123
       }
@@ -67,7 +67,7 @@ curl --request POST \
     "red_team_attacks": {
       "batches": [
         {
-          "intent": "<string>",
+          "intent": "Ask for a refund on an order from last week.",
           "vector_id": "<string>",
           "traits": [
             {

@@ -1,6 +1,6 @@
 ---
-title: "GET /v1/scim/Users"
-sidebarTitle: "/\u200bv1/\u200bscim/\u200bUsers"
+title: "List provisioned people"
+sidebarTitle: "List provisioned people"
 description: "List provisioned people."
 api: "GET https://api.getbluejay.ai/v1/scim/Users"
 playground: "none"
@@ -26,7 +26,7 @@ curl --request GET \
 
 ## Query parameters
 
-<FieldTable rows={[{"name": "filter", "type": "string or null", "required": false, "description": ""}, {"name": "startIndex", "type": "integer", "required": false, "description": "", "default": 1}, {"name": "count", "type": "integer", "required": false, "description": "", "default": 100}]} />
+<FieldTable rows={[{"name": "filter", "type": "string or null", "required": false, "description": ""}, {"name": "startIndex", "type": "integer", "required": false, "description": "", "default": 1}, {"name": "count", "type": "integer", "required": false, "description": "Number of items.", "default": 100}]} />
 
 ## Headers
 

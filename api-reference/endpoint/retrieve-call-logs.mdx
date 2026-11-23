@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/retrieve-call-logs/{agent_id}"
+title: "List the call logs of an agent"
 description: "List the call logs of an agent."
-sidebarTitle: "/\u200bv1/\u200bretrieve-call-logs/\u200b{agent_id}"
+sidebarTitle: "List the call logs of an agent"
 api: "GET https://api.getbluejay.ai/v1/retrieve-call-logs/{agent_id}"
 playground: "none"
 deprecated: true
@@ -42,8 +42,8 @@ curl --request GET \
         {
           "role": "AGENT",
           "spoke_first": true,
-          "name": "<string>",
-          "phone_number": "<string>"
+          "name": "Refund request test",
+          "phone_number": "+14155550123"
         }
       ],
       "call_direction": "INBOUND",
@@ -53,9 +53,9 @@ curl --request GET \
       "transcript_url": "<string>",
       "tool_calls": [
         {
-          "name": "<string>",
+          "name": "Refund request test",
           "start_offset_ms": 123,
-          "description": "<string>",
+          "description": "Checks that the agent handles a refund request.",
           "parameters": {},
           "output": null
         }
@@ -64,16 +64,16 @@ curl --request GET \
         {
           "title": "<string>",
           "start_offset_ms": 123,
-          "description": "<string>",
+          "description": "Checks that the agent handles a refund request.",
           "end_offset_ms": 123,
           "tags": [
-            null
+            "billing"
           ],
           "metadata": {}
         }
       ],
       "tags": [
-        "<string>"
+        "billing"
       ],
       "duration_ms": 0,
       "evaluations": [

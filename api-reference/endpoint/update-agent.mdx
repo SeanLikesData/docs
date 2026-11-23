@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/update-agent"
+title: "Update an agent"
 description: "Update an agent."
-sidebarTitle: "/\u200bv1/\u200bupdate-agent"
+sidebarTitle: "Update an agent"
 api: "POST https://api.getbluejay.ai/v1/update-agent"
 playground: "none"
 ---
@@ -25,9 +25,9 @@ curl --request POST \
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "agent_id": "<string>",
     "external_agent_id": "<string>",
-    "name": "<string>",
-    "system_prompt": "<string>",
-    "phone_number": "<string>",
+    "name": "Refund request test",
+    "system_prompt": "You are a friendly support agent for Acme.",
+    "phone_number": "+14155550123",
     "goals": [
       "<string>"
     ],
@@ -120,9 +120,9 @@ curl --request POST \
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "agent_id": "<string>",
     "external_agent_id": "<string>",
-    "name": "<string>",
-    "system_prompt": "<string>",
-    "phone_number": "<string>",
+    "name": "Refund request test",
+    "system_prompt": "You are a friendly support agent for Acme.",
+    "phone_number": "+14155550123",
     "goals": [
       "<string>"
     ],

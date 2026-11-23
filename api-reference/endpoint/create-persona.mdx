@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/personas"
+title: "Create a persona"
 description: "Create a persona."
-sidebarTitle: "/\u200bv1/\u200bpersonas"
+sidebarTitle: "Create a persona"
 api: "POST https://api.getbluejay.ai/v1/personas"
 playground: "none"
 ---
@@ -24,7 +24,7 @@ curl --request POST \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "<string>",
+    "name": "Refund request test",
     "role_description": "<string>",
     "gender": "male",
     "language": "en",
@@ -76,7 +76,7 @@ curl --request POST \
         "wait_seconds": 123,
         "response_window_seconds": 123,
         "unresponsive": false,
-        "phone_number": "<string>"
+        "phone_number": "+14155550123"
       }
     ]
   }'
@@ -88,7 +88,7 @@ curl --request POST \
 
 ```json 200
 {
-  "name": "<string>",
+  "name": "Refund request test",
   "role_description": "<string>",
   "gender": "male",
   "language": "en",
@@ -140,15 +140,15 @@ curl --request POST \
       "wait_seconds": 123,
       "response_window_seconds": 123,
       "unresponsive": false,
-      "phone_number": "<string>"
+      "phone_number": "+14155550123"
     }
   ],
   "id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "organization_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "workspace_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "is_default": false,
-  "created_at": "<string>",
-  "updated_at": "<string>"
+  "created_at": "2026-11-20T09:30:00Z",
+  "updated_at": "2026-11-20T09:45:00Z"
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/metrics"
+title: "List custom metrics"
 description: "List custom metrics."
-sidebarTitle: "/\u200bv1/\u200bmetrics"
+sidebarTitle: "List custom metrics"
 api: "GET https://api.getbluejay.ai/v1/metrics"
 playground: "none"
 ---
@@ -32,9 +32,9 @@ curl --request GET \
     {
       "id": "<string>",
       "bluejay_as_code_id": "<string>",
-      "name": "<string>",
+      "name": "Refund request test",
       "prompt": "<string>",
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "summary": "<string>",
       "metric_type": "llm_judge",
       "eval_method": "llm_judge",
@@ -49,7 +49,7 @@ curl --request GET \
       "max_value": 1.5,
       "category": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "scoring_guidance": "<string>",
       "created_at": "2026-01-01T00:00:00Z",
@@ -82,9 +82,9 @@ curl --request GET \
     {
       "id": "<string>",
       "bluejay_as_code_id": "<string>",
-      "name": "<string>",
+      "name": "Refund request test",
       "prompt": "<string>",
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "summary": "<string>",
       "metric_type": "llm_judge",
       "eval_method": "llm_judge",
@@ -99,7 +99,7 @@ curl --request GET \
       "max_value": 1.5,
       "category": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "scoring_guidance": "<string>",
       "created_at": "2026-01-01T00:00:00Z",

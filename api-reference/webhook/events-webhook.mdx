@@ -19,18 +19,18 @@ Represents a simulation result evaluated event.
 ```json Example
 {
   "type": "simulation_result_evaluated",
-  "id": 123,
-  "digital_human_id": 123,
+  "id": 4821,
+  "digital_human_id": 9912,
   "status": "INITIALIZING",
-  "simulation_run_id": 123,
-  "simulation_id": 123,
-  "agent_id": 123,
+  "simulation_run_id": 4821,
+  "simulation_id": 2045,
+  "agent_id": 1337,
   "folder_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "result": {},
   "custom_metrics": [
     {
-      "name": "<string>",
-      "description": "<string>",
+      "name": "Refund request test",
+      "description": "Checks that the agent handles a refund request.",
       "response_type": "<string>",
       "response_value": "<string>",
       "reasoning": "<string>",
@@ -38,7 +38,7 @@ Represents a simulation result evaluated event.
       "max_value": 1.5,
       "category": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "scoring_guidance": "<string>",
       "enum_options": [
@@ -96,8 +96,8 @@ Represents a simulation result evaluated event.
       },
       "custom_metrics": [
         {
-          "name": "<string>",
-          "description": "<string>",
+          "name": "Refund request test",
+          "description": "Checks that the agent handles a refund request.",
           "response_type": "<string>",
           "response_value": "<string>",
           "reasoning": "<string>",
@@ -105,7 +105,7 @@ Represents a simulation result evaluated event.
           "max_value": 1.5,
           "category": "<string>",
           "tags": [
-            null
+            "billing"
           ],
           "scoring_guidance": "<string>",
           "enum_options": [
@@ -159,25 +159,25 @@ Represents a simulation result evaluated event.
     {
       "title": "<string>",
       "start_offset_ms": 123,
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "end_offset_ms": 123,
       "tags": [
-        "<string>"
+        "billing"
       ],
       "metadata": {}
     }
   ],
   "tool_calls": [
     {
-      "name": "<string>",
+      "name": "Refund request test",
       "start_offset_ms": 123,
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "parameters": {},
       "output": null
     }
   ],
   "tags": [
-    "<string>"
+    "billing"
   ],
   "metadata": {}
 }
@@ -200,8 +200,8 @@ Represents an observability call evaluated event.
     {
       "role": "AGENT",
       "spoke_first": true,
-      "name": "<string>",
-      "phone_number": "<string>"
+      "name": "Refund request test",
+      "phone_number": "+14155550123"
     }
   ],
   "call_direction": "INBOUND",
@@ -211,9 +211,9 @@ Represents an observability call evaluated event.
   "transcript_url": "<string>",
   "tool_calls": [
     {
-      "name": "<string>",
+      "name": "Refund request test",
       "start_offset_ms": 123,
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "parameters": {},
       "output": null
     }
@@ -222,16 +222,16 @@ Represents an observability call evaluated event.
     {
       "title": "<string>",
       "start_offset_ms": 123,
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "end_offset_ms": 123,
       "tags": [
-        "<string>"
+        "billing"
       ],
       "metadata": {}
     }
   ],
   "tags": [
-    "<string>"
+    "billing"
   ],
   "duration_ms": 0,
   "evaluations": [
@@ -277,8 +277,8 @@ Represents an observability call evaluated event.
       },
       "custom_metrics": [
         {
-          "name": "<string>",
-          "description": "<string>",
+          "name": "Refund request test",
+          "description": "Checks that the agent handles a refund request.",
           "response_type": "<string>",
           "response_value": "<string>",
           "reasoning": "<string>",
@@ -286,7 +286,7 @@ Represents an observability call evaluated event.
           "max_value": 1.5,
           "category": "<string>",
           "tags": [
-            null
+            "billing"
           ],
           "scoring_guidance": "<string>",
           "enum_options": [
@@ -360,12 +360,12 @@ Represents a simulation result ended event.
 ```json Example
 {
   "type": "simulation_ended",
-  "id": 123,
-  "digital_human_id": 123,
+  "id": 4821,
+  "digital_human_id": 9912,
   "status": "INITIALIZING",
-  "simulation_run_id": 123,
-  "simulation_id": 123,
-  "agent_id": 123,
+  "simulation_run_id": 4821,
+  "simulation_id": 2045,
+  "agent_id": 1337,
   "folder_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "external_agent_id": "<string>",
   "created_at": "2026-01-01T00:00:00Z",
@@ -384,14 +384,14 @@ Represents an outbound simulation started event.
 ```json Example
 {
   "type": "outbound_simulation_started",
-  "agent_id": 123,
-  "simulation_id": 123,
-  "simulation_run_id": 123,
+  "agent_id": 1337,
+  "simulation_id": 2045,
+  "simulation_run_id": 4821,
   "digital_humans": [
     {
-      "id": 123,
-      "name": "<string>",
-      "phone_number": "<string>",
+      "id": 4821,
+      "name": "Refund request test",
+      "phone_number": "+14155550123",
       "associated_simulation_result_ids": [
         123
       ]
@@ -409,9 +409,9 @@ Fired once when every conversation in a simulation run is finished and evaluated
 ```json Example
 {
   "type": "simulation_run_evaluated",
-  "simulation_run_id": 123,
-  "simulation_id": 123,
-  "agent_id": 123,
+  "simulation_run_id": 4821,
+  "simulation_id": 2045,
+  "agent_id": 1337,
   "folder_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "external_agent_id": "<string>",
   "pass_rate": 1.5,

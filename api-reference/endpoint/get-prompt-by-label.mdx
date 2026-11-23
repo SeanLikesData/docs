@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/agents/{agent_id}/prompts"
+title: "Get an agent version by label (deprecated)"
 description: "Get an agent version by label (deprecated)."
-sidebarTitle: "/\u200bv1/\u200bagents/\u200b{agent_id}/\u200bprompts"
+sidebarTitle: "Get an agent version by label (deprecated)"
 api: "GET https://api.getbluejay.ai/v1/agents/{agent_id}/prompts"
 playground: "none"
 deprecated: true
@@ -43,7 +43,7 @@ curl --request GET \
   ],
   "metadata": {},
   "version": 123,
-  "agent_id": 123
+  "agent_id": 1337
 }
 ```
 
@@ -57,7 +57,7 @@ curl --request GET \
 
 ## Query parameters
 
-<FieldTable rows={[{"name": "label", "type": "string or null", "required": false, "description": ""}]} />
+<FieldTable rows={[{"name": "label", "type": "string or null", "required": false, "description": "Short display label."}]} />
 
 ## Headers
 

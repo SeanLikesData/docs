@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/update-digital-human/{digital_human_id}"
+title: "Update a Digital Human"
 description: "Update a Digital Human."
-sidebarTitle: "/\u200bv1/\u200bupdate-digital-human/\u200b{digital_human_id}"
+sidebarTitle: "Update a Digital Human"
 api: "PUT https://api.getbluejay.ai/v1/update-digital-human/{digital_human_id}"
 playground: "none"
 ---
@@ -24,12 +24,12 @@ curl --request PUT \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "intent": "<string>",
+    "intent": "Ask for a refund on an order from last week.",
     "success_criteria": "<string>",
-    "name": "<string>",
+    "name": "Refund request test",
     "tag": "<string>",
     "tags": [
-      "<string>"
+      "billing"
     ],
     "type": "voicemail_custom",
     "language": "en",
@@ -42,13 +42,13 @@ curl --request PUT \
     "audio_quality": "high",
     "fluency": "beginner",
     "verbosity": "low",
-    "phone_number": "<string>",
+    "phone_number": "+14155550123",
     "extension": "<string>",
     "outbound_text_number": "<string>",
     "background_noise_volume": 1.5,
     "expected_tool_calls": [
       {
-        "name": "<string>",
+        "name": "Refund request test",
         "parameters": {},
         "output": null
       }
@@ -127,7 +127,7 @@ curl --request PUT \
         "wait_seconds": 123,
         "response_window_seconds": 123,
         "unresponsive": false,
-        "phone_number": "<string>"
+        "phone_number": "+14155550123"
       }
     ],
     "override_conflict": false,
@@ -158,13 +158,13 @@ curl --request PUT \
 ```json 200
 {
   "digital_human": {
-    "id": 123,
+    "id": 4821,
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-    "intent": "<string>",
+    "intent": "Ask for a refund on an order from last week.",
     "success_criteria": "<string>",
     "tag": "<string>",
     "tags": [
-      "<string>"
+      "billing"
     ],
     "type": "voicemail_custom",
     "system_prompt_rule_ids": [
@@ -173,7 +173,7 @@ curl --request PUT \
     "system_prompt_rule_quotes": [
       "<string>"
     ],
-    "name": "<string>",
+    "name": "Refund request test",
     "language": "en",
     "accent": "multilingual",
     "gender": "male",
@@ -184,14 +184,14 @@ curl --request PUT \
     "audio_quality": "<string>",
     "fluency": "<string>",
     "verbosity": "<string>",
-    "phone_number": "<string>",
+    "phone_number": "+14155550123",
     "extension": "<string>",
     "outbound_text_number": "<string>",
     "websocket_url": "<string>",
     "background_noise_volume": 1.5,
     "expected_tool_calls": [
       {
-        "name": "<string>",
+        "name": "Refund request test",
         "parameters": {},
         "output": null
       }
@@ -267,7 +267,7 @@ curl --request PUT \
         "wait_seconds": 123,
         "response_window_seconds": 123,
         "unresponsive": false,
-        "phone_number": "<string>"
+        "phone_number": "+14155550123"
       }
     ],
     "always_on_mode": true,
@@ -283,7 +283,7 @@ curl --request PUT \
   "simulation_ids": [
     123
   ],
-  "simulation_id": 123,
+  "simulation_id": 2045,
   "warning": "<string>"
 }
 ```

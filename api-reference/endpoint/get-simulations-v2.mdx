@@ -1,7 +1,7 @@
 ---
-title: "GET /v2/simulations"
+title: "List simulations (v2)"
 description: "List simulations."
-sidebarTitle: "/\u200bv2/\u200bsimulations"
+sidebarTitle: "List simulations (v2)"
 api: "GET https://api.getbluejay.ai/v2/simulations"
 playground: "none"
 ---
@@ -33,10 +33,10 @@ curl --request GET \
 {
   "simulations": [
     {
-      "id": 123,
+      "id": 4821,
       "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-      "agent_id": 123,
-      "name": "<string>",
+      "agent_id": 1337,
+      "name": "Refund request test",
       "created_at": "2026-01-01T00:00:00Z",
       "updated_at": "2026-01-01T00:00:00Z",
       "updated_by": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
@@ -48,9 +48,9 @@ curl --request GET \
       "ringing_timeout": 123,
       "inactivity_timeout_seconds": 123,
       "tags": [
-        "<string>"
+        "billing"
       ],
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "pinned": true,
       "always_on": true,
       "load_test_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",

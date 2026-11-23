@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/update-simulation-result"
+title: "Add data to a simulation result"
 description: "Add data to a simulation result."
-sidebarTitle: "/\u200bv1/\u200bupdate-simulation-result"
+sidebarTitle: "Add data to a simulation result"
 api: "POST https://api.getbluejay.ai/v1/update-simulation-result"
 playground: "none"
 ---
@@ -47,19 +47,19 @@ curl --request POST \
       {
         "title": "<string>",
         "start_offset_ms": 123,
-        "description": "<string>",
+        "description": "Checks that the agent handles a refund request.",
         "end_offset_ms": 123,
         "tags": [
-          "<string>"
+          "billing"
         ],
         "metadata": {}
       }
     ],
     "tool_calls": [
       {
-        "name": "<string>",
+        "name": "Refund request test",
         "start_offset_ms": 123,
-        "description": "<string>",
+        "description": "Checks that the agent handles a refund request.",
         "parameters": {},
         "output": null
       }
@@ -74,7 +74,7 @@ curl --request POST \
       }
     ],
     "tags": [
-      "<string>"
+      "billing"
     ],
     "metadata": {},
     "trace_ids": [

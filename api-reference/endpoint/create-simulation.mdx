@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/create-simulation"
+title: "Create a simulation"
 description: "Create a simulation."
-sidebarTitle: "/\u200bv1/\u200bcreate-simulation"
+sidebarTitle: "Create a simulation"
 api: "POST https://api.getbluejay.ai/v1/create-simulation"
 playground: "none"
 ---
@@ -23,8 +23,8 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "agent_id": "<string>",
-    "name": "<string>",
-    "description": "<string>",
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
     "prompt_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "agent_version_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "knowledge_base_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
@@ -63,7 +63,7 @@ curl --request POST \
 
 ```json 200
 {
-  "simulation_id": 123,
+  "simulation_id": 2045,
   "status": "200"
 }
 ```

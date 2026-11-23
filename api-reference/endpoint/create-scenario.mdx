@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/scenario"
+title: "Create a scenario"
 description: "Create a scenario."
-sidebarTitle: "/\u200bv1/\u200bscenario"
+sidebarTitle: "Create a scenario"
 api: "POST https://api.getbluejay.ai/v1/scenario"
 playground: "none"
 ---
@@ -76,8 +76,8 @@ curl --request POST \
   "id": "<string>",
   "organization_id": "<string>",
   "agent_ids": [],
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "definition": {},
   "created_at": "2026-01-01T00:00:00Z",
   "dh_sync_summary": {},

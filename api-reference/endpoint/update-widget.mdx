@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/widgets/{widget_id}"
+title: "Update a widget"
 description: "Update a widget."
-sidebarTitle: "/\u200bv1/\u200bwidgets/\u200b{widget_id}"
+sidebarTitle: "Update a widget"
 api: "PUT https://api.getbluejay.ai/v1/widgets/{widget_id}"
 playground: "none"
 ---
@@ -20,8 +20,8 @@ curl --request PUT \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "<string>",
-    "description": "<string>",
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
     "chart_type": "line",
     "chart_mode": "time_series",
     "bar_mode": "stacked",
@@ -75,8 +75,8 @@ curl --request PUT \
 {
   "id": "<string>",
   "organization_id": "<string>",
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "chart_type": "<string>",
   "chart_mode": "<string>",
   "data_type": "<string>",
@@ -106,8 +106,8 @@ curl --request PUT \
   },
   "show_legend": true,
   "created_by": "<string>",
-  "created_at": "<string>",
-  "updated_at": "<string>",
+  "created_at": "2026-11-20T09:30:00Z",
+  "updated_at": "2026-11-20T09:45:00Z",
   "widget_metrics": [],
   "layout": {
     "x": 123,

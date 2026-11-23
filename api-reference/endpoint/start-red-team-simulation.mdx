@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/red-team-simulations"
+title: "Start a Red Teaming run"
 description: "Start a Red Teaming run."
-sidebarTitle: "/\u200bv1/\u200bred-team-simulations"
+sidebarTitle: "Start a Red Teaming run"
 api: "POST https://api.getbluejay.ai/v1/red-team-simulations"
 playground: "none"
 ---
@@ -47,7 +47,7 @@ curl --request POST \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "agent_id": 123,
+    "agent_id": 1337,
     "config": {},
     "confirmed": false
   }'
@@ -63,10 +63,10 @@ curl --request POST \
   "action": "<string>",
   "preview": "<string>",
   "to_proceed": "<string>",
-  "test_id": 123,
-  "simulation_id": 123,
-  "simulation_run_id": 123,
-  "status": "<string>"
+  "test_id": 4821,
+  "simulation_id": 2045,
+  "simulation_run_id": 4821,
+  "status": "completed"
 }
 ```
 

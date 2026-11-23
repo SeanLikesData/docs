@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/retrieve-simulation-results/{simulation_run_id}"
+title: "List the results of a simulation run"
 description: "List the results of a simulation run."
-sidebarTitle: "/\u200bv1/\u200bretrieve-simulation-results/\u200b{simulation_run_id}"
+sidebarTitle: "List the results of a simulation run"
 api: "GET https://api.getbluejay.ai/v1/retrieve-simulation-results/{simulation_run_id}"
 playground: "none"
 ---
@@ -50,8 +50,8 @@ curl --request GET \
   },
   "simulation_results": [
     {
-      "id": 123,
-      "digital_human_id": 123,
+      "id": 4821,
+      "digital_human_id": 9912,
       "persona_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
       "persona_name": "<string>",
       "result": {},
@@ -59,7 +59,7 @@ curl --request GET \
       "start_time": "2026-01-01T00:00:00Z",
       "end_time": "2026-01-01T00:00:00Z",
       "custom_metrics": {},
-      "status": "<string>",
+      "status": "completed",
       "error_code": "<string>",
       "error_message": "<string>",
       "latency": {},
@@ -67,10 +67,10 @@ curl --request GET \
         {
           "title": "<string>",
           "start_offset_ms": 123,
-          "description": "<string>",
+          "description": "Checks that the agent handles a refund request.",
           "end_offset_ms": 123,
           "tags": [
-            null
+            "billing"
           ],
           "metadata": {}
         }
@@ -154,7 +154,7 @@ curl --request GET \
       ],
       "tool_calls": [
         {
-          "name": "<string>",
+          "name": "Refund request test",
           "expected": [
             {}
           ],
@@ -169,7 +169,7 @@ curl --request GET \
       "metrics": [
         {
           "metric_id": "<string>",
-          "name": "<string>",
+          "name": "Refund request test",
           "type": "<string>",
           "value": null,
           "max_value": 123,

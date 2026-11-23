@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/get-simulation-runs/{simulation_id}"
+title: "List the runs of a simulation"
 description: "List the runs of a simulation."
-sidebarTitle: "/\u200bv1/\u200bget-simulation-runs/\u200b{simulation_id}"
+sidebarTitle: "List the runs of a simulation"
 api: "GET https://api.getbluejay.ai/v1/get-simulation-runs/{simulation_id}"
 playground: "none"
 ---
@@ -28,18 +28,18 @@ curl --request GET \
 {
   "simulation_runs": [
     {
-      "id": 123,
-      "simulation_id": 123,
-      "experiment_id": 123,
+      "id": 4821,
+      "simulation_id": 2045,
+      "experiment_id": 4821,
       "summary": "<string>",
       "tests_passed": 123,
       "tests_failed": 123,
       "total_tests": 123,
       "tests_completed": 123,
-      "curr_step_id": 123,
+      "curr_step_id": 4821,
       "created_at": "2026-01-01T00:00:00Z",
       "status": "RUNNING",
-      "phone_number": "<string>",
+      "phone_number": "+14155550123",
       "eval_failed": 123
     }
   ]

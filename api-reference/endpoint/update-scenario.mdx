@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/scenario/{workflow_id}"
+title: "Update a scenario"
 description: "Update a scenario."
-sidebarTitle: "/\u200bv1/\u200bscenario/\u200b{workflow_id}"
+sidebarTitle: "Update a scenario"
 api: "PUT https://api.getbluejay.ai/v1/scenario/{workflow_id}"
 playground: "none"
 ---
@@ -23,11 +23,11 @@ curl --request PUT \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "<string>",
+    "name": "Refund request test",
     "agent_ids": [
       123
     ],
-    "description": "<string>",
+    "description": "Checks that the agent handles a refund request.",
     "definition": {}
   }'
 ```
@@ -41,8 +41,8 @@ curl --request PUT \
   "id": "<string>",
   "organization_id": "<string>",
   "agent_ids": [],
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "definition": {},
   "created_at": "2026-01-01T00:00:00Z",
   "dh_sync_summary": {},

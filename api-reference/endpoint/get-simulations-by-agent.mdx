@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/get-simulations-by-agent/{agent_id}"
+title: "List the simulations of an agent"
 description: "List the simulations of an agent."
-sidebarTitle: "/\u200bv1/\u200bget-simulations-by-agent/\u200b{agent_id}"
+sidebarTitle: "List the simulations of an agent"
 api: "GET https://api.getbluejay.ai/v1/get-simulations-by-agent/{agent_id}"
 playground: "none"
 deprecated: true
@@ -31,9 +31,9 @@ curl --request GET \
 {
   "simulations": [
     {
-      "id": 123,
-      "name": "<string>",
-      "agent_id": 123,
+      "id": 4821,
+      "name": "Refund request test",
+      "agent_id": 1337,
       "created_at": "2026-01-01T00:00:00Z",
       "settings": {},
       "selected_custom_metrics": [

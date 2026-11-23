@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/traces/{trace_id}"
+title: "Get a trace"
 description: "Get a trace."
-sidebarTitle: "/\u200bv1/\u200btraces/\u200b{trace_id}"
+sidebarTitle: "Get a trace"
 api: "POST https://api.getbluejay.ai/v1/traces/{trace_id}"
 playground: "none"
 ---
@@ -28,7 +28,7 @@ curl --request POST \
 
 ```json 200
 {
-  "status": "<string>",
+  "status": "completed",
   "data": {}
 }
 ```

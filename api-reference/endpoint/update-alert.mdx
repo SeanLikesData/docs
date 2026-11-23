@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/update-alert/{alert_id}"
+title: "Update an alert"
 description: "Update an alert."
-sidebarTitle: "/\u200bv1/\u200bupdate-alert/\u200b{alert_id}"
+sidebarTitle: "Update an alert"
 api: "PUT https://api.getbluejay.ai/v1/update-alert/{alert_id}"
 playground: "none"
 ---
@@ -21,8 +21,8 @@ curl --request PUT \
   --header 'Content-Type: application/json' \
   --data '{
     "sample_size": 123,
-    "name": "<string>",
-    "description": "<string>",
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
     "is_enabled": true,
     "entity_type": "standard_metric",
     "entity_field": "<string>",
@@ -38,7 +38,7 @@ curl --request PUT \
     "agent_ids": [
       123
     ],
-    "simulation_id": 123,
+    "simulation_id": 2045,
     "evaluation_scope": "per_test_result",
     "aggregation": "none",
     "threshold_time_interval": 123,
@@ -55,8 +55,8 @@ curl --request PUT \
 ```json 200
 {
   "id": "<string>",
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "is_enabled": true,
   "organization_id": "<string>",
   "entity_type": "standard_metric",
@@ -73,7 +73,7 @@ curl --request PUT \
   "agents": [
     123
   ],
-  "simulation_id": 123,
+  "simulation_id": 2045,
   "evaluation_scope": "<string>",
   "aggregation": "<string>",
   "created_at": "2026-01-01T00:00:00Z",

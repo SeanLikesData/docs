@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/spans/{trace_id}/{span_id}"
+title: "Get a span"
 description: "Get a span."
-sidebarTitle: "/\u200bv1/\u200bspans/\u200b{trace_id}/\u200b{span_id}"
+sidebarTitle: "Get a span"
 api: "POST https://api.getbluejay.ai/v1/spans/{trace_id}/{span_id}"
 playground: "none"
 ---
@@ -29,7 +29,7 @@ curl --request POST \
   "span_id": "<string>",
   "trace_id": "<string>",
   "parent_span_id": "<string>",
-  "name": "<string>",
+  "name": "Refund request test",
   "timestamp": "<string>",
   "duration_nano": 123,
   "has_error": true,

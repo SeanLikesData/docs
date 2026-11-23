@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/re-evaluate/{conversation_id}"
+title: "Score a conversation again"
 description: "Score a conversation again."
-sidebarTitle: "/\u200bv1/\u200bre-evaluate/\u200b{conversation_id}"
+sidebarTitle: "Score a conversation again"
 api: "POST https://api.getbluejay.ai/v1/re-evaluate/{conversation_id}"
 playground: "none"
 ---
@@ -28,7 +28,7 @@ curl --request POST \
 
 ```json 200
 {
-  "status": "<string>",
+  "status": "completed",
   "call_id": "<string>",
   "message": "<string>"
 }
@@ -48,7 +48,7 @@ curl --request POST \
 
 ## Response
 
-<FieldTable rows={[{"name": "status", "type": "string", "required": true, "description": ""}, {"name": "call_id", "type": "string", "required": true, "description": "ID of the call."}, {"name": "message", "type": "string", "required": true, "description": ""}]} />
+<FieldTable rows={[{"name": "status", "type": "string", "required": true, "description": "Current state."}, {"name": "call_id", "type": "string", "required": true, "description": "ID of the call."}, {"name": "message", "type": "string", "required": true, "description": "Human-readable message."}]} />
 
 ## Status codes
 

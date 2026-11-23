@@ -13,14 +13,20 @@ The Bluejay REST API takes and returns JSON. To find an endpoint, use the sideba
 
 <Steps>
   <Step title="Get an API key">
-    Open the [API Keys page](https://app.getbluejay.ai/settings/api-keys) of the app and create a key. The API ignores the `X-Organization-Id` header.
+    Open the [API Keys page](https://app.getbluejay.ai/settings/api-keys) of the app and create a key. Then save it in your terminal so the examples work as written:
+
+    ```bash
+    export BLUEJAY_API_KEY=your_key_here
+    ```
+
+    The API ignores the `X-Organization-Id` header.
   </Step>
   <Step title="Send a request">
     Send every request to the base URL `https://api.getbluejay.ai`, with the key in the `X-API-Key` header. Endpoint paths start with `/v1`. The two `/v2` retrieve endpoints add the grade of each success-criteria bullet. This request lists the agents your key can reach:
 
     ```bash
     curl https://api.getbluejay.ai/v1/all-agents \
-      -H "X-API-Key: YOUR_API_KEY"
+      -H "X-API-Key: $BLUEJAY_API_KEY"
     ```
   </Step>
   <Step title="Read the response">
@@ -29,6 +35,12 @@ The Bluejay REST API takes and returns JSON. To find an endpoint, use the sideba
 </Steps>
 
 To try an endpoint without writing code, use the [API Playground](/api-reference/playground).
+
+## Run your first test
+
+1. [Create a simulation](/api-reference/endpoint/create-simulation) for an agent, using the agent `id` from the list above.
+2. [Run it](/api-reference/endpoint/queue-simulation-run-v2). The response gives you a run ID.
+3. [Read the results](/api-reference/endpoint/retrieve-simulation-results-v2) with that run ID.
 
 ## Errors
 

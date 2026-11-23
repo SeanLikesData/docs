@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/add-agent"
+title: "Add an agent"
 description: "Add an agent."
-sidebarTitle: "/\u200bv1/\u200badd-agent"
+sidebarTitle: "Add an agent"
 api: "POST https://api.getbluejay.ai/v1/add-agent"
 playground: "none"
 ---
@@ -56,9 +56,9 @@ curl --request POST \
   --data '{
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "workspace_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-    "name": "<string>",
-    "system_prompt": "<string>",
-    "phone_number": "<string>",
+    "name": "Refund request test",
+    "system_prompt": "You are a friendly support agent for Acme.",
+    "phone_number": "+14155550123",
     "goals": [
       "<string>"
     ],
@@ -151,7 +151,7 @@ curl --request POST \
 
 ```json 200
 {
-  "agent_id": 123,
+  "agent_id": 1337,
   "status": "200",
   "version": 123,
   "http_webhook_key": "<string>"

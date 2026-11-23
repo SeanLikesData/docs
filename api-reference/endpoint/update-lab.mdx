@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/metrics-lab/lab/{lab_id}"
+title: "Update a Metrics Lab lab"
 description: "Update a Metrics Lab lab."
-sidebarTitle: "/\u200bv1/\u200bmetrics-lab/\u200blab/\u200b{lab_id}"
+sidebarTitle: "Update a Metrics Lab lab"
 api: "PUT https://api.getbluejay.ai/v1/metrics-lab/lab/{lab_id}"
 playground: "none"
 ---
@@ -20,8 +20,8 @@ curl --request PUT \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "<string>",
-    "description": "<string>"
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request."
   }'
 ```
 
@@ -32,8 +32,8 @@ curl --request PUT \
 ```json 200
 {
   "id": "<string>",
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "created_at": "2026-01-01T00:00:00Z",
   "updated_at": "2026-01-01T00:00:00Z"
 }

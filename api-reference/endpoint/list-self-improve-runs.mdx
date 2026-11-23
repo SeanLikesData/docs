@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/self-improve/runs"
+title: "List Self-Improve runs"
 description: "List Self-Improve runs."
-sidebarTitle: "/\u200bv1/\u200bself-improve/\u200bruns"
+sidebarTitle: "List Self-Improve runs"
 api: "GET https://api.getbluejay.ai/v1/self-improve/runs"
 playground: "none"
 ---
@@ -28,11 +28,11 @@ curl --request GET \
 {
   "runs": [
     {
-      "id": 123,
+      "id": 4821,
       "organization_id": "<string>",
-      "agent_id": 123,
-      "simulation_id": 123,
-      "status": "<string>",
+      "agent_id": 1337,
+      "simulation_id": 2045,
+      "status": "completed",
       "config": {},
       "success_metric_ids": [
         "<string>"
@@ -47,11 +47,11 @@ curl --request GET \
       "baseline_prompt_text": "<string>",
       "current_prompt_text": "<string>",
       "proposed_agent_version_id": "<string>",
-      "current_sim_run_id": 123,
+      "current_sim_run_id": 4821,
       "stop_requested": true,
       "error": "<string>",
-      "created_at": "<string>",
-      "updated_at": "<string>"
+      "created_at": "2026-11-20T09:30:00Z",
+      "updated_at": "2026-11-20T09:45:00Z"
     }
   ]
 }

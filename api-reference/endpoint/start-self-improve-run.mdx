@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/self-improve/runs"
+title: "Start a Self-Improve run"
 description: "Start a Self-Improve run."
-sidebarTitle: "/\u200bv1/\u200bself-improve/\u200bruns"
+sidebarTitle: "Start a Self-Improve run"
 api: "POST https://api.getbluejay.ai/v1/self-improve/runs"
 playground: "none"
 ---
@@ -34,8 +34,8 @@ curl --request POST \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "agent_id": 123,
-    "simulation_id": 123,
+    "agent_id": 1337,
+    "simulation_id": 2045,
     "target_pass_rate": 0.9,
     "max_iterations": 5,
     "min_improvement": 0.02,
@@ -57,8 +57,8 @@ curl --request POST \
   "action": "<string>",
   "preview": "<string>",
   "to_proceed": "<string>",
-  "run_id": 123,
-  "status": "<string>"
+  "run_id": 7710,
+  "status": "completed"
 }
 ```
 

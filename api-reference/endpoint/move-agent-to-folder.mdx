@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/folders/move-agent"
+title: "Move an agent into a folder"
 description: "Move an agent into a folder."
-sidebarTitle: "/\u200bv1/\u200bfolders/\u200bmove-agent"
+sidebarTitle: "Move an agent into a folder"
 api: "PUT https://api.getbluejay.ai/v1/folders/move-agent"
 playground: "none"
 ---
@@ -20,7 +20,7 @@ curl --request PUT \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "agent_id": 123,
+    "agent_id": 1337,
     "folder_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a"
   }'
 ```
@@ -31,7 +31,7 @@ curl --request PUT \
 
 ```json 200
 {
-  "agent_id": 123,
+  "agent_id": 1337,
   "folder_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "status": "success"
 }

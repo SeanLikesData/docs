@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/update-agent-by-external-id"
+title: "Update an agent by external ID"
 description: "Update an agent by external ID."
-sidebarTitle: "/\u200bv1/\u200bupdate-agent-by-external-id"
+sidebarTitle: "Update an agent by external ID"
 api: "PUT https://api.getbluejay.ai/v1/update-agent-by-external-id"
 playground: "none"
 ---
@@ -23,9 +23,9 @@ curl --request PUT \
   --header 'Content-Type: application/json' \
   --data '{
     "external_agent_id": "<string>",
-    "name": "<string>",
-    "system_prompt": "<string>",
-    "phone_number": "<string>",
+    "name": "Refund request test",
+    "system_prompt": "You are a friendly support agent for Acme.",
+    "phone_number": "+14155550123",
     "goals": [
       "<string>"
     ],
@@ -118,9 +118,9 @@ curl --request PUT \
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "agent_id": "<string>",
     "external_agent_id": "<string>",
-    "name": "<string>",
-    "system_prompt": "<string>",
-    "phone_number": "<string>",
+    "name": "Refund request test",
+    "system_prompt": "You are a friendly support agent for Acme.",
+    "phone_number": "+14155550123",
     "goals": [
       "<string>"
     ],

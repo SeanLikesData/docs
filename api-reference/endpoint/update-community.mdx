@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/update-community/{community_id}"
+title: "Update a community"
 description: "Update a community."
-sidebarTitle: "/\u200bv1/\u200bupdate-community/\u200b{community_id}"
+sidebarTitle: "Update a community"
 api: "PUT https://api.getbluejay.ai/v1/update-community/{community_id}"
 playground: "none"
 ---
@@ -21,7 +21,7 @@ curl --request PUT \
   --header 'Content-Type: application/json' \
   --data '{
     "title": "<string>",
-    "description": "<string>",
+    "description": "Checks that the agent handles a refund request.",
     "digital_human_ids": [
       123
     ]
@@ -36,7 +36,7 @@ curl --request PUT \
 {
   "id": "<string>",
   "title": "<string>",
-  "description": "<string>",
+  "description": "Checks that the agent handles a refund request.",
   "created_at": "2026-01-01T00:00:00Z",
   "digital_human_ids": [
     123

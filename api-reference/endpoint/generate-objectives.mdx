@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/generate-objectives"
+title: "Generate objectives for a Digital Human"
 description: "Generate objectives for a Digital Human."
-sidebarTitle: "/\u200bv1/\u200bgenerate-objectives"
+sidebarTitle: "Generate objectives for a Digital Human"
 api: "POST https://api.getbluejay.ai/v1/generate-objectives"
 playground: "none"
 ---
@@ -22,7 +22,7 @@ curl --request POST \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "test_case_id": 123
+    "test_case_id": 4821
   }'
 ```
 
@@ -33,7 +33,7 @@ curl --request POST \
 ```json 200
 {
   "objectives": "<string>",
-  "test_case_id": 123
+  "test_case_id": 4821
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/knowledge-base/{knowledge_base_id}"
+title: "Update a Knowledge Base"
 description: "Update a Knowledge Base."
-sidebarTitle: "/\u200bv1/\u200bknowledge-base/\u200b{knowledge_base_id}"
+sidebarTitle: "Update a Knowledge Base"
 api: "PUT https://api.getbluejay.ai/v1/knowledge-base/{knowledge_base_id}"
 playground: "none"
 ---
@@ -22,8 +22,8 @@ curl --request PUT \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "<string>",
-    "description": "<string>"
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request."
   }'
 ```
 
@@ -35,11 +35,11 @@ curl --request PUT \
 {
   "id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
   "organization_id": "<string>",
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "folder_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-  "created_at": "<string>",
-  "updated_at": "<string>"
+  "created_at": "2026-11-20T09:30:00Z",
+  "updated_at": "2026-11-20T09:45:00Z"
 }
 ```
 
@@ -57,11 +57,11 @@ curl --request PUT \
 
 ## Request body
 
-<FieldTable rows={[{"name": "name", "type": "string or null", "required": false, "description": ""}, {"name": "description", "type": "string or null", "required": false, "description": ""}]} />
+<FieldTable rows={[{"name": "name", "type": "string or null", "required": false, "description": "Display name."}, {"name": "description", "type": "string or null", "required": false, "description": "Free-text note about this item."}]} />
 
 ## Response
 
-<FieldTable rows={[{"name": "id", "type": "string (uuid)", "required": true, "description": "Unique ID."}, {"name": "organization_id", "type": "string", "required": true, "description": "ID of the organization."}, {"name": "name", "type": "string", "required": true, "description": ""}, {"name": "description", "type": "string or null", "required": false, "description": ""}, {"name": "folder_id", "type": "string (uuid) or null", "required": false, "description": "ID of the folder."}, {"name": "created_at", "type": "string or null", "required": false, "description": "When it was created."}, {"name": "updated_at", "type": "string or null", "required": false, "description": "When it was updated."}]} />
+<FieldTable rows={[{"name": "id", "type": "string (uuid)", "required": true, "description": "Unique ID."}, {"name": "organization_id", "type": "string", "required": true, "description": "ID of the organization."}, {"name": "name", "type": "string", "required": true, "description": "Display name."}, {"name": "description", "type": "string or null", "required": false, "description": "Free-text note about this item."}, {"name": "folder_id", "type": "string (uuid) or null", "required": false, "description": "ID of the folder."}, {"name": "created_at", "type": "string or null", "required": false, "description": "When it was created."}, {"name": "updated_at", "type": "string or null", "required": false, "description": "When it was updated."}]} />
 
 ## Status codes
 

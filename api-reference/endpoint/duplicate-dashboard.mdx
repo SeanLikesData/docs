@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/dashboards/{dashboard_id}/duplicate"
+title: "Copy a dashboard"
 description: "Copy a dashboard."
-sidebarTitle: "/\u200bv1/\u200bdashboards/\u200b{dashboard_id}/\u200bduplicate"
+sidebarTitle: "Copy a dashboard"
 api: "POST https://api.getbluejay.ai/v1/dashboards/{dashboard_id}/duplicate"
 playground: "none"
 ---
@@ -28,14 +28,14 @@ curl --request POST \
 {
   "id": "<string>",
   "organization_id": "<string>",
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "is_curated": false,
   "created_by": "<string>",
-  "created_at": "<string>",
+  "created_at": "2026-11-20T09:30:00Z",
   "data_type": "<string>",
-  "agent_id": 123,
-  "url": "<string>"
+  "agent_id": 1337,
+  "url": "https://example.com/webhook"
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/scenario/{workflow_id}"
+title: "Get a scenario"
 description: "Get a scenario."
-sidebarTitle: "/\u200bv1/\u200bscenario/\u200b{workflow_id}"
+sidebarTitle: "Get a scenario"
 api: "GET https://api.getbluejay.ai/v1/scenario/{workflow_id}"
 playground: "none"
 ---
@@ -29,8 +29,8 @@ curl --request GET \
   "id": "<string>",
   "organization_id": "<string>",
   "agent_ids": [],
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "definition": {},
   "created_at": "2026-01-01T00:00:00Z",
   "dh_sync_summary": {},

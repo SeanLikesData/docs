@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/metrics-lab/lab/{lab_id}"
+title: "Get a Metrics Lab lab"
 description: "Get a Metrics Lab lab."
-sidebarTitle: "/\u200bv1/\u200bmetrics-lab/\u200blab/\u200b{lab_id}"
+sidebarTitle: "Get a Metrics Lab lab"
 api: "GET https://api.getbluejay.ai/v1/metrics-lab/lab/{lab_id}"
 playground: "none"
 ---
@@ -28,10 +28,10 @@ curl --request GET \
 {
   "lab": {
     "id": "<string>",
-    "name": "<string>",
-    "description": "<string>",
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
     "tags": [
-      "<string>"
+      "billing"
     ],
     "created_at": "2026-01-01T00:00:00Z"
   },
@@ -40,21 +40,21 @@ curl --request GET \
       "id": "<string>",
       "type": "obs_conversation",
       "call_id": "<string>",
-      "test_result_id": 123,
+      "test_result_id": 4821,
       "agent_id": 0,
       "start_time_utc": "2026-01-01T00:00:00Z",
       "duration_ms": 123,
       "duration_s": 123,
-      "status": "<string>",
+      "status": "completed",
       "tags": [
-        "<string>"
+        "billing"
       ]
     }
   ],
   "metrics": [
     {
       "id": "<string>",
-      "name": "<string>",
+      "name": "Refund request test",
       "prompt": "<string>",
       "response_type": "<string>",
       "category": "<string>",
@@ -75,7 +75,7 @@ curl --request GET \
       "id": "<string>",
       "custom_metric_id": "<string>",
       "call_id": "<string>",
-      "test_result_id": 123,
+      "test_result_id": 4821,
       "human_response_value": "<string>",
       "human_reasoning": "<string>",
       "created_at": "2026-01-01T00:00:00Z"
@@ -86,10 +86,10 @@ curl --request GET \
       "id": "<string>",
       "custom_metric_id": "<string>",
       "call_id": "<string>",
-      "test_result_id": 123,
+      "test_result_id": 4821,
       "response_value": "<string>",
       "reasoning": "<string>",
-      "status": "<string>",
+      "status": "completed",
       "created_at": "2026-01-01T00:00:00Z"
     }
   ],
@@ -99,7 +99,7 @@ curl --request GET \
       "custom_metric_id": "<string>",
       "lab_id": "<string>",
       "revision_number": 123,
-      "description": "<string>",
+      "description": "Checks that the agent handles a refund request.",
       "eval_route": "<string>",
       "model": "<string>",
       "audio_model": "<string>",
@@ -114,10 +114,10 @@ curl --request GET \
       "id": "<string>",
       "lab_metric_revision_id": "<string>",
       "call_id": "<string>",
-      "test_result_id": 123,
+      "test_result_id": 4821,
       "response_value": "<string>",
       "reasoning": "<string>",
-      "status": "<string>",
+      "status": "completed",
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]

@@ -1,7 +1,7 @@
 ---
-title: "PUT /v1/update-metrics"
+title: "Update several custom metrics"
 description: "Update several custom metrics."
-sidebarTitle: "/\u200bv1/\u200bupdate-metrics"
+sidebarTitle: "Update several custom metrics"
 api: "PUT https://api.getbluejay.ai/v1/update-metrics"
 playground: "none"
 ---
@@ -27,7 +27,7 @@ curl --request PUT \
     ],
     "updates": {
       "tags": [
-        "<string>"
+        "billing"
       ],
       "agent_ids": [
         123
@@ -65,7 +65,7 @@ curl --request PUT \
 
 ## Request body
 
-<FieldTable rows={[{"name": "metric_ids", "type": "string[]", "required": true, "description": "UUIDs of custom metrics to update"}, {"name": "updates", "type": "object", "required": true, "description": "Fields to update (only present keys are applied; value including null is written)", "children": [{"name": "tags", "type": "string[] or null", "required": false, "description": ""}, {"name": "agent_ids", "type": "integer[] or null", "required": false, "description": ""}, {"name": "eval_modality", "type": "string or null", "required": false, "description": "Enum representing the evaluation route of a call.", "values": ["AUDIO", "TEXT", "AUTO"]}, {"name": "eval_segment", "type": "string or null", "required": false, "description": "", "values": ["agent", "user", "all"]}, {"name": "scope", "type": "string or null", "required": false, "description": "", "values": ["observability", "simulations", "all"]}, {"name": "model", "type": "string or null", "required": false, "description": ""}, {"name": "audio_model", "type": "string or null", "required": false, "description": ""}, {"name": "temperature", "type": "number or null", "required": false, "description": ""}, {"name": "allow_not_applicable", "type": "boolean or null", "required": false, "description": ""}]}]} />
+<FieldTable rows={[{"name": "metric_ids", "type": "string[]", "required": true, "description": "UUIDs of custom metrics to update"}, {"name": "updates", "type": "object", "required": true, "description": "Fields to update (only present keys are applied; value including null is written)", "children": [{"name": "tags", "type": "string[] or null", "required": false, "description": "Labels you can filter by."}, {"name": "agent_ids", "type": "integer[] or null", "required": false, "description": ""}, {"name": "eval_modality", "type": "string or null", "required": false, "description": "Enum representing the evaluation route of a call.", "values": ["AUDIO", "TEXT", "AUTO"]}, {"name": "eval_segment", "type": "string or null", "required": false, "description": "", "values": ["agent", "user", "all"]}, {"name": "scope", "type": "string or null", "required": false, "description": "", "values": ["observability", "simulations", "all"]}, {"name": "model", "type": "string or null", "required": false, "description": ""}, {"name": "audio_model", "type": "string or null", "required": false, "description": ""}, {"name": "temperature", "type": "number or null", "required": false, "description": ""}, {"name": "allow_not_applicable", "type": "boolean or null", "required": false, "description": ""}]}]} />
 
 ## Response
 

@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/create-digital-human"
+title: "Create a Digital Human"
 description: "Create a Digital Human."
-sidebarTitle: "/\u200bv1/\u200bcreate-digital-human"
+sidebarTitle: "Create a Digital Human"
 api: "POST https://api.getbluejay.ai/v1/create-digital-human"
 playground: "none"
 deprecated: true
@@ -30,15 +30,15 @@ curl --request POST \
     "simulation_ids": [
       123
     ],
-    "simulation_id": 123,
+    "simulation_id": 2045,
     "digital_human": {
       "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
       "intent": "",
       "success_criteria": "",
-      "name": "<string>",
+      "name": "Refund request test",
       "tag": "<string>",
       "tags": [
-        "<string>"
+        "billing"
       ],
       "type": "voicemail_custom",
       "system_prompt_rule_ids": [
@@ -57,13 +57,13 @@ curl --request POST \
       "audio_quality": "high",
       "fluency": "beginner",
       "verbosity": "low",
-      "phone_number": "<string>",
+      "phone_number": "+14155550123",
       "extension": "<string>",
       "outbound_text_number": "<string>",
       "background_noise_volume": 0.8,
       "expected_tool_calls": [
         {
-          "name": "<string>",
+          "name": "Refund request test",
           "parameters": {},
           "output": null
         }
@@ -136,7 +136,7 @@ curl --request POST \
           "wait_seconds": 123,
           "response_window_seconds": 123,
           "unresponsive": false,
-          "phone_number": "<string>"
+          "phone_number": "+14155550123"
         }
       ],
       "always_on_mode": false,
@@ -151,7 +151,7 @@ curl --request POST \
       "persona_ids": [
         "3c90c3cc-0d44-4b50-8888-8dd25736052a"
       ],
-      "source_digital_human_id": 123
+      "source_digital_human_id": 4821
     }
   }'
 ```
@@ -163,13 +163,13 @@ curl --request POST \
 ```json 200
 {
   "digital_human": {
-    "id": 123,
+    "id": 4821,
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-    "intent": "<string>",
+    "intent": "Ask for a refund on an order from last week.",
     "success_criteria": "<string>",
     "tag": "<string>",
     "tags": [
-      "<string>"
+      "billing"
     ],
     "type": "voicemail_custom",
     "system_prompt_rule_ids": [
@@ -178,7 +178,7 @@ curl --request POST \
     "system_prompt_rule_quotes": [
       "<string>"
     ],
-    "name": "<string>",
+    "name": "Refund request test",
     "language": "en",
     "accent": "multilingual",
     "gender": "male",
@@ -189,14 +189,14 @@ curl --request POST \
     "audio_quality": "<string>",
     "fluency": "<string>",
     "verbosity": "<string>",
-    "phone_number": "<string>",
+    "phone_number": "+14155550123",
     "extension": "<string>",
     "outbound_text_number": "<string>",
     "websocket_url": "<string>",
     "background_noise_volume": 1.5,
     "expected_tool_calls": [
       {
-        "name": "<string>",
+        "name": "Refund request test",
         "parameters": {},
         "output": null
       }
@@ -272,7 +272,7 @@ curl --request POST \
         "wait_seconds": 123,
         "response_window_seconds": 123,
         "unresponsive": false,
-        "phone_number": "<string>"
+        "phone_number": "+14155550123"
       }
     ],
     "always_on_mode": true,
@@ -288,7 +288,7 @@ curl --request POST \
   "simulation_ids": [
     123
   ],
-  "simulation_id": 123,
+  "simulation_id": 2045,
   "warning": "<string>"
 }
 ```

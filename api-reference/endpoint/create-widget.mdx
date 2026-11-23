@@ -1,7 +1,7 @@
 ---
-title: "POST /v1/widgets"
+title: "Create a widget"
 description: "Create a widget."
-sidebarTitle: "/\u200bv1/\u200bwidgets"
+sidebarTitle: "Create a widget"
 api: "POST https://api.getbluejay.ai/v1/widgets"
 playground: "none"
 ---
@@ -24,8 +24,8 @@ curl --request POST \
   --header "X-API-Key: $BLUEJAY_API_KEY" \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "<string>",
-    "description": "<string>",
+    "name": "Refund request test",
+    "description": "Checks that the agent handles a refund request.",
     "chart_type": "line",
     "chart_mode": "time_series",
     "data_type": "observability",
@@ -81,8 +81,8 @@ curl --request POST \
 {
   "id": "<string>",
   "organization_id": "<string>",
-  "name": "<string>",
-  "description": "<string>",
+  "name": "Refund request test",
+  "description": "Checks that the agent handles a refund request.",
   "chart_type": "<string>",
   "chart_mode": "<string>",
   "data_type": "<string>",
@@ -112,8 +112,8 @@ curl --request POST \
   },
   "show_legend": true,
   "created_by": "<string>",
-  "created_at": "<string>",
-  "updated_at": "<string>",
+  "created_at": "2026-11-20T09:30:00Z",
+  "updated_at": "2026-11-20T09:45:00Z",
   "widget_metrics": [],
   "layout": {
     "x": 123,

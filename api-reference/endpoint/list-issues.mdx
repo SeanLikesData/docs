@@ -1,7 +1,7 @@
 ---
-title: "GET /v1/observability/issues"
+title: "List issues"
 description: "List issues."
-sidebarTitle: "/\u200bv1/\u200bobservability/\u200bissues"
+sidebarTitle: "List issues"
 api: "GET https://api.getbluejay.ai/v1/observability/issues"
 playground: "none"
 ---
@@ -37,15 +37,15 @@ curl --request GET \
     "id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "type": "<string>",
     "title": "<string>",
-    "description": "<string>",
-    "status": "<string>",
+    "description": "Checks that the agent handles a refund request.",
+    "status": "completed",
     "priority": "<string>",
     "assignee_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "due_date": "2026-01-01",
     "error_source": "<string>",
     "error_code": "<string>",
     "error_signature": "<string>",
-    "agent_id": 123,
+    "agent_id": 1337,
     "cluster_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
     "first_seen_at": "2026-01-01T00:00:00Z",
     "last_seen_at": "2026-01-01T00:00:00Z",
@@ -61,7 +61,7 @@ curl --request GET \
 
 ## Query parameters
 
-<FieldTable rows={[{"name": "status", "type": "string or null", "required": false, "description": "open, in_progress, resolved or ignored"}, {"name": "priority", "type": "string or null", "required": false, "description": "low, medium, high or urgent"}, {"name": "type", "type": "string or null", "required": false, "description": "non_deterministic or deterministic"}, {"name": "assignee_id", "type": "string (uuid) or null", "required": false, "description": "ID of the assignee."}, {"name": "limit", "type": "integer", "required": false, "description": "", "default": 50}, {"name": "offset", "type": "integer", "required": false, "description": "", "default": 0}]} />
+<FieldTable rows={[{"name": "status", "type": "string or null", "required": false, "description": "open, in_progress, resolved or ignored"}, {"name": "priority", "type": "string or null", "required": false, "description": "low, medium, high or urgent"}, {"name": "type", "type": "string or null", "required": false, "description": "non_deterministic or deterministic"}, {"name": "assignee_id", "type": "string (uuid) or null", "required": false, "description": "ID of the assignee."}, {"name": "limit", "type": "integer", "required": false, "description": "Maximum number of items to return.", "default": 50}, {"name": "offset", "type": "integer", "required": false, "description": "Number of items to skip.", "default": 0}]} />
 
 ## Headers
 
@@ -71,7 +71,7 @@ curl --request GET \
 
 The response is a list. Each item has these fields:
 
-<FieldTable rows={[{"name": "id", "type": "string (uuid)", "required": true, "description": "Unique ID."}, {"name": "type", "type": "string", "required": true, "description": "non_deterministic if identified from call evidence, deterministic if recognised from a known error"}, {"name": "title", "type": "string", "required": true, "description": ""}, {"name": "description", "type": "string", "required": true, "description": ""}, {"name": "status", "type": "string", "required": true, "description": "open, in_progress, resolved or ignored"}, {"name": "priority", "type": "string or null", "required": false, "description": "low, medium, high or urgent. Null until someone sets it."}, {"name": "assignee_id", "type": "string (uuid) or null", "required": false, "description": "ID of the assignee."}, {"name": "due_date", "type": "string (date) or null", "required": false, "description": "null when nobody has set one"}, {"name": "error_source", "type": "string", "required": true, "description": "where the failure was recorded, e.g. tool_call"}, {"name": "error_code", "type": "string or null", "required": false, "description": "deterministic error code when known"}, {"name": "error_signature", "type": "string or null", "required": false, "description": "hash or text that identifies this failure"}, {"name": "agent_id", "type": "integer or null", "required": false, "description": "Agent whose calls are classified against this issue"}, {"name": "cluster_id", "type": "string (uuid) or null", "required": false, "description": "cluster this issue was minted from"}, {"name": "first_seen_at", "type": "string (date-time)", "required": true, "description": "When it was first seen."}, {"name": "last_seen_at", "type": "string (date-time)", "required": true, "description": "When it was last seen."}, {"name": "created_at", "type": "string (date-time)", "required": true, "description": "When it was created."}, {"name": "updated_at", "type": "string (date-time)", "required": true, "description": "When it was updated."}]} />
+<FieldTable rows={[{"name": "id", "type": "string (uuid)", "required": true, "description": "Unique ID."}, {"name": "type", "type": "string", "required": true, "description": "non_deterministic if identified from call evidence, deterministic if recognised from a known error"}, {"name": "title", "type": "string", "required": true, "description": ""}, {"name": "description", "type": "string", "required": true, "description": "Free-text note about this item."}, {"name": "status", "type": "string", "required": true, "description": "open, in_progress, resolved or ignored"}, {"name": "priority", "type": "string or null", "required": false, "description": "low, medium, high or urgent. Null until someone sets it."}, {"name": "assignee_id", "type": "string (uuid) or null", "required": false, "description": "ID of the assignee."}, {"name": "due_date", "type": "string (date) or null", "required": false, "description": "null when nobody has set one"}, {"name": "error_source", "type": "string", "required": true, "description": "where the failure was recorded, e.g. tool_call"}, {"name": "error_code", "type": "string or null", "required": false, "description": "deterministic error code when known"}, {"name": "error_signature", "type": "string or null", "required": false, "description": "hash or text that identifies this failure"}, {"name": "agent_id", "type": "integer or null", "required": false, "description": "Agent whose calls are classified against this issue"}, {"name": "cluster_id", "type": "string (uuid) or null", "required": false, "description": "cluster this issue was minted from"}, {"name": "first_seen_at", "type": "string (date-time)", "required": true, "description": "When it was first seen."}, {"name": "last_seen_at", "type": "string (date-time)", "required": true, "description": "When it was last seen."}, {"name": "created_at", "type": "string (date-time)", "required": true, "description": "When it was created."}, {"name": "updated_at", "type": "string (date-time)", "required": true, "description": "When it was updated."}]} />
 
 ## Status codes
 

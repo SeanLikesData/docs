@@ -1,7 +1,7 @@
 ---
-title: "GET /v2/digital-humans/{digital_human_id}"
+title: "Get a Digital Human (v2)"
 description: "Get a Digital Human."
-sidebarTitle: "/\u200bv2/\u200bdigital-humans/\u200b{digital_human_id}"
+sidebarTitle: "Get a Digital Human (v2)"
 api: "GET https://api.getbluejay.ai/v2/digital-humans/{digital_human_id}"
 playground: "none"
 ---
@@ -29,13 +29,13 @@ curl --request GET \
 ```json 200
 {
   "digital_human": {
-    "id": 123,
+    "id": 4821,
     "bluejay_as_code_id": "3c90c3cc-0d44-4b50-8888-8dd25736052a",
-    "intent": "<string>",
+    "intent": "Ask for a refund on an order from last week.",
     "success_criteria": "<string>",
     "tag": "<string>",
     "tags": [
-      "<string>"
+      "billing"
     ],
     "type": "voicemail_custom",
     "system_prompt_rule_ids": [
@@ -44,7 +44,7 @@ curl --request GET \
     "system_prompt_rule_quotes": [
       "<string>"
     ],
-    "name": "<string>",
+    "name": "Refund request test",
     "language": "en",
     "accent": "multilingual",
     "gender": "male",
@@ -55,14 +55,14 @@ curl --request GET \
     "audio_quality": "<string>",
     "fluency": "<string>",
     "verbosity": "<string>",
-    "phone_number": "<string>",
+    "phone_number": "+14155550123",
     "extension": "<string>",
     "outbound_text_number": "<string>",
     "websocket_url": "<string>",
     "background_noise_volume": 1.5,
     "expected_tool_calls": [
       {
-        "name": "<string>",
+        "name": "Refund request test",
         "parameters": {},
         "output": null
       }
@@ -138,7 +138,7 @@ curl --request GET \
         "wait_seconds": 123,
         "response_window_seconds": 123,
         "unresponsive": false,
-        "phone_number": "<string>"
+        "phone_number": "+14155550123"
       }
     ],
     "always_on_mode": true,
@@ -154,7 +154,7 @@ curl --request GET \
   "simulation_ids": [
     123
   ],
-  "simulation_id": 123,
+  "simulation_id": 2045,
   "warning": "<string>"
 }
 ```
