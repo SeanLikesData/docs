@@ -1406,7 +1406,8 @@
                   "api-reference/endpoint/get-folder",
                   "api-reference/endpoint/get-all-folders",
                   "api-reference/endpoint/delete-folder",
-                  "api-reference/endpoint/phone-numbers"
+                  "api-reference/endpoint/phone-numbers",
+                  "api-reference/endpoint/import-phone-numbers"
                 ]
               },
               {
@@ -1432,6 +1433,18 @@
                   "api-reference/endpoint/delete-scim-user"
                 ]
               }
+            ]
+          },
+          {
+            "group": "Other",
+            "pages": [
+              "api-reference/endpoint/start-generate-test-scenarios-job",
+              "api-reference/endpoint/get-generate-test-scenarios-job",
+              "api-reference/endpoint/estimate-load-test",
+              "api-reference/endpoint/list-provider-accounts",
+              "api-reference/endpoint/list-provider-numbers",
+              "api-reference/endpoint/end-session",
+              "api-reference/endpoint/start-session"
             ]
           }
         ]
