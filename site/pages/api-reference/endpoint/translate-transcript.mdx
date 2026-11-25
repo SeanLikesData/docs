@@ -1,0 +1,54 @@
+---
+title: "POST /v1/translate-transcript"
+description: "Translate a transcript."
+api: "POST https://api.getbluejay.ai/v1/translate-transcript"
+playground: "none"
+---
+
+Translates a transcript. Send `simulation_result_id` for a simulation, or `conversation_id` for a production call. `target_language` is a language code such as `es`. The default is `en`.
+
+{/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
+
+## Headers
+
+<FieldTable rows={[{"name": "X-API-Key", "type": "string", "required": true, "description": "API key required to authenticate requests."}]} />
+
+## Request body
+
+<FieldTable rows={[{"name": "body", "type": "object", "required": true, "children": [{"name": "simulation_result_id", "type": "integer", "required": true, "description": "ID of the simulation result (sim_conversation) to translate"}, {"name": "target_language", "type": "string", "required": false, "description": "Target language code (e.g., 'en', 'es', 'fr', 'de'). Defaults to 'en' (English).", "default": "en"}, {"name": "conversation_id", "type": "string", "required": true, "description": "ID of the production conversation (call_id) to translate"}, {"name": "target_language", "type": "string", "required": false, "description": "Target language code (e.g., 'en', 'es', 'fr', 'de'). Defaults to 'en' (English).", "default": "en"}]}]} />
+
+## Response
+
+<FieldTable rows={[{"name": "translated_transcript_url", "type": "string", "required": true, "description": "URL to the translated transcript file"}, {"name": "target_language", "type": "string", "required": true, "description": "The target language used for translation"}, {"name": "success", "type": "boolean", "required": false, "description": "Whether the translation was successful", "default": true}]} />
+
+## Status codes
+
+| Status | Meaning |
+|---|---|
+| `200` | Successful Response |
+| `422` | Validation Error |
+
+## Example request
+
+```bash
+curl --request POST \
+  --url https://api.getbluejay.ai/v1/translate-transcript \
+  --header 'X-API-Key: <api-key>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "simulation_result_id": 123,
+    "target_language": "en"
+  }'
+```
+
+## Example response
+
+```json 200
+{
+  "translated_transcript_url": "<string>",
+  "target_language": "<string>",
+  "success": true
+}
+```
+
+{/* END GENERATED */}
