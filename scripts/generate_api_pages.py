@@ -6,6 +6,10 @@ Each page keeps its hand-written text. The script sets the title to the method a
 path, then writes the parameter, body and response tables and the examples between
 the GENERATED markers. Run it again after each API change.
 
+The pages are SaturnDocs pages in site/pages/. The script also writes the sidebar
+entries in site/docs.json, the API Playground operations in
+site/components/operations.json and the endpoint title rules in site/public/theme.css.
+
 Usage: python3 scripts/generate_api_pages.py [spec_path_or_url]
 """
 
@@ -17,12 +21,20 @@ import sys
 import urllib.request
 
 DOCS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SITE_DIR = os.path.join(DOCS_DIR, "site")
+PAGES_DIR = os.path.join(SITE_DIR, "pages")
+NAV_FILE = os.path.join(SITE_DIR, "docs.json")
+OPERATIONS_FILE = os.path.join(SITE_DIR, "components", "operations.json")
+THEME_FILE = os.path.join(SITE_DIR, "public", "theme.css")
 SPEC_URL = "https://api.getbluejay.ai/openapi.json"
 BASE_URL = "https://api.getbluejay.ai"
 PAGE_GLOBS = ["api-reference/endpoint/*.mdx", "api-reference/webhook/*.mdx"]
-IMPORT = 'import { FieldTable } from "/snippets/field-table.jsx";'
 START = "{/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}"
 END = "{/* END GENERATED */}"
+# The theme draws the method pill and the path of each endpoint title from one rule per page, between these markers.
+TITLE_START = "/* GENERATED: endpoint titles, from the API pages by scripts/generate_api_pages.py. Do not edit by hand. */"
+TITLE_END = "/* END GENERATED: endpoint titles */"
+TITLE_METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE")
 MAX_DEPTH = 6
 METHODS = ("get", "post", "put", "patch", "delete")
 ENDPOINT_DIR = "api-reference/endpoint"
@@ -149,6 +161,12 @@ def clean(text):
         return ""
     text = re.sub(r"\s+", " ", str(text)).strip()
     return text.replace("—", ",")
+
+
+def mdx_text(text):
+    """Spec text as page text. Outside backticks, SaturnDocs reads { } and a tag-like < as code and rejects the page."""
+    parts = re.split(r"(`+[^`]*`+)", text)
+    return "".join(p if i % 2 else re.sub(r"([{}]|<(?=[A-Za-z_$/>!?]))", r"\\\1", p) for i, p in enumerate(parts))
 
 
 def field_rows(spec, props, required, depth=0, seen=()):
@@ -336,7 +354,7 @@ def generate(spec, method, path, op):
     statuses = [(c, clean(r.get("description"))) for c, r in sorted(op.get("responses", {}).items())]
     if statuses:
         parts += ["## Status codes", "", "| Status | Meaning |", "|---|---|"]
-        parts += [f"| `{c}` | {d} |" for c, d in statuses]
+        parts += [f"| `{c}` | {mdx_text(d)} |" for c, d in statuses]
         parts += [""]
     parts += ["## Example request", "", "```bash", curl(spec, method, path, op), "```", ""]
     if resp_schema:
@@ -357,7 +375,7 @@ def generate_webhook(spec, name, op):
             rows = field_rows(spec, body.get("properties", {}), body.get("required", []))
             parts += [f"## `{event}`" if mapping else "## Payload", ""]
             if body.get("description"):
-                parts += [clean(body["description"]), ""]
+                parts += [mdx_text(clean(body["description"])), ""]
             parts += [table(rows), "", "```json Example", json.dumps(example(spec, event_schema), indent=2), "```", ""]
     parts.append(END)
     return "\n".join(parts)
@@ -378,13 +396,45 @@ def set_key(fm, key, value):
 
 
 def operation_of(fm):
-    m = re.search(r'^openapi:\s*["\']?([A-Z]+) ([^"\'\n]+)', fm, re.M)
-    if m:
-        return m.group(1), m.group(2).strip()
     m = re.search(r'^api:\s*["\']?([A-Z]+) https?://[^/]+([^"\'\n]+)', fm, re.M)
     if m:
         return m.group(1), m.group(2).strip()
     return None
+
+
+def titled_operation(fm):
+    """The route of a page: its api key, or its "METHOD /path" title when the page has no api key."""
+    found = operation_of(fm)
+    if found:
+        return found
+    m = re.search(r'^title:\s*"?(%s) (/[^"\s]*)"?\s*$' % "|".join(TITLE_METHODS), fm, re.M)
+    return (m.group(1), m.group(2)) if m else None
+
+
+def ordered(fm):
+    """Frontmatter with the title and description first and the generated keys last."""
+    lines = fm.split("\n")
+    if any(not re.match(r"[A-Za-z][\w:-]*:", ln) for ln in lines):
+        return fm
+    key = lambda ln: ln.split(":", 1)[0]
+    first = [ln for k in ("title", "description") for ln in lines if key(ln) == k]
+    last = [ln for k in ("api", "playground", "deprecated") for ln in lines if key(ln) == k]
+    return "\n".join(first + [ln for ln in lines if ln not in first and ln not in last] + last)
+
+
+def webhook_name(spec, page):
+    """A webhook page is named after its webhook: events-webhook.mdx documents events_webhook."""
+    stem = os.path.splitext(os.path.basename(page))[0]
+    return next((n for n in (stem.replace("-", "_"), stem) if n in spec.get("webhooks", {})), None)
+
+
+def page_file(slug):
+    return os.path.join(PAGES_DIR, slug + ".mdx")
+
+
+def leaf(entry):
+    """The page of a sidebar entry, or None when the entry is a group."""
+    return entry if isinstance(entry, str) else entry.get("page")
 
 
 def process(spec, page):
@@ -396,36 +446,32 @@ def process(spec, page):
     for rx in PROMPT_RE:
         body = rx.sub("", body)
     body = re.sub(re.escape(START) + r".*?" + re.escape(END) + r"\n?", "", body, flags=re.S)
-    body = body.replace(IMPORT + "\n", "").strip("\n")
+    body = body.strip("\n")
 
-    webhook = re.search(r'^(?:openapi:\s*["\']?WEBHOOK |webhook:\s*["\']?)(\w+)["\']?$', fm, re.M)
-    if webhook:
-        op = next(iter(spec.get("webhooks", {}).get(webhook.group(1), {}).values()), None)
+    if os.path.basename(os.path.dirname(page)) == "webhook":
+        name = webhook_name(spec, page)
+        op = next(iter(spec["webhooks"][name].values()), None) if name else None
         if not op:
             return "webhook not in spec"
-        fm = re.sub(r"^openapi:.*\n?", "", fm, flags=re.M).rstrip("\n")
-        fm = set_key(fm, "webhook", webhook.group(1))
-        generated = generate_webhook(spec, webhook.group(1), op)
+        generated = generate_webhook(spec, name, op)
     else:
         found = operation_of(fm)
         if not found:
-            return "no operation"
+            return "no api key"
         method, path = found
         op = spec["paths"].get(path, {}).get(method.lower())
         if not op:
             return f"{method} {path} not in spec"
-        fm = re.sub(r"^openapi:.*\n?", "", fm, flags=re.M).rstrip("\n")
         fm = set_key(fm, "title", f"{method} {path}")
-        # A zero-width space after each slash lets a long path wrap at a slash, not inside a word.
-        fm = set_key(fm, "sidebarTitle", path.replace("/", "/\\u200b"))
         fm = set_key(fm, "api", f"{method} {BASE_URL}{path}")
         fm = set_key(fm, "playground", "none")
         fm = re.sub(r"^deprecated:.*\n?", "", fm, flags=re.M).rstrip("\n")
         if op.get("deprecated"):
             fm += "\ndeprecated: true"
+        fm = ordered(fm)
         generated = generate(spec, method, path, op)
 
-    out = f"---\n{fm}\n---\n\n{IMPORT}\n\n"
+    out = f"---\n{fm}\n---\n\n"
     if body:
         out += body + "\n\n"
     out += generated + "\n"
@@ -435,26 +481,29 @@ def process(spec, page):
 
 
 def nav_endpoints():
-    """(group label, slug) for every endpoint page, in API sidebar order."""
-    tabs = json.load(open(os.path.join(DOCS_DIR, "docs.json")))["navigation"]["tabs"]
+    """(group label, slug) for every endpoint page, in API sidebar order. Hidden groups are left out."""
+    tabs = json.load(open(NAV_FILE))["navigation"]["tabs"]
     api = next(t for t in tabs if t["tab"] == "API")
 
     def walk(group, label):
         for p in group["pages"]:
-            if isinstance(p, dict):
-                yield from walk(p, p["group"])
-            elif "/endpoint/" in p:
-                yield label, p
+            slug = leaf(p)
+            if slug is None:
+                if not p.get("hidden"):
+                    yield from walk(p, p["group"])
+            elif "/endpoint/" in slug:
+                yield label, slug
 
     for top in api["groups"]:
-        yield from walk(top, top["group"])
+        if not top.get("hidden"):
+            yield from walk(top, top["group"])
 
 
 def write_operations(spec):
     ops = []
     for group, slug in nav_endpoints():
-        fm = FM_RE.match(open(os.path.join(DOCS_DIR, slug + ".mdx")).read())
-        found = operation_of(fm.group(1)) if fm else None
+        fm = FM_RE.match(open(page_file(slug)).read())
+        found = titled_operation(fm.group(1)) if fm else None
         if not found:
             continue
         method, path = found
@@ -468,11 +517,9 @@ def write_operations(spec):
         ops.append({"group": group, "slug": slug, "method": method, "path": path,
                     "summary": op.get("summary", ""), "params": params, "body": body,
                     "bodyType": ctype})
-    out = os.path.join(DOCS_DIR, "snippets", "api-operations.jsx")
-    content = ("// Generated by scripts/generate_api_pages.py from the OpenAPI spec. Do not edit by hand.\n"
-               "export const apiOperations = " + json.dumps(ops, ensure_ascii=False) + ";\n")
-    if not os.path.exists(out) or open(out).read() != content:
-        open(out, "w").write(content)
+    content = json.dumps(ops, indent=2, ensure_ascii=False) + "\n"
+    if not os.path.exists(OPERATIONS_FILE) or open(OPERATIONS_FILE).read() != content:
+        open(OPERATIONS_FILE, "w").write(content)
     return len(ops)
 
 
@@ -487,31 +534,40 @@ def slugify(text):
 
 
 def nav_groups(tab):
-    """(group, index, method, path) for every endpoint page in the tab."""
+    """(group, index, method, path) for every endpoint page in the tab. Hidden groups are left out."""
     def walk(group):
         for i, p in enumerate(group["pages"]):
-            if isinstance(p, dict):
-                yield from walk(p)
-            elif "/endpoint/" in p:
-                fm = FM_RE.match(open(os.path.join(DOCS_DIR, p + ".mdx")).read())
-                found = operation_of(fm.group(1)) if fm else None
+            slug = leaf(p)
+            if slug is None:
+                if not p.get("hidden"):
+                    yield from walk(p)
+            elif "/endpoint/" in slug:
+                fm = FM_RE.match(open(page_file(slug)).read())
+                found = titled_operation(fm.group(1)) if fm else None
                 if found:
                     yield group, i, found[0], found[1]
 
     for top in tab["groups"]:
-        yield from walk(top)
+        if not top.get("hidden"):
+            yield from walk(top)
+
+
+def sidebar_entry(slug, method, path):
+    """A sidebar entry with the method pill. A zero-width space after each slash lets a long path wrap at a slash."""
+    return {"page": slug, "label": path.replace("/", "/\u200b"), "method": method}
 
 
 def stub_page(spec, method, path, op):
     summary = clean(op.get("summary")) or f"{method} {path}"
     intro = clean((op.get("description") or "").split("\n\n")[0]) or summary + "."
-    page = f'---\ndescription: "{summary.replace(chr(34), chr(39))}"\napi: "{method} {BASE_URL}{path}"\n---\n\n{intro}\n'
+    description = json.dumps(summary.replace(chr(34), chr(39)), ensure_ascii=False)
+    page = f'---\ndescription: {description}\napi: "{method} {BASE_URL}{path}"\n---\n\n{mdx_text(intro)}\n'
     slug = slugify(summary)
     version = path.strip("/").split("/")[0]
     candidates = [slug, f"{slug}-{version}", f"{slug}-{version}-{method.lower()}"]
     candidates += [f"{candidates[-1]}-{n}" for n in range(2, 100)]
-    slug = next(c for c in candidates if not os.path.exists(os.path.join(DOCS_DIR, ENDPOINT_DIR, c + ".mdx")))
-    open(os.path.join(DOCS_DIR, ENDPOINT_DIR, slug + ".mdx"), "w").write(page)
+    slug = next(c for c in candidates if not os.path.exists(page_file(f"{ENDPOINT_DIR}/{c}")))
+    open(page_file(f"{ENDPOINT_DIR}/{slug}"), "w").write(page)
     return f"{ENDPOINT_DIR}/{slug}"
 
 
@@ -519,12 +575,12 @@ def add_new_pages(spec):
     """Stub a page and a nav entry for each spec route with no page that is not in IGNORE_FILE."""
     ignore_path = os.path.join(DOCS_DIR, IGNORE_FILE)
     ignored = {ln.strip() for ln in open(ignore_path) if ln.strip() and not ln.startswith("#")}
-    docs = json.load(open(os.path.join(DOCS_DIR, "docs.json")))
+    docs = json.load(open(NAV_FILE))
     tab = next(t for t in docs["navigation"]["tabs"] if t["tab"] == "API")
     have = set()
-    for page in glob.glob(os.path.join(DOCS_DIR, ENDPOINT_DIR, "*.mdx")):
+    for page in glob.glob(os.path.join(PAGES_DIR, ENDPOINT_DIR, "*.mdx")):
         fm = FM_RE.match(open(page).read())
-        found = operation_of(fm.group(1)) if fm else None
+        found = titled_operation(fm.group(1)) if fm else None
         if found:
             have.add(found)
     new = sorted((p, m.upper()) for p, item in spec["paths"].items() for m in item
@@ -540,17 +596,107 @@ def add_new_pages(spec):
             if common > score or (common == score and best and group is best[0]):
                 best, score = (group, i), common
         if best:
-            best[0]["pages"].insert(best[1] + 1, slug)
+            best[0]["pages"].insert(best[1] + 1, sidebar_entry(slug, method, path))
         else:
             other = next((g for g in tab["groups"] if g["group"] == OTHER_GROUP), None)
             if not other:
                 other = {"group": OTHER_GROUP, "pages": []}
-                tab["groups"].append(other)
-            other["pages"].append(slug)
+                # Hidden groups stay last.
+                tab["groups"].insert(next((i for i, g in enumerate(tab["groups"]) if g.get("hidden")), len(tab["groups"])), other)
+            other["pages"].append(sidebar_entry(slug, method, path))
         added.append(f"{method} {path} -> {slug}")
     if added:
-        open(os.path.join(DOCS_DIR, "docs.json"), "w").write(json.dumps(docs, indent=2, ensure_ascii=False) + "\n")
+        open(NAV_FILE, "w").write(json.dumps(docs, indent=2, ensure_ascii=False) + "\n")
     return added
+
+
+def write_sidebar_entries():
+    """Give every listed endpoint page its method pill and path label. Hidden groups keep plain entries."""
+    docs = json.load(open(NAV_FILE))
+    changed = 0
+
+    def walk(group):
+        nonlocal changed
+        for i, p in enumerate(group["pages"]):
+            slug = leaf(p)
+            if slug is None:
+                if not p.get("hidden"):
+                    walk(p)
+                continue
+            if not slug.startswith(ENDPOINT_DIR + "/") or not os.path.exists(page_file(slug)):
+                continue
+            fm = FM_RE.match(open(page_file(slug)).read())
+            found = operation_of(fm.group(1)) if fm else None
+            if not found:
+                continue
+            old = p if isinstance(p, dict) else {}
+            entry = {**sidebar_entry(slug, *found), **{k: v for k, v in old.items() if k not in ("page", "label", "method")}}
+            entry = {**{k: entry[k] for k in ("page", "label", "icon", "method") if k in entry}, **entry}
+            if entry != p or list(entry) != list(old):
+                group["pages"][i] = entry
+                changed += 1
+
+    for tab in docs["navigation"]["tabs"]:
+        for top in tab["groups"]:
+            if not top.get("hidden"):
+                walk(top)
+    if changed:
+        open(NAV_FILE, "w").write(json.dumps(docs, indent=2, ensure_ascii=False) + "\n")
+    return changed
+
+
+def titled_pages():
+    """(route, method, path) for every page with a "METHOD /path" title: listed pages in sidebar order, then hidden ones."""
+    listed, hidden = [], []
+
+    def walk(group, out):
+        out = hidden if group.get("hidden") else out
+        if group.get("root"):
+            out.append(group["root"])
+        for p in group["pages"]:
+            slug = leaf(p)
+            if slug is None:
+                walk(p, out)
+            else:
+                out.append(slug)
+
+    for tab in json.load(open(NAV_FILE))["navigation"]["tabs"]:
+        for top in tab["groups"]:
+            walk(top, listed)
+    pages = []
+    for slug in dict.fromkeys(listed + hidden):
+        if not os.path.exists(page_file(slug)):
+            continue
+        fm = FM_RE.match(open(page_file(slug)).read())
+        m = re.search(r'^title:\s*"?(%s)\s+(/[^"\s]*)"?\s*$' % "|".join(TITLE_METHODS), fm.group(1), re.M) if fm else None
+        if m:
+            pages.append(("/" + slug, m.group(1), m.group(2)))
+    return pages
+
+
+def write_title_rules():
+    """Write the theme rules that draw each endpoint title as a method pill and a path."""
+    css = open(THEME_FILE).read()
+    if css.count(TITLE_START) != 1 or css.count(TITLE_END) != 1:
+        sys.exit(f"{os.path.relpath(THEME_FILE, DOCS_DIR)} needs one pair of endpoint title markers")
+    start, end = css.index(TITLE_START), css.index(TITLE_END)
+    pages = titled_pages()
+    bad = [p for _, _, p in pages if not re.fullmatch(r"[\x21-\x7e]+", p) or '"' in p or "\\" in p]
+    if bad:
+        sys.exit(f"These paths cannot be written to the theme: {bad}")
+    known = re.search(r'\{\n(  --bj-title-method: "(\w+)";\n(?:  .*\n)*?)\}', css[start:end])
+    body, model = (known.group(1), known.group(2)) if known else ('  --bj-title-method: "GET";\n  --bj-method-bg: var(--bj-method-get-bg);\n  --bj-method-fg: var(--bj-method-get-fg);\n', "GET")
+    lines = [TITLE_START]
+    for method in TITLE_METHODS:
+        links = ", ".join(f'[href$="{route}"]' for route, m, _ in pages if m == method)
+        if links:
+            rule = body.replace(f'"{model}"', f'"{method}"').replace(f"-{model.lower()}-", f"-{method.lower()}-")
+            lines.append(f'html:has(link[rel="canonical"]:is({links})) {{\n{rule}}}')
+    lines += [f'html:has(link[rel="canonical"][href$="{route}"]) {{ --bj-title-path: "{path}"; }}' for route, _, path in pages]
+    out = css[:start] + "\n".join(lines) + "\n" + css[end:]
+    if out != css:
+        open(THEME_FILE, "w").write(out)
+    return len(pages)
 
 
 def main():
@@ -560,7 +706,7 @@ def main():
     for a in added:
         print("  " + a)
     problems = []
-    pages = sorted(p for g in PAGE_GLOBS for p in glob.glob(os.path.join(DOCS_DIR, g)))
+    pages = sorted(p for g in PAGE_GLOBS for p in glob.glob(os.path.join(PAGES_DIR, g)))
     for page in pages:
         err = process(spec, page)
         if err:
@@ -569,6 +715,8 @@ def main():
     for p in problems:
         print("  " + p)
     print(f"API Playground operations: {write_operations(spec)}")
+    print(f"sidebar entries updated: {write_sidebar_entries()}")
+    print(f"endpoint title rules: {write_title_rules()}")
 
 
 if __name__ == "__main__":

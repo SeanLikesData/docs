@@ -1,0 +1,50 @@
+---
+title: "DELETE /v1/agent/{agent_id}"
+description: "Delete an agent."
+api: "DELETE https://api.getbluejay.ai/v1/agent/{agent_id}"
+playground: "none"
+---
+
+Deletes an agent by `agent_id`.
+
+{/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
+
+## Path parameters
+
+<FieldTable rows={[{"name": "agent_id", "type": "integer", "required": true, "description": ""}]} />
+
+## Headers
+
+<FieldTable rows={[{"name": "X-API-Key", "type": "string", "required": true, "description": "API key required to authenticate requests."}]} />
+
+## Response
+
+<FieldTable rows={[{"name": "agent_id", "type": "integer", "required": true, "description": "ID of the created agent"}, {"name": "status", "type": "string", "required": false, "description": "Status of the response", "default": "200"}, {"name": "version", "type": "integer or null", "required": false, "description": "Bluejay version integer; always 1 on create"}, {"name": "http_webhook_key", "type": "string or null", "required": false, "description": "Signing key for HTTP webhook (only provided if http_webhook was set)"}]} />
+
+## Status codes
+
+| Status | Meaning |
+|---|---|
+| `200` | Successful Response |
+| `422` | Validation Error |
+
+## Example request
+
+```bash
+curl --request DELETE \
+  --url https://api.getbluejay.ai/v1/agent/{agent_id} \
+  --header 'X-API-Key: <api-key>'
+```
+
+## Example response
+
+```json 200
+{
+  "agent_id": 123,
+  "status": "200",
+  "version": 123,
+  "http_webhook_key": "<string>"
+}
+```
+
+{/* END GENERATED */}

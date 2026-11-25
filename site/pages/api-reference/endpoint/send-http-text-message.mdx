@@ -1,0 +1,72 @@
+---
+title: "POST /v1/send-http-text-message"
+description: "Reply in an HTTP text simulation."
+api: "POST https://api.getbluejay.ai/v1/send-http-text-message"
+playground: "none"
+---
+
+Sends one agent turn into a running HTTP text simulation. The Digital Human reply goes to the webhook in the agent settings.
+
+## Fields
+
+| Field | Type | Description |
+|---|---|---|
+| <Code>simulation&#95;result&#95;id</Code> | string | Required. The simulation result to send to. |
+| `type` | string | `message` (default) or `tool_call`. |
+| `message` | string | Required when `type` is `message`. The agent text. |
+| `name` | string | Required when `type` is `tool_call`. The tool name. |
+| `parameters` | object | Tool parameters. |
+| `output` | any | Tool output. |
+| `end_turn` | boolean | Default `true`. If `false`, Bluejay holds the message and waits for more. |
+| <Code>end&#95;conversation</Code> | boolean | Default `false`. If `true`, Bluejay ends and evaluates the conversation. |
+| `message_id` | string | Unique ID. Bluejay drops a repeated ID in the same conversation. |
+
+{/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
+
+## Headers
+
+<FieldTable rows={[{"name": "X-API-Key", "type": "string", "required": true, "description": "API key required to authenticate requests."}]} />
+
+## Request body
+
+<FieldTable rows={[{"name": "body", "type": "object", "required": true, "children": [{"name": "simulation_result_id", "type": "string", "required": true, "description": "ID of the simulation result (test result)"}, {"name": "end_conversation", "type": "boolean or null", "required": false, "description": "If true, skip lambda and end/evaluate the conversation", "default": false}, {"name": "end_turn", "type": "boolean or null", "required": false, "description": "If true, process the message now; if false, stack it for later", "default": true}, {"name": "message_id", "type": "string or null", "required": false, "description": "Unique message ID for deduping within a conversation"}, {"name": "type", "type": "string", "required": false, "description": "Send a message to the user", "default": "message"}, {"name": "message", "type": "string", "required": true, "description": "Text message to send"}, {"name": "simulation_result_id", "type": "string", "required": true, "description": "ID of the simulation result (test result)"}, {"name": "end_conversation", "type": "boolean or null", "required": false, "description": "If true, skip lambda and end/evaluate the conversation", "default": false}, {"name": "end_turn", "type": "boolean or null", "required": false, "description": "If true, process the message now; if false, stack it for later", "default": true}, {"name": "message_id", "type": "string or null", "required": false, "description": "Unique message ID for deduping within a conversation"}, {"name": "type", "type": "string", "required": true, "description": "Log a tool call"}, {"name": "name", "type": "string", "required": true, "description": "Tool name"}, {"name": "parameters", "type": "object or null", "required": false, "description": "Tool parameters"}, {"name": "output", "type": "any or null", "required": false, "description": "Tool output"}]}]} />
+
+## Response
+
+<FieldTable rows={[{"name": "simulation_result_id", "type": "string", "required": true, "description": "Simulation result ID"}, {"name": "status", "type": "string", "required": false, "description": "Status of the response", "default": "success"}, {"name": "end_conversation", "type": "boolean", "required": false, "description": "Whether the conversation has ended", "default": false}]} />
+
+## Status codes
+
+| Status | Meaning |
+|---|---|
+| `200` | Successful Response |
+| `422` | Validation Error |
+
+## Example request
+
+```bash
+curl --request POST \
+  --url https://api.getbluejay.ai/v1/send-http-text-message \
+  --header 'X-API-Key: <api-key>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "simulation_result_id": "<string>",
+    "end_conversation": false,
+    "end_turn": true,
+    "message_id": "<string>",
+    "type": "message",
+    "message": "<string>"
+  }'
+```
+
+## Example response
+
+```json 200
+{
+  "simulation_result_id": "<string>",
+  "status": "success",
+  "end_conversation": false
+}
+```
+
+{/* END GENERATED */}

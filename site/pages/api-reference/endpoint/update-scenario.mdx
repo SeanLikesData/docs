@@ -1,0 +1,73 @@
+---
+title: "PUT /v1/scenario/{workflow_id}"
+description: "Update a scenario."
+api: "PUT https://api.getbluejay.ai/v1/scenario/{workflow_id}"
+playground: "none"
+---
+
+Updates a scenario. Fields you do not send do not change.
+
+- `agent_ids` replaces all agent links. `[]` removes all links.
+- `definition` replaces the full graph. Bluejay validates it the same as [Create Scenario](/api-reference/endpoint/create-scenario).
+
+{/* GENERATED: from the OpenAPI spec by scripts/generate_api_pages.py. Do not edit by hand. */}
+
+## Path parameters
+
+<FieldTable rows={[{"name": "workflow_id", "type": "string (uuid)", "required": true, "description": ""}]} />
+
+## Headers
+
+<FieldTable rows={[{"name": "X-API-Key", "type": "string", "required": true, "description": "API key required to authenticate requests."}]} />
+
+## Request body
+
+<FieldTable rows={[{"name": "name", "type": "string or null", "required": false, "description": "New name for the workflow"}, {"name": "agent_ids", "type": "integer[] or null", "required": false, "description": "Set owning agents, or null to clear agent links (must belong to your organization when set)."}, {"name": "description", "type": "string or null", "required": false, "description": "New description (set empty string to clear if your client sends it)"}, {"name": "definition", "type": "object or null", "required": false, "description": "Full React Flow definition when replacing the graph. Same shape as create: each node needs a top-level `id`; each edge needs a top-level `id` unique among edges."}]} />
+
+## Response
+
+<FieldTable rows={[{"name": "id", "type": "string", "required": true, "description": "Workflow ID"}, {"name": "organization_id", "type": "string or null", "required": false, "description": "Owning organization ID (set by middleware on create)"}, {"name": "agent_ids", "type": "integer[]", "required": false, "description": "Linked agent ids when the workflow is agent-scoped"}, {"name": "name", "type": "string", "required": true, "description": "Name of the workflow"}, {"name": "description", "type": "string or null", "required": false, "description": "Description"}, {"name": "definition", "type": "object", "required": true, "description": "Stored React Flow graph (`start` / `single` / `options` nodes). Nodes and edges use top-level string `id` fields; edge `id` values are unique within the graph."}, {"name": "created_at", "type": "string (date-time)", "required": true, "description": "Creation timestamp"}, {"name": "dh_sync_summary", "type": "object or null", "required": false, "description": "Present on PUT responses when the definition was updated. Keys: updated, created, marked_stale, skipped, errors."}, {"name": "warnings", "type": "string[]", "required": false, "description": "Non-blocking lint warnings emitted at save time (e.g. node text referencing an unknown ``{{trait_name}}``). Empty when the definition is clean or no agents are linked."}]} />
+
+## Status codes
+
+| Status | Meaning |
+|---|---|
+| `200` | Successful Response |
+| `422` | Validation Error |
+
+## Example request
+
+```bash
+curl --request PUT \
+  --url https://api.getbluejay.ai/v1/scenario/{workflow_id} \
+  --header 'X-API-Key: <api-key>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "name": "<string>",
+    "agent_ids": [
+      123
+    ],
+    "description": "<string>",
+    "definition": {}
+  }'
+```
+
+## Example response
+
+```json 200
+{
+  "id": "<string>",
+  "organization_id": "<string>",
+  "agent_ids": [],
+  "name": "<string>",
+  "description": "<string>",
+  "definition": {},
+  "created_at": "2026-01-01T00:00:00Z",
+  "dh_sync_summary": {},
+  "warnings": [
+    "<string>"
+  ]
+}
+```
+
+{/* END GENERATED */}
