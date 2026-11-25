@@ -15,6 +15,10 @@ STT benchmarks are turned on per organization. To turn them on, [contact the Blu
 
 ## Run your first benchmark
 
+<Tip>
+To try it in a minute, click **Run** on one of the [sample datasets](#sample-datasets). They are real recordings with their transcripts, so there is nothing to write or generate.
+</Tip>
+
 <Steps>
   <Step title="Add a model">
     On the **STT** page, click **Add a model**. Pick a model from the library, or point at [your own endpoint](/benchmarks/stt-custom-endpoints).
@@ -24,7 +28,7 @@ STT benchmarks are turned on per organization. To turn them on, [contact the Blu
   <Step title="Create a dataset">
     Describe the conversations you care about and choose how many. Bluejay writes the scripts and generates their audio.
 
-    You can move on while it works. The run waits until every item has audio.
+    You can start the run while it works. Each item joins the run as soon as its audio is ready.
   </Step>
   <Step title="Run it">
     Review the model and the dataset, then click **Run**. Every item is sent to the model, and its transcript is scored as soon as it comes back.
@@ -36,6 +40,16 @@ To start another run later, click **New Run**. It starts from the model every ti
 ## Datasets
 
 A dataset is a set of conversations. Each item has a script, the speakers who read it, and the audio Bluejay generates from them. The script is the reference that transcripts are scored against.
+
+### Sample datasets
+
+The **STT** page lists sample datasets of real, public recordings. Click a sample to add a copy to your workspace, or click **Run** to add it and pick a model straight away.
+
+| Sample | What it has | License |
+|---|---|---|
+| Voice agent requests | 25 people asking a voice assistant for help, one request each. From Pipecat's STT benchmark data. | CC BY 4.0 |
+| Doctor and patient consultations | Two mock GP consultations, line by line, with symptoms, medications and history. From Babylon Health's PriMock57. | CC BY 4.0 |
+| Parliament speeches in five languages | European Parliament speeches in English, German, French, Spanish and Italian, five of each. From Meta's VoxPopuli. | CC0 |
 
 ### Generate data
 
@@ -57,6 +71,8 @@ Editing a script generates its audio again. If audio fails to generate, click **
 ### Use your own recordings
 
 To score real recordings instead of generated audio, add the item through the API with <Code>audio_source</Code> set to `uploaded`, then upload the file with [Upload item audio](/api-reference/endpoint/upload-item-audio). The item's script becomes the reference transcript, so write exactly what is said. Bluejay plays the file as it is, without personas or an environment.
+
+If the recording is not in English, set the item's <Code>language</Code>, for example `es`, and Bluejay sends it to the model. Generated audio takes its language from its personas.
 
 ### Vocabulary
 
@@ -137,6 +153,8 @@ Every step above works through the API, with the same API keys as the rest of Bl
 | Task | Method | Path |
 |---|---|---|
 | [Create a dataset](/api-reference/endpoint/create-dataset) | `POST` | <Code>{"/v1/datasets"}</Code> |
+| [List sample datasets](/api-reference/endpoint/list-samples) | `GET` | <Code>{"/v1/datasets/samples"}</Code> |
+| [Add a sample dataset](/api-reference/endpoint/add-sample) | `POST` | <Code>{"/v1/datasets/samples/{sample_id}"}</Code> |
 | [Generate data](/api-reference/endpoint/generate-items) | `POST` | <Code>{"/v1/datasets/{dataset_id}/generate"}</Code> |
 | [Add items](/api-reference/endpoint/create-items) | `POST` | <Code>{"/v1/datasets/{dataset_id}/items"}</Code> |
 | [Upload item audio](/api-reference/endpoint/upload-item-audio) | `PUT` | <Code>{"/v1/datasets/{dataset_id}/items/{item_id}/audio"}</Code> |
