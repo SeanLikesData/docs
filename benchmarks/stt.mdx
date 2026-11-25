@@ -59,6 +59,25 @@ The **STT** page lists sample datasets of real, public recordings. Click a sampl
 - Pin a speaker to one of your personas to hear that voice in every conversation.
 - An environment applies to the whole item. Its background noise and recording device replace the speakers' own noise and line quality.
 
+### Environments in the API
+
+An environment gives an item one background noise and one recording device. In the API it is an `environment` object: on an item's `content`, or, when you [generate data](/api-reference/endpoint/generate-items), inside each entry of `environments`.
+
+```json
+"environments": [
+  { "weight": 70, "environment": { "background": "hospital", "level": "moderate", "device": "close_mic" } },
+  { "weight": 30, "environment": { "background": "office", "level": "quiet", "device": "phone_line" } }
+]
+```
+
+| Field | Values |
+|---|---|
+| `background` | A noise preset, such as `hospital`, `office`, `cafe` or `street`. [Generate data](/api-reference/endpoint/generate-items) lists every preset. Leave it out for no background noise. |
+| `level` | `quiet`, `moderate` or `loud`. Required with `background`. |
+| `device` | `close_mic`, `laptop`, `phone_line` or `far_field`. |
+
+`weight` is each environment's relative share of the generated items.
+
 ### Write a script
 
 Click **Write a script** to type a conversation yourself. Saving the item also generates its audio, so there is no separate step.
